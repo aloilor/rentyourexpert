@@ -25,7 +25,7 @@ def main():
     result = cursor.fetchall()
     cursor.close()
     db.close()
-    response = "Hello world \n"
+    response = "Hello Daniele \n"
 
     for x in result: 
         response += str(x) + '\n'
