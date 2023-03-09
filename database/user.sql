@@ -15,4 +15,4 @@ CREATE TABLE 'user' (
     'isWorker' tinyint unsigned NOT NULL, 
     'isAdmin' tinyint unsigned NOT NULL, 
     PRIMARY KEY ('id')
-)
+);
