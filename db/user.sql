@@ -1,7 +1,7 @@
-CREATE DATABASE IF NOT EXISTS rentYourExpert ;
+CREATE DATABASE IF NOT EXISTS rentYourExpert;
 USE rentYourExpert;
 
-CREATE TABLE user (
+CREATE TABLE IF NOT EXISTS user (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(50) NOT NULL, 
     `surname` varchar(50) NOT NULL,
