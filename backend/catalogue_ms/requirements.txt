@@ -1,4 +1,2 @@
-cryptography
 Flask==2.2.3
-Flask-MySQL==1.5.2
-PyMySQL==1.0.2
+mysql-connector==2.2.9

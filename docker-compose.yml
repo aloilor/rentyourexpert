@@ -1,5 +1,5 @@
-version: 3
-servicecs:
+version: '3'
+services:
   catalogue_ms:
     build: ./backend/catalogue_ms
     links:
@@ -9,9 +9,15 @@ servicecs:
 
   db:
     image: mysql:8.0.32
+    cap_add:
+      - SYS_NICE
     ports:
-      - "30000:3306"
+      - "3307:3306" 
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: "root"
     volumes: 
-      -./db:/docker-entrypoint-initdb.d/:ro
+      - ./db:/docker-entrypoint-initdb.d/:ro
+
+volumes: 
+  db:
+    driver: local

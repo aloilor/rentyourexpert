@@ -1,30 +1,31 @@
-import pymysql
+import mysql.connector
 from flask import Flask 
 from flask import jsonify
-from flaskext.mysql import MySQL 
 
 
 app = Flask(__name__)
-mysql = MySQL()
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-app.config['MYSQL_DATABASE_DB'] = 'rentYourExpert'
-app.config['MYSQL_DATABASE_HOST'] = 'db'
-mysql.init_app(app)
+config = {
+    'user' : 'root',
+    'password' : 'root',
+    'host' : 'db',
+    'port' : '3306',
+    'database' : 'rentYourExpert'
+}
+
+db = mysql.connector.connect(**config)
 
 @app.route('/')
-def users():
-    conn = mysql.connect()
-    cursor = conn.cursor(pymsql.cursors.DictCursor)
-    cursor.execute("SELECT * FROM user")
+def main():
+    #executing the query
+    cursor = db.cursor()
+    cursor.execute("SELECT * from user")
+    result = cursor.fetchall()
+    cursor.close()
+    connection.close()
 
-    rows = cursor.fetchall()
-
-    resp = jsonify(rows)
-    resp.status_code = 200
-    return resp
+    return result
 
 if __name__ == "__main__":
-    app.run(debug = True, host = '0.0.0.0')
+    app.run(debug = True, host = '0.0.0.0', port = 5000)
