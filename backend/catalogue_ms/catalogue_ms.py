@@ -5,7 +5,6 @@ import mysql.connector
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def main():
 
