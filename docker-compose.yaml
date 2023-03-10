@@ -13,7 +13,18 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
     volumes: 
       - ./db:/docker-entrypoint-initdb.d/:ro
-      
+    
+
+  frontend:
+    build: ./frontend/frontend-app 
+    ports: 
+      - "3000:3000"
+    volumes: 
+      - ./frontend/frontend-app:/user/src/app
+    depends_on: 
+      - catalogue_ms
+
+
 volumes: 
   db:
     driver: local
