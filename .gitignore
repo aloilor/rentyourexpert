@@ -1,2 +1,3 @@
 #ignore Lorenzo environment
-flask_lab
+flask_lab/
+backend/catalogue_ms/__pycache__/
