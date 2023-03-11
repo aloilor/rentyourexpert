@@ -5,7 +5,7 @@ import { Channel } from './Components/Channel/Channel'
 function App() {
 
   const [initialState, setState] = useState([])
-  const url = "/api"
+  const url = "/home"
   
   useEffect(()=> {
     fetch(url).then(response => {
