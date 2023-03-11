@@ -3,8 +3,7 @@ FROM node:18
 WORKDIR /user/src/app 
 
 COPY ./package.json ./
-
-COPY ./package-lock.json ./
+COPY ./node_modules/ ./
 
 RUN npm install 
 
