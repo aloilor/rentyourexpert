@@ -5,7 +5,11 @@ services:
     ports:
       - "5000:5000"
 
-  
+  management_ms:
+    build: ./backend/management_ms
+    ports:
+      - "5002:5002"
+
   login:
     build: ./backend/login
     ports:
@@ -20,7 +24,6 @@ services:
     volumes: 
       - ./db:/docker-entrypoint-initdb.d/:ro
     
-
   frontend:
     build: ./frontend/frontend-app 
     ports: 
@@ -28,7 +31,6 @@ services:
     volumes: 
       - ./frontend/frontend-app:/user/src/app
     
-
 
 volumes: 
   db:
