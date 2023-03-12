@@ -64,6 +64,13 @@ def getWorker(id):
 
     return json.dumps(json_data)
 
+@app.route('/catalogue/<id>', methods=['POST'])
+def sendRequest(id):
+    worker_id = id
+    query = "INSERT INTO request({customer_id}, {worker_id})".format(worker_id = worker_id)
+
+    return True
+    
 
 
 if __name__ == "__main__":
