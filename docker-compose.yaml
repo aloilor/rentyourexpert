@@ -5,11 +5,15 @@ services:
     ports:
       - "5000:5000"
 
-  
+  login_ms:
+    build: ./backend/login_ms
+    ports:
+      - "5001:5001"
+
   login:
     build: ./backend/login
     ports:
-      - "7000:5000"
+      - "7000:7000"
 
   db:
     image: mysql:8.0.32
