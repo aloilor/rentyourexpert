@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder='templates')
 app.secret_key = "super secret key"
 
 
-@app.route('/pythonlogin/', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
 
     #MySQL connection config

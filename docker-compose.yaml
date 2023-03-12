@@ -5,10 +5,11 @@ services:
     ports:
       - "5000:5000"
 
-  home:
-    build: ./backend/home
+  
+  login:
+    build: ./backend/login
     ports:
-      - "8000:8000"
+      - "7000:5000"
 
   db:
     image: mysql:8.0.32
@@ -26,8 +27,7 @@ services:
       - "3000:3000"
     volumes: 
       - ./frontend/frontend-app:/user/src/app
-    depends_on:
-      - home
+    
 
 
 volumes: 
