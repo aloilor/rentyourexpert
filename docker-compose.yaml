@@ -5,10 +5,18 @@ services:
     ports:
       - "5000:5000"
 
+<<<<<<< HEAD
   home:
     build: ./backend/home
     ports:
       - "8000:8000"
+=======
+  
+  login:
+    build: ./backend/login
+    ports:
+      - "7000:5000"
+>>>>>>> origin/ele
 
   db:
     image: mysql:8.0.32
@@ -26,8 +34,12 @@ services:
       - "3000:3000"
     volumes: 
       - ./frontend/frontend-app:/user/src/app
+<<<<<<< HEAD
     depends_on:
       - home
+=======
+    
+>>>>>>> origin/ele
 
 
 volumes: 

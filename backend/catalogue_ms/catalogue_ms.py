@@ -2,8 +2,10 @@ from flask import Flask
 from flask import jsonify
 import mysql.connector
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 def dbConnect():
     #MySQL connection config
@@ -22,7 +24,7 @@ def getAllWorkers():
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT name,surname,profession,location,description,phone,available FROM user WHERE isWorker=1"
+    query = "SELECT id,name,surname,profession,location,description,phone,available FROM user WHERE isWorker=1"
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
@@ -46,7 +48,7 @@ def getWorker(id):
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT name,surname,profession,location,description,phone,available FROM user WHERE isWorker=1 AND id={id}".format(id=id)
+    query = "SELECT id,name,surname,profession,location,description,phone,available FROM user WHERE isWorker=1 AND id={id}".format(id=id)
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
