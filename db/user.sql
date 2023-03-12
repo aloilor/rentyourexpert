@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS request (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `customer_id` int unsigned NOT NULL,
     `worker_id` int unsigned NOT NULL, 
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    PRIMARY KEY (`id`)
-    FOREIGN KEY(`customer_id`) REFERENCES user(`id`) ON DELETE CASCADE
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY(`customer_id`) REFERENCES user(`id`) ON DELETE CASCADE,
     FOREIGN KEY(`worker_id`) REFERENCES user(`id`) ON DELETE CASCADE
 );
 
