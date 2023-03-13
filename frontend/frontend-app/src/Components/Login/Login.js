@@ -30,7 +30,7 @@ function Login() {
           console.log(data.auth_token);
           localStorage.setItem('auth_token', data.auth_token);
         } else {
-          setMessage('Incorrect username/password!');
+          setMessage('Incorrect email/password!');
         }
       })
       .catch(error => {

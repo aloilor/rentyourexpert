@@ -92,7 +92,7 @@ def register():
             response['message'] = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into user table
-            cursor.execute('INSERT INTO user (name, surname, profession, location, description, email, phone, address, isAdmin, isWorker, available, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, 0, 0, %s)', (name, surname, profession, location, description, email, phone, address, password,))
+            cursor.execute('INSERT INTO user (name, surname, profession, location, description, email, phone, address, isAdmin, isWorker, available, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 0, 1, 0, %s)', (name, surname, profession, location, description, email, phone, address, password,))
             db.commit()
             response['message'] = 'You have successfully registered!'
         
