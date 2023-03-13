@@ -9,23 +9,23 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password);
+
+    let formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
     fetch('/login/', {
       method: 'POST',
       body: 
-        JSON.stringify({ email }),
-      headers: { 'Content-Type': 'application/json' }
+        formData
     })
       .then(response => response.json())
-      .then(data => {
-        if (data.message === 'success') {
-          setMessage('Logged in successfully!');
-        } else {
-          setMessage('Incorrect email/password!');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      .then( response => console.log(response))
   };
 
   return (
@@ -33,10 +33,10 @@ function Login() {
       <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
       <label>Email:</label>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input name = 'email' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
         <br />
         <label>Password:</label>
-        <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input name = 'password' type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
         <br />
         <button type="submit">Login</button>
       </form>

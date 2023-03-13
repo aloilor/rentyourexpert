@@ -24,12 +24,12 @@ def login():
     
     if request.method == 'POST':
         # Create variables for easy access
-        email = request.json['email']
-        password = request.json['password']
+        email = request.form.get('email')
+        password = request.form.get('password')
         
         
         
-        cursor.execute('SELECT * FROM user WHERE email = %s AND password = %s ', (email, password, ))
+        cursor.execute('SELECT * FROM user WHERE email = %s AND password = %s ', (email, password))
 
         # Fetch one record and return result
         user = cursor.fetchone()
