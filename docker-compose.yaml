@@ -12,11 +12,6 @@ services:
     ports:
       - "5002:5002"
 
-  login:
-    build: ./backend/login
-    ports:
-      - "7000:5000"
-
   db:
     image: mysql:8.0.32
     hostname: db
@@ -26,7 +21,15 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
     volumes: 
       - ./db:/docker-entrypoint-initdb.d/:ro
-    
+
+  login_ms:
+    build: ./backend/login_ms
+    hostname: login
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+
   frontend:
     build: ./frontend/frontend-app 
     ports: 

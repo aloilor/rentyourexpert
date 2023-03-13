@@ -20,15 +20,17 @@ def login():
     }
     db = mysql.connector.connect(**config)
     cursor = db.cursor()
+    response = {'message': ''}
     
-    msg = ''
-    if request.method == 'POST' and 'email' in request.form:
+    if request.method == 'POST':
         # Create variables for easy access
-        email = request.form['email']
-        #password = request.form['password']
+        email = request.form.get('email')
+        password = request.form.get('password')
         
-        # Check if account exists using MySQL
-        cursor.execute('SELECT * FROM user WHERE email = %s ', (email,))
+        
+        
+        cursor.execute('SELECT * FROM user WHERE email = %s AND password = %s ', (email, password))
+
         # Fetch one record and return result
         user = cursor.fetchone()
         # If account exists in accounts table in out database
@@ -38,12 +40,14 @@ def login():
             session['id'] = user[0]
             session['email'] = user[6]
             # Redirect to home page
-            return 'Logged in successfully!'
+            response['message'] = 'success'
         else:
             # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username/password!'
+            response['message'] = 'failure'
+            print(password)
     
     # Output message if something goes wrong...
-    return render_template('index.html', msg=msg)
+    return jsonify(response)
 
-    
+if __name__ == "__main__":
+    app.run(debug = True, host = '0.0.0.0', port = 5001)
