@@ -27,8 +27,6 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        
-        
         cursor.execute('SELECT * FROM user WHERE email = %s AND password = %s ', (email, password))
 
         # Fetch one record and return result
@@ -41,6 +39,8 @@ def login():
             session['email'] = user[6]
             # Redirect to home page
             response['message'] = 'success'
+            response['auth_token'] = str(email)+str(password)
+
         else:
             # Account doesnt exist or username/password incorrect
             response['message'] = 'failure'

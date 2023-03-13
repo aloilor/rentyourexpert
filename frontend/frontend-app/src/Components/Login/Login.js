@@ -24,7 +24,7 @@ function Login() {
       body: 
         formData
     })
-      .then(response => response.json())
+      .then( response => response.json())
       .then( response => console.log(response))
   };
 
