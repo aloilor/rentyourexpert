@@ -5,10 +5,10 @@ function ExpertsList() {
   const [experts, setExperts] = useState([]);
 
   useEffect(() => {
-    fetch('/catalogue')
-      .then(response => response.json())
-      .then(data => setExperts(data))
-      .catch(error => console.log(error));
+    fetch("/catalogue")
+      .then((response) => response.json())
+      .then((data) => setExperts(data))
+      .catch((error) => console.log(error));
   }, []);
 
   return (

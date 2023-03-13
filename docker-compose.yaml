@@ -1,20 +1,5 @@
 version: '3'
 services:
-  catalogue_ms:
-    build: ./backend/catalogue_ms
-    ports:
-      - "5000:5000"
-
-  login_ms:
-    build: ./backend/login_ms
-    ports:
-      - "5001:5001"
-
-  login:
-    build: ./backend/login
-    ports:
-      - "7000:7000"
-
   db:
     image: mysql:8.0.32
     ports:
@@ -23,6 +8,27 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
     volumes: 
       - ./db:/docker-entrypoint-initdb.d/:ro
+      
+  catalogue_ms:
+    build: ./backend/catalogue_ms
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  login_ms:
+    build: ./backend/login_ms
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+
+  login:
+    build: ./backend/login
+    ports:
+      - "7000:7000"
+
+  
     
 
   frontend:
