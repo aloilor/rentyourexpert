@@ -2,11 +2,13 @@ version: '3'
 services:
   catalogue_ms:
     build: ./backend/catalogue_ms
+    hostname: catalogue_ms
     ports:
       - "5000:5000"
 
   management_ms:
     build: ./backend/management_ms
+    hostname: management_ms
     ports:
       - "5002:5002"
 
@@ -17,6 +19,7 @@ services:
 
   db:
     image: mysql:8.0.32
+    hostname: db
     ports:
       - "32000:3306" 
     environment:
