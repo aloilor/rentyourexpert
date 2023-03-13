@@ -172,6 +172,7 @@ def delRequest(id):
     db = dbConnect()
 
     query = """DELETE FROM request WHERE id = {id}""".format(id=id)
+    
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
