@@ -18,6 +18,16 @@ CREATE TABLE IF NOT EXISTS user (
     PRIMARY KEY (`id`)
 );
 
+CREATE TABLE IF NOT EXISTS request (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `customer_id` int unsigned NOT NULL,
+    `worker_id` int unsigned NOT NULL, 
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY(`customer_id`) REFERENCES user(`id`) ON DELETE CASCADE,
+    FOREIGN KEY(`worker_id`) REFERENCES user(`id`) ON DELETE CASCADE
+);
+
 INSERT INTO user (name, surname, profession, location, description, email, phone, address, available, isWorker, isAdmin, password)
 VALUES
 ('John', 'Doe', 'Web Developer', 'New York', 'Experienced web developer with expertise in HTML, CSS, and JavaScript.', 'johndoe@example.com', 1234567890, '123 Main St, New York, NY 10001', 1, 1, 0, '0000'),

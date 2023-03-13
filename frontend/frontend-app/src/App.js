@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ExpertsList from "./Components/Catalogue/ExpertsList";
 import ExpertDetail from "./Components/Catalogue/ExpertDetail";
 import Login from "./Components/Login/Login";
+import Register from "./Components/Login/Register";
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/catalogue" element={<ExpertsList experts={experts} />} />
           <Route path="/catalogue/:id" element={<ExpertDetail />} />
           <Route path="/login" element={<Login  />} />
+          <Route path="/register" element={<Register  />} />
         </Routes>
       </div>
     </BrowserRouter>

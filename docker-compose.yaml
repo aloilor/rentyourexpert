@@ -1,35 +1,34 @@
 version: '3'
 services:
+  catalogue_ms:
+    build: ./backend/catalogue_ms
+    hostname: catalogue_ms
+    ports:
+      - "5000:5000"
+
+  management_ms:
+    build: ./backend/management_ms
+    hostname: management_ms
+    ports:
+      - "5002:5002"
+
   db:
     image: mysql:8.0.32
+    hostname: db
     ports:
       - "32000:3306" 
     environment:
       MYSQL_ROOT_PASSWORD: "root"
     volumes: 
       - ./db:/docker-entrypoint-initdb.d/:ro
-      
-  catalogue_ms:
-    build: ./backend/catalogue_ms
-    ports:
-      - "5000:5000"
-    depends_on:
-      - db
 
   login_ms:
     build: ./backend/login_ms
+    hostname: login
     ports:
       - "5001:5001"
     depends_on:
       - db
-
-  login:
-    build: ./backend/login
-    ports:
-      - "7000:7000"
-
-  
-    
 
   frontend:
     build: ./frontend/frontend-app 
@@ -38,7 +37,6 @@ services:
     volumes: 
       - ./frontend/frontend-app:/user/src/app
     
-
 
 volumes: 
   db:

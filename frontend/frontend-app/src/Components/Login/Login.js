@@ -12,12 +12,15 @@ function Login() {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    
 
-    console.log(email, password);
 
     let formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+    
+
+    
 
     fetch('/login/', {
       method: 'POST',
@@ -25,7 +28,16 @@ function Login() {
         formData
     })
       .then(response => response.json())
-      .then( response => console.log(response))
+      .then(data => {
+        if (data.message === 'success') {
+          setMessage('Logged in successfully!');
+        } else {
+          setMessage('Incorrect username/password!');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   return (
