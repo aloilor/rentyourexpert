@@ -32,7 +32,7 @@ function Login() {
         if (data.message === 'success') {
           setMessage('Logged in successfully!');
         } else {
-          setMessage('Incorrect username/password!');
+          setMessage('Incorrect email/password!');
         }
       })
       .catch(error => {
