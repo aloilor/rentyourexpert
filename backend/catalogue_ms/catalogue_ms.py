@@ -24,7 +24,7 @@ def getAllWorkers():
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT id,name,surname,profession,location,description,phone,available FROM user WHERE isWorker=1"
+    query = "SELECT id,name,surname,profession,location,description,phone,available FROM worker "
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
@@ -48,7 +48,7 @@ def getWorker(id):
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT id,name,surname,profession,location,description,phone,available FROM user WHERE isWorker=1 AND id={id}".format(id=id)
+    query = "SELECT id,name,surname,profession,location,description,phone,available FROM worker WHERE id={id}".format(id=id)
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
