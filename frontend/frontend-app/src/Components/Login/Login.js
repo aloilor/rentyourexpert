@@ -4,6 +4,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
 
   const handleSubmit = (event) => {
@@ -29,6 +30,7 @@ function Login() {
           setMessage('Logged in successfully!');
           console.log(data.auth_token);
           localStorage.setItem('auth_token', data.auth_token);
+          setIsLoggedIn(true);
         } else {
           setMessage('Incorrect email/password!');
         }
@@ -51,6 +53,8 @@ function Login() {
         <button type="submit">Login</button>
       </form>
       <p>{message}</p>
+      <br />
+      <p>Don't have an account? <a href="/register">Register here</a>.</p>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function ExpertDetail() {
   const { id } = useParams();
   const [expert, setExpert] = useState({});
+  const authToken = localStorage.getItem('auth_token');
 
   useEffect(() => {
     fetch(`http://localhost:5000/catalogue/${id}`)
@@ -13,7 +14,7 @@ function ExpertDetail() {
   }, [id]);
 
   console.log(id); // aggiungi questa linea per stampare l'id
-
+  if (authToken) {
   return (
     <div>
       <h1>Expert Detail</h1>
@@ -25,6 +26,13 @@ function ExpertDetail() {
       <p>Availability: {expert.available ? 'Available' : 'Not available'}</p>
     </div>
   );
+} else {
+  return(
+  // l'utente non è autenticato, visualizza il componente di login
+  <div>
+      <h1>NON HAI L'AUTORIZZAZIONE</h1>
+  </div>
+  )
 }
-
+} 
 export default ExpertDetail;
