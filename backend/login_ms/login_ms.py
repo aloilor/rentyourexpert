@@ -2,11 +2,12 @@ import re
 from flask import Flask, render_template, request, redirect, url_for, session 
 from flask import jsonify
 import mysql.connector
+from flask_cors import CORS
 
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "super secret key"
-
+CORS(app)
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -28,8 +29,6 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        
-        
         cursor.execute('SELECT * FROM user WHERE email = %s AND password = %s ', (email, password))
 
         # Fetch one record and return result
@@ -42,6 +41,8 @@ def login():
             session['email'] = user[6]
             # Redirect to home page
             response['message'] = 'success'
+            response['auth_token'] = str(email)+str(password)
+
         else:
             # Account doesnt exist or email/password incorrect
             response['message'] = 'failure'

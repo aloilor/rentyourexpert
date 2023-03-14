@@ -13,16 +13,12 @@ function Login() {
     const email = form.email.value;
     const password = form.password.value;
     
-
-
     let formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+  
     
-
-    
-
-    fetch('/login/', {
+    fetch('http://localhost:5001/login/', {
       method: 'POST',
       body: 
         formData
@@ -31,6 +27,8 @@ function Login() {
       .then(data => {
         if (data.message === 'success') {
           setMessage('Logged in successfully!');
+          console.log(data.auth_token);
+          localStorage.setItem('auth_token', data.auth_token);
         } else {
           setMessage('Incorrect email/password!');
         }

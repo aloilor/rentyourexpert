@@ -5,7 +5,7 @@ function ExpertsList() {
   const [experts, setExperts] = useState([]);
 
   useEffect(() => {
-    fetch("/catalogue")
+    fetch("http://localhost:5000/catalogue")
       .then((response) => response.json())
       .then((data) => setExperts(data))
       .catch((error) => console.log(error));

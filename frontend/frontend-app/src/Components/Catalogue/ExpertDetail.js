@@ -6,7 +6,7 @@ function ExpertDetail() {
   const [expert, setExpert] = useState({});
 
   useEffect(() => {
-    fetch(`/catalogue/${id}`)
+    fetch(`http://localhost:5000/catalogue/${id}`)
       .then((response) => response.json())
       .then((data) => setExpert(data[0]))
       .catch((error) => console.log(error));
