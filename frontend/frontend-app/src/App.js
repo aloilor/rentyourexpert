@@ -6,13 +6,11 @@ import ExpertDetail from "./Components/Catalogue/ExpertDetail";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Login/Register";
 import Home from "./Components/Home/Home";
-
+import LoginCustomer from "./Components/LoginCustomer/LoginCustomer";
+import RegisterCustomer from "./Components/LoginCustomer/RegisterCustomer";
 
 function App() {
-  const [experts, setExperts] = useState([]);
-  const [isLoggedIn ] = useState([]);
-  
-
+  const [experts] = useState([]);
 
   return (
     <BrowserRouter>
@@ -23,6 +21,8 @@ function App() {
           <Route path="/catalogue/:id" element={<ExpertDetail />} />
           <Route path="/login" element={<Login  />} />
           <Route path="/register" element={<Register  />} />
+          <Route path="/login_customer" element={<LoginCustomer  />} />
+          <Route path="/register_customer" element={<RegisterCustomer  />} />
         </Routes>
       </div>
     </BrowserRouter>

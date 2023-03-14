@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 function ExpertsList() {
   const authToken = localStorage.getItem('auth_token');
+  const authTokenParts = authToken ? authToken.split(';') : [];
+  const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
   const [experts, setExperts] = useState([]);
 
   useEffect(() => {
@@ -12,10 +14,12 @@ function ExpertsList() {
       .then((data) => setExperts(data))
       .catch((error) => console.log(error));
   }, []);
-  if (authToken) {
+
+
+  if (lastAuthTokenPart=='C') {
     // l'utente è autenticato, visualizza il catalogo
     return (
-    
+      
       <div>
         <h1>Expert List</h1>
         {experts.map((expert, index) => (
