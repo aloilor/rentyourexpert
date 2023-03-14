@@ -19,12 +19,12 @@ def dbConnect():
     db = mysql.connector.connect(**config)
     return db
 
-@app.route('/users', methods=['GET'])
-def getAllUsers():
+@app.route('/customers', methods=['GET'])
+def getAllCustomers():
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT id,name,surname,profession,location,description,phone,available FROM user"
+    query = "SELECT * FROM customer"
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
@@ -42,24 +42,20 @@ def getAllUsers():
 
     return json.dumps(json_data)
 
-@app.route('/users', methods=['POST'])
-def addUser():
+
+@app.route('/customers', methods=['POST'])
+def addCustomer():
 
     #connecting to the database
     db = dbConnect()
 
-    query =  """INSERT INTO user (name, surname, profession, location, description, email, phone, address, available, isWorker, isAdmin)
-             VALUES ('{name}', '{surname}', '{profession}', '{location}', '{description}', '{email}', '{phone}', '{address}', '{available}', '{isWorker}', '{isAdmin}')""".format(
+    query =  """customer (username, name, surname, email, password, isAdmin)
+             VALUES ('{username}', '{name}', '{surname}', '{email}', '{password}', '{isAdmin}')""".format(
+              username = request.form.get('username'),
               name = request.form.get('name'),
               surname = request.form.get('surname'),
-              profession = request.form.get('profession'),
-              location = request.form.get('location'),
-              description = request.form.get('description'),
               email = request.form.get('email'),
-              phone = request.form.get('phone'),
-              address = request.form.get('address'),
-              available = request.form.get('available'),
-              isWorker = request.form.get('isWorker'),
+              password = request.form.get('password'),
               isAdmin = request.form.get('isAdmin')
              )
     
@@ -77,13 +73,14 @@ def addUser():
 
     return str(lastId),200
 
-@app.route('/users/<id>', methods=['DELETE'])
+
+@app.route('/customers/<id>', methods=['DELETE'])
 def delUser(id):
     
     #connecting to the database
     db = dbConnect()
 
-    query = """DELETE FROM user WHERE id = {id}""".format(id=id)
+    query = """DELETE FROM customer WHERE id = {id}""".format(id=id)
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
@@ -94,6 +91,42 @@ def delUser(id):
     db.close()
 
     return str(id),200
+
+
+@app.route('/workers', methods=['POST'])
+def addWorker():
+
+    #connecting to the database
+    db = dbConnect()
+
+    query =  """INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password)
+             VALUES ('{name}', '{surname}', '{profession}', '{location}', '{description}', '{email}', '{phone}', '{address}', '{available}', '{password}')""".format(
+              name = request.form.get('name'),
+              surname = request.form.get('surname'),
+              profession = request.form.get('profession'),
+              location = request.form.get('location'),
+              description = request.form.get('description'),
+              email = request.form.get('email'),
+              phone = request.form.get('phone'),
+              address = request.form.get('address'),
+              available = request.form.get('available'),
+              password = request.form.get('password')
+             )
+    
+
+    #executing the query
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+    
+    lastId = cursor.lastrowid
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return str(lastId),200
+
 
 @app.route('/requests', methods=['GET'])
 def getAllRequests():
