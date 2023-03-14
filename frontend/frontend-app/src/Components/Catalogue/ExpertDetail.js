@@ -5,6 +5,8 @@ function ExpertDetail() {
   const { id } = useParams();
   const [expert, setExpert] = useState({});
   const authToken = localStorage.getItem('auth_token');
+  const authTokenParts = authToken ? authToken.split(';') : [];
+  const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
 
   useEffect(() => {
     fetch(`http://localhost:5000/catalogue/${id}`)
@@ -14,7 +16,7 @@ function ExpertDetail() {
   }, [id]);
 
   console.log(id); // aggiungi questa linea per stampare l'id
-  if (authToken) {
+  if (lastAuthTokenPart=='C') {
   return (
     <div>
       <h1>Expert Detail</h1>

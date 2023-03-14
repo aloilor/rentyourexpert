@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function LoginCustomer() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-
+  const navigate = useNavigate();
   
 
   const handleSubmit = (event) => {
@@ -19,7 +20,7 @@ function Login() {
     formData.append('password', password);
   
     
-    fetch('http://localhost:5001/login/', {
+    fetch('http://localhost:5001/login_customer/', {
       method: 'POST',
       body: 
         formData
@@ -28,8 +29,8 @@ function Login() {
       .then(data => {
         if (data.message === 'success') {
           setMessage('Logged in successfully!');
-          console.log(data.auth_token);
           localStorage.setItem('auth_token', data.auth_token);
+          navigate('/catalogue');  
         } else {
           setMessage('Incorrect email/password!');
         }
@@ -53,10 +54,9 @@ function Login() {
       </form>
       <p>{message}</p>
       <br />
-      <p>Don't have an account? <a href="/register">Register here</a>.</p>
+      <p>Don't have an account? <a href="/register_customer">Register here</a>.</p>
     </div>
   );
 }
 
-export default Login;
-
+export default LoginCustomer;
