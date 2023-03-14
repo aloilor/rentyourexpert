@@ -2,11 +2,12 @@ import re
 from flask import Flask, render_template, request, redirect, url_for, session 
 from flask import jsonify
 import mysql.connector
+from flask_cors import CORS
 
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "super secret key"
-
+CORS(app)
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():

@@ -18,7 +18,7 @@ function Login() {
     formData.append('password', password);
   
     
-    fetch('/login/', {
+    fetch('http://localhost:5001/login/', {
       method: 'POST',
       body: 
         formData
