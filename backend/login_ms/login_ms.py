@@ -10,7 +10,6 @@ app.secret_key = "super secret key"
 CORS(app)
 
 
-
 #### WORKER LOGIN 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
