@@ -76,13 +76,11 @@ def sendRequest(id):
     token = request.headers.get('Authorization').split(";")
     customer_id = token[0]
     worker_id = id
-    accepted = 0
     
     query = """INSERT INTO request (customer_id, worker_id, accepted)
-    VALUES ({customer_id}, {worker_id}, {accepted});""".format(
+    VALUES ('{customer_id}', '{worker_id}',0);""".format(
         worker_id = worker_id, 
-        customer_id = customer_id,
-        accepted = accepted)
+        customer_id = customer_id)
     cursor = db.cursor()
 
     cursor.execute(query)
