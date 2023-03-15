@@ -7,6 +7,7 @@ import mysql.connector
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 def dbConnect():
     #MySQL connection config
@@ -49,21 +50,16 @@ def addCustomer():
 
     #connecting to the database
     db = dbConnect()
+    email = request.form['email']
+    password = request.form['password']
+    name = request.form['name']
+    surname = request.form['surname']
+    username = request.form['username']
 
-    query =  """customer (username, name, surname, email, password, isAdmin)
-             VALUES ('{username}', '{name}', '{surname}', '{email}', '{password}', '{isAdmin}')""".format(
-              username = request.form.get('username'),
-              name = request.form.get('name'),
-              surname = request.form.get('surname'),
-              email = request.form.get('email'),
-              password = request.form.get('password'),
-              isAdmin = request.form.get('isAdmin')
-             )
     
-
     #executing the query
     cursor = db.cursor()
-    cursor.execute(query)
+    cursor.execute('INSERT INTO customer (name, surname, email, username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, 0)', (name, surname, email, username, password,))
     db.commit()
     
     lastId = cursor.lastrowid
@@ -73,6 +69,29 @@ def addCustomer():
     db.close()
 
     return str(lastId),200
+
+@app.route('/customers/<id>', methods=['GET'])
+def getCustomer(id):
+    #connecting to the database
+    db = dbConnect()
+
+    query = "SELECT * FROM customer WHERE id={id}".format(id=id)
+    #executing the query
+    cursor = db.cursor()
+    cursor.execute(query)
+
+    #jsonifying 
+    row_headers = [x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    json_data = []
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return json.dumps(json_data)
 
 
 @app.route('/customers/<id>', methods=['DELETE'])
@@ -139,31 +158,45 @@ def getWorker(id):
 
     return json.dumps(json_data)
 
+@app.route('/workers/<id>', methods=['DELETE'])
+def delWorker(id):
+    
+    #connecting to the database
+    db = dbConnect()
+
+    query = """DELETE FROM worker WHERE id = {id}""".format(id=id)
+    #executing the query
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return str(id),200
+
 
 @app.route('/workers', methods=['POST'])
 def addWorker():
 
     #connecting to the database
     db = dbConnect()
+    email = request.form['email']
+    password = request.form['password']
+    name = request.form['name']
+    surname = request.form['surname']
+    profession = request.form['profession']
+    location = request.form['location']
+    description = request.form['description']
+    phone = request.form['phone']
+    address = request.form['address']
 
-    query =  """INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password)
-             VALUES ('{name}', '{surname}', '{profession}', '{location}', '{description}', '{email}', '{phone}', '{address}', '{available}', '{password}')""".format(
-              name = request.form.get('name'),
-              surname = request.form.get('surname'),
-              profession = request.form.get('profession'),
-              location = request.form.get('location'),
-              description = request.form.get('description'),
-              email = request.form.get('email'),
-              phone = request.form.get('phone'),
-              address = request.form.get('address'),
-              available = request.form.get('available'),
-              password = request.form.get('password')
-             )
     
 
     #executing the query
     cursor = db.cursor()
-    cursor.execute(query)
+    cursor.execute('INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 1, %s)', (name, surname, profession, location, description, email, phone, address, password,))
     db.commit()
     
     lastId = cursor.lastrowid
