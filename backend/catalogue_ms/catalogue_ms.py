@@ -68,11 +68,27 @@ def getWorker(id):
 
 @app.route('/catalogue/<id>', methods=['POST'])
 def sendRequest(id):
-    worker_id = id
-    query = "INSERT INTO request({customer_id}, {worker_id})".format(worker_id = worker_id)
-
-    return True
     
+    db = dbConnect()
+
+    token = request.headers.get('Authorization').split(";")
+    customer_id = token[0]
+    worker_id = id
+    
+        
+    query = """INSERT INTO request (customer_id, worker_id, accepted)
+    VALUES ({customer_id}, {worker_id}, 0)""".format(
+        worker_id = worker_id, 
+        customer_id = customer_id)
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return str(id),200    
 
 
 if __name__ == "__main__":
