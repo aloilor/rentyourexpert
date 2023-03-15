@@ -3,6 +3,7 @@ from flask import jsonify
 import mysql.connector
 import json
 from flask_cors import CORS
+from flask import request
 
 app = Flask(__name__)
 CORS(app)
@@ -68,7 +69,7 @@ def getWorker(id):
 
 @app.route('/catalogue/<id>', methods=['POST'])
 def sendRequest(id):
-    
+
     db = dbConnect()
 
     token = request.headers.get('Authorization').split(";")
