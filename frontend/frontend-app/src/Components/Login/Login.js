@@ -19,7 +19,7 @@ function Login() {
     formData.append('password', password);
   
     
-    fetch('http://localhost:5001/login/', {
+    fetch('http://localhost:5001/worker_login/', {
       method: 'POST',
       body: 
         formData

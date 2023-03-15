@@ -38,7 +38,7 @@ function Register() {
     formData.append('password', password);
 
 
-    fetch('http://localhost:5001/register/', {
+    fetch('http://localhost:5001/worker_register/', {
       method: 'POST',
       body: formData
     })
