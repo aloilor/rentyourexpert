@@ -7,6 +7,24 @@ function ExpertDetail() {
   const authToken = localStorage.getItem('auth_token');
   const authTokenParts = authToken ? authToken.split(';') : [];
   const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
+  
+  const sendRequest = () => {
+    fetch(`http://localhost:5000/catalogue/${id}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': authToken
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        console.log('Request sent successfully');
+        // aggiorna il componente per visualizzare la richiesta inviata
+      } else {
+        console.log('Failed to send request');
+      }
+    })
+    .catch((error) => console.log(error));
+  }
 
   useEffect(() => {
     fetch(`http://localhost:5000/catalogue/${id}`)
@@ -15,7 +33,6 @@ function ExpertDetail() {
       .catch((error) => console.log(error));
   }, [id]);
 
-  console.log(id); // aggiungi questa linea per stampare l'id
   if (lastAuthTokenPart=='C') {
   return (
     <div>
@@ -26,6 +43,8 @@ function ExpertDetail() {
       <p>Description: {expert.description}</p>
       <p>Phone: {expert.phone}</p>
       <p>Availability: {expert.available ? 'Available' : 'Not available'}</p>
+      <button onClick={sendRequest}>Invia richiesta</button>
+
     </div>
   );
 } else {

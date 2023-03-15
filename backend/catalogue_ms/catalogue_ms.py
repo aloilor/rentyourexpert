@@ -1,4 +1,5 @@
 from flask import Flask 
+from flask import request 
 from flask import jsonify
 import mysql.connector
 import json
@@ -75,13 +76,15 @@ def sendRequest(id):
     token = request.headers.get('Authorization').split(";")
     customer_id = token[0]
     worker_id = id
+    accepted = 0
     
-        
     query = """INSERT INTO request (customer_id, worker_id, accepted)
-    VALUES ({customer_id}, {worker_id}, 0)""".format(
+    VALUES ({customer_id}, {worker_id}, {accepted});""".format(
         worker_id = worker_id, 
-        customer_id = customer_id)
+        customer_id = customer_id,
+        accepted = accepted)
     cursor = db.cursor()
+
     cursor.execute(query)
     db.commit()
 
