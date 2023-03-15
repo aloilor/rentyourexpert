@@ -8,6 +8,8 @@ function Home() {
       <a href="/login_customer">Login</a>
       <p>Please login to access as worker:</p>
       <a href="/login">Login</a>
+      <br />
+      <a href="/admin">Admin Panel</a>
     </div>
   );
 }
