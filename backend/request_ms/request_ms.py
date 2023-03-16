@@ -48,7 +48,6 @@ def sendRequest(id):
 @app.route('/worker_profile/<id>/request/<id2>', methods=['GET','POST'])
 def worker_manageRequest(id,id2):
     token = request.headers.get('Authorization').split(";")
-    customer_id = token[0]
     worker_id = id
     request_id = id2
 
