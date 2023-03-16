@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS request (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `customer_id` int unsigned NOT NULL,
     `worker_id` int unsigned NOT NULL, 
+    `accepted` tinyint unsigned NOT NULL, 
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY(`customer_id`) REFERENCES customer(`id`) ON DELETE CASCADE,
@@ -55,10 +56,10 @@ VALUES
 ('saraJohnson', 'Sara', 'Johnson', 'sarajohnson@example.com', 'password111', 0);
 
 
-INSERT INTO request (customer_id, worker_id)
+INSERT INTO request (customer_id, worker_id, accepted)
 VALUES 
-(1, 1),
-(2, 2),
-(3, 4),
-(4, 3),
-(5, 5);
+(1, 1, 0),
+(2, 2, 0),
+(3, 4, 0),
+(4, 3, 0),
+(5, 5, 0);

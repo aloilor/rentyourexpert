@@ -22,13 +22,21 @@ services:
     volumes: 
       - ./db:/docker-entrypoint-initdb.d/:ro
 
-  login_ms:
-    build: ./backend/login_ms
-    hostname: login
+  worker_login_ms:
+    build: ./backend/worker_login_ms
+    hostname: worker_login
     ports:
       - "5001:5001"
     depends_on:
       - db
+
+  cust_login_ms:
+    build: ./backend/cust_login_ms
+    hostname: cust_login
+    ports:
+      - "5003:5003"
+
+
 
   frontend:
     build: ./frontend/frontend-app 

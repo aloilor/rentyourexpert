@@ -20,7 +20,7 @@ function LoginCustomer() {
     formData.append('password', password);
   
     
-    fetch('http://localhost:5001/login_customer/', {
+    fetch('http://localhost:5003/login_customer/', {
       method: 'POST',
       body: 
         formData
