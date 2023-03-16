@@ -68,30 +68,6 @@ def getWorker(id):
 
     return json.dumps(json_data)
 
-@app.route('/catalogue/<id>', methods=['POST'])
-def sendRequest(id):
-
-    db = dbConnect()
-
-    token = request.headers.get('Authorization').split(";")
-    customer_id = token[0]
-    worker_id = id
-    
-    query = """INSERT INTO request (customer_id, worker_id, accepted)
-    VALUES ('{customer_id}', '{worker_id}',0);""".format(
-        worker_id = worker_id, 
-        customer_id = customer_id)
-    cursor = db.cursor()
-
-    cursor.execute(query)
-    db.commit()
-
-    #closing the connection to the database
-    cursor.close()
-    db.close()
-
-    return str(id),200    
-
 
 if __name__ == "__main__":
     app.run(debug = True, host = '0.0.0.0', port = 5000)
