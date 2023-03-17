@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import WorkerRequests from '../WorkerRequests/WorkerRequests';
+import LogoutCustomerButton from '../Logout/Logout';
 
 function WorkerProfile() {
   const authToken = localStorage.getItem('auth_token');
@@ -20,6 +21,7 @@ function WorkerProfile() {
   
   return (
     <div>
+      <LogoutCustomerButton />
       <h1>Worker Profile</h1>
       <ul>
         <li>Name: {worker.name}</li>

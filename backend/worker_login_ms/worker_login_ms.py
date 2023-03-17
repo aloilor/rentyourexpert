@@ -149,7 +149,7 @@ def getWorkerRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS SENT TO THE WORKER 
-    query_requests = "SELECT name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id".format(id=id)
+    query_requests = "SELECT request.id, name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
