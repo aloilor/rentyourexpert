@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
 
   
 
@@ -30,6 +34,9 @@ function Login() {
           setMessage('Logged in successfully!');
           console.log(data.auth_token);
           localStorage.setItem('auth_token', data.auth_token);
+          navigate('/worker_profile/:id');  
+          window.location.reload()
+
         } else {
           setMessage('Incorrect email/password!');
         }

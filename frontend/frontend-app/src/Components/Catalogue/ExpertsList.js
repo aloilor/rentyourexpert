@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import LogoutCustomerButton from '../LogoutCustomer/LogoutCustomer';
+import LogoutCustomerButton from '../Logout/Logout';
 import LoginCustomer from '../LoginCustomer/LoginCustomer';
+import ProfileButton from '../Profile/ButtonCustomerProfile';
+
 
 function ExpertsList() {
   const authToken = localStorage.getItem('auth_token');
@@ -24,6 +26,7 @@ function ExpertsList() {
       
       <div>
         <LogoutCustomerButton />
+        <ProfileButton />
         <h1>Expert List</h1>
         {experts.map((expert, index) => (
           <div key={index}>
@@ -36,7 +39,7 @@ function ExpertsList() {
     return(
     // l'utente non è autenticato, visualizza il componente di login
     <div>
-        <LoginCustomer />
+        <LoginCustomer />       
     </div>
     )
   }

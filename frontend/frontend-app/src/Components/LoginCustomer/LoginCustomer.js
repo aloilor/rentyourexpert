@@ -31,6 +31,7 @@ function LoginCustomer() {
           setMessage('Logged in successfully!');
           localStorage.setItem('auth_token', data.auth_token);
           navigate('/catalogue');  
+          window.location.reload()
         } else {
           setMessage('Incorrect email/password!');
         }
