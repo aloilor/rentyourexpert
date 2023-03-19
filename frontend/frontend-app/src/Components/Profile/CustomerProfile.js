@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CustomerRequests from '../CustomerRequests/CustomerRequests';
+import LogoutCustomerButton from '../Logout/Logout';
 
 function CustomerProfile() {
   const authToken = localStorage.getItem('auth_token');
@@ -16,6 +17,7 @@ function CustomerProfile() {
 
   return (
     <div>
+       <LogoutCustomerButton />
       <h1>Customer Profile</h1>
       <ul>
         <li>Username: {customer.username}</li>

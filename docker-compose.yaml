@@ -36,7 +36,7 @@ services:
     ports:
       - "5003:5003"
 
-  requests_ms:
+  request_ms:
     build: ./backend/request_ms
     hostname: req_ms
     ports:
