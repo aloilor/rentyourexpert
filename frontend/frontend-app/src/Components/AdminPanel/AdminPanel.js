@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LogoutCustomerButton from '../Logout/Logout';
 
 function AdminPanel() {
   return (
     <div>
+       <LogoutCustomerButton />
       <Link to="/admin/customers">
         <button>Customers</button>
       </Link>
