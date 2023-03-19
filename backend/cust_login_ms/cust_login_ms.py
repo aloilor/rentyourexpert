@@ -129,7 +129,7 @@ def getCustomerProfile(id):
 
 
     #QUERY TO RETRIVE INFORMATION ABOUT THE CUSTOMER
-    query_info = "SELECT username, name, surname, email, password FROM customer WHERE id = {id}".format(id = id)
+    query_info = "SELECT id, username, name, surname, email, password FROM customer WHERE id = {id}".format(id = id)
     cursor.execute(query_info)
 
     #jsonifying 
@@ -138,9 +138,23 @@ def getCustomerProfile(id):
     json_data_info = []
     for result in rv:
         json_data_info.append(dict(zip(row_headers,result)))
+    return json.dumps(json_data_info)
 
+@app.route('/customer_profile/<id>/requests', methods=['GET'])
+def getCustomerRequests(id):
+    #MySQL connection config
+    config = {
+        'user' : 'root',
+        'password' : 'root',
+        'host' : 'db',
+        'port' : '3306',
+        'database' : 'rentYourExpert',
+    }
+    db = mysql.connector.connect(**config)
+    cursor = db.cursor()
+    
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id".format(id=id)
+    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
@@ -154,7 +168,7 @@ def getCustomerProfile(id):
     cursor.close()
     db.close()
 
-    return json.dumps(json_data_info) + json.dumps(json_data_req, indent=4, sort_keys=True, default=str)
+    return json.dumps(json_data_req, indent=4, sort_keys=True, default=str)
 
 
 
