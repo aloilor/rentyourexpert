@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import LogoutCustomerButton from '../Logout/Logout';
+
 
 function ExpertDetail() {
   const { id } = useParams();
@@ -36,6 +38,7 @@ function ExpertDetail() {
   if (lastAuthTokenPart=='C') {
   return (
     <div>
+      <LogoutCustomerButton />
       <h1>Expert Detail</h1>
       <p>Name: {expert.name} {expert.surname}</p>
       <p>Profession: {expert.profession}</p>
