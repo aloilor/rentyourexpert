@@ -18,7 +18,7 @@ import AddWorkerForm from "./Components/AdminPanel/newWorker";
 import CustomerProfile from "./Components/Profile/CustomerProfile";
 import WorkerProfile from "./Components/Profile/WorkerProfile";
 import WorkerRequests from "./Components/WorkerRequests/WorkerRequests";
-
+import CustomerRequests from "./Components/CustomerRequests/CustomerRequests";
 
 function App() {
   const [experts] = useState([]);
@@ -47,9 +47,9 @@ function App() {
           <Route path="/admin/workers/new" element={<AddWorkerForm />} />
           
           <Route path="/customer_profile/:id" element={<CustomerProfile />} />
+          <Route path="/customer_profile/:id/requests" element={<CustomerRequests />} />
           <Route path="/worker_profile/:id" element={<WorkerProfile />} />
           <Route path="/worker_profile/:id/requests" element={<WorkerRequests />} />
-        
         
         </Routes>
       </div>

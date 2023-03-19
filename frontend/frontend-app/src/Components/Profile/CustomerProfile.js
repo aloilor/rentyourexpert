@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import CustomerRequests from '../CustomerRequests/CustomerRequests';
 
 function CustomerProfile() {
   const authToken = localStorage.getItem('auth_token');
@@ -24,6 +24,7 @@ function CustomerProfile() {
         <li>Email: {customer.email}</li>
         <li>Password: {customer.password}</li>
       </ul>
+      <CustomerRequests id={id} />
     </div>
   );
 }

@@ -154,7 +154,7 @@ def getCustomerRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id".format(id=id)
+    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
