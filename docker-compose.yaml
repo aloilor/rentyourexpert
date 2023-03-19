@@ -48,6 +48,12 @@ services:
     ports:
       - "5005:5005"
 
+  review_ms:
+    build: ./backend/review_ms
+    hostname: review_ms
+    ports:
+      - "5006:5006"
+
   frontend:
     build: ./frontend/frontend-app 
     ports: 
