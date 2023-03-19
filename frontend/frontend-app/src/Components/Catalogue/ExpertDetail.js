@@ -9,7 +9,7 @@ function ExpertDetail() {
   const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
   
   const sendRequest = () => {
-    fetch(`http://localhost:5000/catalogue/${id}`, {
+    fetch(`http://localhost:5004/catalogue/${id}`, {
       method: 'POST',
       headers: {
         'Authorization': authToken
