@@ -297,3 +297,32 @@ def delRequest(id):
 
     return str(id),200
 
+@app.route('/login_admin/', methods=['GET', 'POST'])
+def login_admin():
+    #connecting to the database
+    db = dbConnect()
+    cursor = db.cursor()
+
+    response = {'message': ''}
+    
+    if request.method == 'POST':
+        # Create variables for easy access
+        email = request.form.get('email')
+        password = request.form.get('password')
+    
+        cursor.execute('SELECT * FROM customer WHERE email = %s AND password = %s AND isAdmin = 1', (email, password))
+
+        # Fetch one record and return result
+        user = cursor.fetchone()
+        # If account exists in user table in out database
+        if user:
+            # Redirect to home page
+            response['message'] = 'success'
+            response['auth_token'] = str(user[0])+";"+str(email)+";"+str(password)+";"+"A"
+
+        else:
+            # Account doesnt exist or email/password incorrect
+            response['message'] = 'failure'
+            
+    # Output message if something goes wrong...
+    return jsonify(response)
