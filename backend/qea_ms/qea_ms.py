@@ -28,7 +28,7 @@ def getQeAs(id):
     #connecting to the database
     db = dbConnect()
 
-    query = """SELECT username, question, answer FROM customer, questionanswer 
+    query = """SELECT questionanswer.id, username, question, answer FROM customer, questionanswer 
             WHERE customer.id = {id} AND customer.id = customer_id""".format(id = id)
     
 

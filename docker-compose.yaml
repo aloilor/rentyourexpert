@@ -41,6 +41,18 @@ services:
     hostname: req_ms
     ports:
       - "5004:5004"
+  
+  qea_ms:
+    build: ./backend/qea_ms
+    hostname: qea_ms
+    ports:
+      - "5005:5005"
+
+  review_ms:
+    build: ./backend/review_ms
+    hostname: review_ms
+    ports:
+      - "5006:5006"
 
 
 

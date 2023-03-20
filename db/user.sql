@@ -38,6 +38,19 @@ CREATE TABLE IF NOT EXISTS request (
     FOREIGN KEY(`worker_id`) REFERENCES worker(`id`) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS questionanswer (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `customer_id` int unsigned NOT NULL,
+    `worker_id` int unsigned NOT NULL, 
+    `question` varchar(500) NOT NULL, 
+    `answer` varchar(500),
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY(`customer_id`) REFERENCES customer(`id`) ON DELETE CASCADE,
+    FOREIGN KEY(`worker_id`) REFERENCES worker(`id`) ON DELETE CASCADE
+);
+
+
 INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password)
 VALUES
 ('John', 'Doe', 'Web Developer', 'New York', 'Experienced web developer with expertise in HTML, CSS, and JavaScript.', 'johndoe@example.com', 1234567890, '123 Main St, New York, NY 10001', 1, '0000'),
@@ -63,3 +76,11 @@ VALUES
 (3, 4, 0),
 (4, 3, 0),
 (5, 5, 0);
+
+INSERT INTO questionanswer (customer_id, worker_id, question, answer)
+VALUES 
+(1, 2, 'Can you design a logo for my new business?', NULL),
+(2, 3, 'Can you fix my leaky faucet?', NULL),
+(3, 1, 'Can you create a responsive website for my business?', NULL),
+(4, 4, 'Can you review this contract for me?', NULL),
+(5, 5, 'Can you install a ceiling fan in my living room?', NULL);

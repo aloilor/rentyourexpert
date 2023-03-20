@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import WorkerRequests from '../WorkerRequests/WorkerRequests';
 import LogoutCustomerButton from '../Logout/Logout';
 
+
 function WorkerProfile() {
   const authToken = localStorage.getItem('auth_token');
   const authTokenParts = authToken ? authToken.split(';') : [];
@@ -36,6 +37,7 @@ function WorkerProfile() {
         <li>Password: {worker.password}</li>
       </ul>
       <WorkerRequests id={id} />
+     
     </div>
   );
 }
