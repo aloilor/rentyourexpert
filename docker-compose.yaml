@@ -38,7 +38,7 @@ services:
 
   request_ms:
     build: ./backend/request_ms
-    hostname: req_ms
+    hostname: request_ms
     ports:
       - "5004:5004"
   
@@ -54,7 +54,17 @@ services:
     ports:
       - "5006:5006"
 
+  qea_ms:
+    build: ./backend/qea_ms
+    hostname: qea_ms
+    ports:
+      - "5005:5005"
 
+  review_ms:
+    build: ./backend/review_ms
+    hostname: review_ms
+    ports:
+      - "5006:5006"
 
   frontend:
     build: ./frontend/frontend-app 
