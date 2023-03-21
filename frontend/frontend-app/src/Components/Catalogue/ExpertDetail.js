@@ -7,8 +7,6 @@ function ExpertDetail() {
   const { id } = useParams();
   const [expert, setExpert] = useState({});
   const authToken = localStorage.getItem('auth_token');
-  const authTokenParts = authToken ? authToken.split(';') : [];
-  const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
   
   const sendRequest = () => {
     fetch(`http://localhost:5004/catalogue/${id}`, {
@@ -35,7 +33,6 @@ function ExpertDetail() {
       .catch((error) => console.log(error));
   }, [id]);
 
-  if (lastAuthTokenPart=='C') {
   return (
     <div>
       <LogoutCustomerButton />
@@ -51,13 +48,5 @@ function ExpertDetail() {
 
     </div>
   );
-} else {
-  return(
-  // l'utente non è autenticato, visualizza il componente di login
-  <div>
-      <h1>NON HAI L'AUTORIZZAZIONE</h1>
-  </div>
-  )
-}
 } 
 export default ExpertDetail;

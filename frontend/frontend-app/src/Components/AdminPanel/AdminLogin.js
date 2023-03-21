@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LoginCustomer() {
+function LoginAdmin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -20,17 +20,16 @@ function LoginCustomer() {
     formData.append('password', password);
   
     
-    fetch('http://localhost:5003/login_customer/', {
+    fetch('http://localhost:5002/login_admin/', {
       method: 'POST',
-      body: 
-        formData
+      body: formData
     })
       .then(response => response.json())
       .then(data => {
         if (data.message === 'success') {
           setMessage('Logged in successfully!');
           localStorage.setItem('auth_token', data.auth_token);
-          navigate('/catalogue');  
+          navigate('/admin');  
           window.location.reload()
         } else {
           setMessage('Incorrect email/password!');
@@ -43,21 +42,19 @@ function LoginCustomer() {
 
   return (
     <div>
-      <h1>Login Form</h1>
+      <h1>Login Form for Admins</h1>
       <form onSubmit={handleSubmit}>
-      <label>Email:</label>
-        <input name = 'email' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label>Email:</label>
+        <input name='email' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
         <br />
         <label>Password:</label>
-        <input name = 'password' type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input name='password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <br />
         <button type="submit">Login</button>
       </form>
       <p>{message}</p>
-      <br />
-      <p>Don't have an account? <a href="/register_customer">Register here</a>.</p>
     </div>
   );
 }
 
-export default LoginCustomer;
+export default LoginAdmin;

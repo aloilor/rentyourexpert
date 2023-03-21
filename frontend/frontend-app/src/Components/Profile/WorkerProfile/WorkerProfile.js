@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import WorkerRequests from '../WorkerRequests/WorkerRequests';
-import LogoutCustomerButton from '../Logout/Logout';
-import QeA from '../QeA/QeA';
+import WorkerRequests from '../../Requests/WorkerRequests/WorkerRequests';
+import LogoutCustomerButton from '../../Logout/Logout';
+import QeA from '../../QeA/QeA';
 
 function WorkerProfile() {
   const authToken = localStorage.getItem('auth_token');
