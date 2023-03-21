@@ -6,6 +6,7 @@ function WorkersManagement() {
   const { id } = useParams();
   const [worker, setWorker] = useState({});
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     fetch(`http://localhost:5002/workers/${id}`)

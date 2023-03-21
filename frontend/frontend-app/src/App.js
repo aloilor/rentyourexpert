@@ -21,35 +21,27 @@ import WorkerProfile from "./Components/Profile/WorkerProfile/WorkerProfile";
 import WorkerRequests from "./Components/Requests/WorkerRequests/WorkerRequests";
 import CustomerRequests from "./Components/Requests/CustomerRequests/CustomerRequests";
 import LoginAdmin from "./Components/AdminPanel/AdminLogin";
-
-
-
+import RequestList from "./Components/AdminPanel/RequestsManagement/AdminRequests";
+import AdminNewRequest from "./Components/AdminPanel/RequestsManagement/AdminNewRequests";
 
 
 function App() {
   const [experts] = useState([]);
   const [customers] = useState([]);
   const [workers] = useState([]);
-
+  const authToken = localStorage.getItem('auth_token');
+  const authTokenParts = authToken ? authToken.split(';') : [];
+  const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
 
   function isAdmin() {
-    const authToken = localStorage.getItem('auth_token');
-    const authTokenParts = authToken ? authToken.split(';') : [];
-    const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
     return lastAuthTokenPart === 'A';
   }
 
   function isWorker() {
-    const authToken = localStorage.getItem('auth_token');
-    const authTokenParts = authToken ? authToken.split(';') : [];
-    const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
     return lastAuthTokenPart === 'W';
   }
 
   function isCustomer() {
-    const authToken = localStorage.getItem('auth_token');
-    const authTokenParts = authToken ? authToken.split(';') : [];
-    const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
     return lastAuthTokenPart === 'C';
   }
   
@@ -74,9 +66,10 @@ function App() {
           <Route path="/admin/workers" element={isAdmin() ? <WorkersList workers={workers} />: <LoginAdmin /> } /> 
           <Route path="/admin/workers/:id" element={isAdmin() ? <WorkersManagement />: <LoginAdmin /> } /> 
           <Route path="/admin/workers/new" element={isAdmin() ? <AddWorkerForm />: <LoginAdmin /> } />  
+          <Route path="/admin/requests" element={isAdmin() ? <RequestList />: <LoginAdmin /> } />
+          <Route path="/admin/requests/new" element={isAdmin() ? <AdminNewRequest />: <LoginAdmin /> } />
           <Route path="/admin_login" element={<LoginAdmin />} />
-          
-         
+
 
           <Route path="/customer_profile/:id" element={isCustomer() ? <CustomerProfile /> : <LoginCustomer /> } />
           <Route path="/customer_profile/:id/requests" element={isCustomer() ? <CustomerRequests /> : <LoginCustomer /> } />

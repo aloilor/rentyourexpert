@@ -9,7 +9,7 @@ function Home() {
       <p>Please login to access as worker:</p>
       <a href="/login">Login</a>
       <br />
-      <a href="/admin_login">Admin Panel</a>
+      <a href="/admin">Admin Panel</a>
     </div>
   );
 }
