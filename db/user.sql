@@ -50,6 +50,17 @@ CREATE TABLE IF NOT EXISTS questionanswer (
     FOREIGN KEY(`worker_id`) REFERENCES worker(`id`) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS review (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `customer_id` int unsigned NOT NULL,
+    `worker_id` int unsigned NOT NULL, 
+    `description` varchar(500) NOT NULL, 
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY(`customer_id`) REFERENCES customer(`id`) ON DELETE CASCADE,
+    FOREIGN KEY(`worker_id`) REFERENCES worker(`id`) ON DELETE CASCADE
+); 
+
 
 INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password)
 VALUES
@@ -84,3 +95,12 @@ VALUES
 (3, 1, 'Can you create a responsive website for my business?', NULL),
 (4, 4, 'Can you review this contract for me?', NULL),
 (5, 5, 'Can you install a ceiling fan in my living room?', NULL);
+
+
+INSERT INTO review (customer_id, worker_id, description)
+VALUES
+    (1, 1, 'This worker did an amazing job!'),
+    (2, 2, 'Very professional and efficient.'),
+    (4, 3, 'Highly recommend this worker!'),
+    (3, 4, 'Exceeded my expectations.'),
+    (5, 5, 'Great communication and attention to detail.');
