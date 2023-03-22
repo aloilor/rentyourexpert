@@ -43,31 +43,58 @@ function Reviews({ id }) {
           .catch(error => console.log(error));
       }
 
-      const handleEditReview = (description, reviewId) => {
-    fetch(`http://localhost:5006/catalogue/${id}/reviews/${reviewId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': authToken
-      },
-      body: `description=${description}`
-    })
-      .then(response => {
-        if (response.status === 200) {
-          alert('Recensione modificata con successo');
-          // Aggiornare la lista delle recensioni
-          fetch(`http://localhost:5006/catalogue/${id}`)
-            .then(response => response.json())
-            .then(data => setReviews(data))
-            .catch(error => console.log(error));
-        } else {
-          alert('Errore durante la modifica della recensione');
-        }
-      })
-      .catch(error => console.log(error));
-    setEditReviewId(null);
-    setEditMode(false);
-  };
+
+
+      const handleReviewUpdate = (event, reviewId) => {
+        event.preventDefault();
+        const description = event.target.elements.description.value;
+        const updatedReviews = reviews.map(review => {
+          if (review.id === reviewId) {
+            return { ...review, description };
+          } else {
+            return review;
+          }
+        });
+        setReviews(updatedReviews);
+        setEditMode(false);
+        fetch(`http://localhost:5006/catalogue/${id}/${reviewId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': authToken
+          },
+          body: `description=${description}`
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to update review');
+          }
+        })
+        .catch(error => console.error(error));
+      };
+
+      const handleReviewDelete = (reviewId) => {
+        fetch(`http://localhost:5006/catalogue/${id}/${reviewId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': localStorage.getItem('auth_token')
+          }
+        })
+        .then(response => {
+          if (response.status === 200) {
+            alert('Recensione eliminata con successo');
+            // Aggiornare la lista delle recensioni
+            fetch(`http://localhost:5006/catalogue/${id}`)
+              .then(response => response.json())
+              .then(data => setReviews(data))
+              .catch(error => console.log(error));
+          } else {
+            alert('Tu e il worker non siete ancora amici!');
+          }
+        })
+        .catch(error => console.log(error));
+      };
+
 
 
 if(lastAuthTokenPart=='C'){
@@ -82,12 +109,26 @@ if(lastAuthTokenPart=='C'){
               <div>Created At: {reviews.created_at}</div>
               {firstAuthTokenPart === reviews.customer_id.toString() && (
               <div>
-                <br />
-                
-                
+                {editMode && reviews.id === editReviewId ? (
+                  <form onSubmit={event => handleReviewUpdate(event, reviews.id)}>
+                    <label htmlFor="description">Description:</label>
+                    <input type="text" name="description" defaultValue={reviews.description} />
+                    <button type="submit">Update</button>
+                  </form>
+                ) : (
+                  <div>
+                    {reviews.description}
+                    <br />
+                    <button onClick={() => {
+                      setEditMode(true);
+                      setEditReviewId(reviews.id);
+                    }}>Edit</button>
+                    <button onClick={() => handleReviewDelete(reviews.id)}>Delete</button>
+                  </div>
+                )}         
               </div>
       )}
-      </li>
+            </li>
           ))}
         </ul>
         <h2>Aggiungi una recensione</h2>
@@ -97,7 +138,7 @@ if(lastAuthTokenPart=='C'){
           }}>
           <label htmlFor="description">Descrizione:</label>
           <input type="text" id="description" name="description" />
-          <button type="submit">Aggiungi recensione</button>
+          <button type="submit">Add Review</button>
         </form>
     </div>
 

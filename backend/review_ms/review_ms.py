@@ -27,7 +27,7 @@ def dbConnect():
 def getAllReviews(worker_id):
     db = dbConnect()
 
-    query = "SELECT * FROM review, customer WHERE worker_id = {worker_id}  AND customer_id = customer.id".format(worker_id=worker_id)
+    query = "SELECT review.id,review.customer_id,review.description,review.created_at  FROM review, customer WHERE worker_id = {worker_id}  AND customer_id = customer.id".format(worker_id=worker_id)
 
     #executing the query
     cursor = db.cursor()
@@ -65,9 +65,6 @@ def addReview(worker_id):
     cursor = db.cursor()
     cursor.execute(query)
 
-    if(not cursor.fetchall()):
-        cursor.close()
-        db.close()
         
     #jsonifying 
     row_headers = [x[0] for x in cursor.description] #this will extract row headers
@@ -77,7 +74,7 @@ def addReview(worker_id):
     if str(dic['accepted']) == '0':
         cursor.close()
         db.close()
-        return ("Cannot create review, this customer has never sent a request to the worker.")   
+        return ("Cannot create review, this customer has never sent a request to the worker."),400   
 
     query = """ INSERT INTO review (customer_id, worker_id, description) VALUES 
             ('{customer_id}', '{worker_id}', '{description}') """.format(
