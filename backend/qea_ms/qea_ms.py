@@ -60,7 +60,7 @@ def addQeA(id):
     db = dbConnect()
 
     query = """INSERT INTO questionanswer (customer_id, worker_id, question, answer)
-            VALUES ('{customer_id}', '{worker_id}','{question}', NULL)""".format(
+            VALUES ("{customer_id}", "{worker_id}","{question}", NULL)""".format(
                 customer_id = customer_id,
                 worker_id = worker_id,
                 question = question,
