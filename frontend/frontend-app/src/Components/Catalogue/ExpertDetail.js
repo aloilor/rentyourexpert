@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LogoutCustomerButton from '../Logout/Logout';
 import QeA from '../QeA/QeA';
+import Reviews from '../Reviews/Reviews';
+
 
 function ExpertDetail() {
   const { id } = useParams();
@@ -45,6 +47,7 @@ function ExpertDetail() {
       <p>Availability: {expert.available ? 'Available' : 'Not available'}</p>
       <button onClick={sendRequest}>Invia richiesta</button>
       <QeA id={id} />
+      <Reviews id={id} />
 
     </div>
   );

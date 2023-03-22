@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function QeA({ id }) {
   const [questions, setQuestions] = useState([]);
+  const [editMode, setEditMode] = useState(false);
   const authToken = localStorage.getItem('auth_token');
   const authTokenParts = authToken ? authToken.split(';') : [];
   const firstAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[0] : null;
@@ -15,12 +16,40 @@ function QeA({ id }) {
       .catch(error => console.log(error));
   }, [id]);
 
+  const handleAnswerUpdate = (event, questionId) => {
+    event.preventDefault();
+    const answer = event.target.answer.value;
+    fetch(`http://localhost:5005/worker_profile/${id}/qea/${questionId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': authToken,
+      },
+      body: new FormData(event.target),
+    })
+      .then(response => {
+        if (response.ok) {
+          setQuestions(questions => {
+            const updatedQuestions = questions.map(question => {
+              if (question.id === questionId) {
+                return { ...question, answer };
+              } else {
+                return question;
+              }
+            });
+            return updatedQuestions;
+          });
+          setEditMode(false);
+        } else {
+          throw new Error('Failed to update answer');
+        }
+      })
+      .catch(error => console.error(error));
+  };
+
 
   const handleAnswerSubmit = (event, questionId) => {
     event.preventDefault();
     const answer = event.target.answer.value;
-    const questionToUpdate = questions.find(question => question.id === questionId);
-    const updatedQuestion = { ...questionToUpdate, answer };
     fetch(`http://localhost:5005/worker_profile/${id}/qea/${questionId}`, {
       method: 'POST',
       headers: {
@@ -88,7 +117,17 @@ function QeA({ id }) {
           <div>Username: {question.username}</div>
           <div>Question: {question.question}</div>
           <div>Answer: {question.answer ? (
-            <div>{question.answer}</div>
+            <div>{question.answer}
+            <br />
+                <button onClick={() => setEditMode(true)}>Edit</button>
+                {editMode && (
+                  <form onSubmit={event => handleAnswerUpdate(event, question.id)}>
+                    <label htmlFor="answer">Answer:</label>
+                    <input type="text" name="answer" defaultValue={question.answer} />
+                    <button type="submit">Update</button>
+                    </form>
+                  )}
+            </div>
           ) : (
             <form onSubmit={event => handleAnswerSubmit(event, question.id)}>
               <label htmlFor="answer">Answer:</label>
@@ -112,7 +151,9 @@ function QeA({ id }) {
               <div>Username: {question.username}</div>
               <div>Question: {question.question}</div>
               <div>Answer: {question.answer ? (
-                 <div>{question.answer}</div>
+                <div>{question.answer}
+                
+                </div>
               ) : (
                 <div>Not answer yet...</div>
               )}</div>
@@ -131,3 +172,5 @@ function QeA({ id }) {
 }
 
 export default QeA;
+
+
