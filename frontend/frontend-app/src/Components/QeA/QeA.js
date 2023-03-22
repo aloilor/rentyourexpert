@@ -19,6 +19,8 @@ function QeA({ id }) {
   const handleAnswerSubmit = (event, questionId) => {
     event.preventDefault();
     const answer = event.target.answer.value;
+    const questionToUpdate = questions.find(question => question.id === questionId);
+    const updatedQuestion = { ...questionToUpdate, answer };
     fetch(`http://localhost:5005/worker_profile/${id}/qea/${questionId}`, {
       method: 'POST',
       headers: {
@@ -76,7 +78,7 @@ function QeA({ id }) {
 
   
 
-  if (firstAuthTokenPart === id && lastAuthTokenPart === 'W') {
+  if (lastAuthTokenPart=='W' && firstAuthTokenPart === id ) {
     return (
       <div>
       <h2>Questions</h2>

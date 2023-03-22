@@ -35,7 +35,7 @@ function Login() {
           console.log(data.auth_token);
           localStorage.setItem('auth_token', data.auth_token);
           const authToken = localStorage.getItem('auth_token');
-          const userData = JSON.parse(atob(authToken.split('.')[1])); // decodifica il payload JWT e ottiene i dati dell'utente
+          const userData = JSON.parse(authToken.split(';')[0]); // decodifica il payload JWT e ottiene i dati dell'utente
           const workerId = userData.id;
           navigate(`/worker_profile/${workerId}`);
           window.location.reload()

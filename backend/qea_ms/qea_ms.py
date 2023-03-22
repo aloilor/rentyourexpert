@@ -101,4 +101,21 @@ def worker_addAnswer(id,id2):
 
     return str(id),200  
 
+@app.route('/question/<id>', methods=['DELETE'])
+def delQuestion(id):
+    
+    #connecting to the database
+    db = dbConnect()
 
+    query = """DELETE FROM questionanswer WHERE id = {id}""".format(id=id)
+    
+    #executing the query
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return str(id),200
