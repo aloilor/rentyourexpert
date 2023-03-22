@@ -259,10 +259,11 @@ def addRequest():
     #connecting to the database
     db = dbConnect()
 
-    query = """INSERT INTO request(customer_id, worker_id) 
-                VALUES ('{customer_id}','{worker_id}')""".format(
+    query = """INSERT INTO request(customer_id, worker_id, accepted) 
+                VALUES ('{customer_id}','{worker_id}',{accepted})""".format(
                     customer_id = request.form.get('customer_id'),
-                    worker_id = request.form.get('worker_id')   
+                    worker_id = request.form.get('worker_id'),
+                    accepted =  request.form.get('accepted')
                 )
 
     #executing the query

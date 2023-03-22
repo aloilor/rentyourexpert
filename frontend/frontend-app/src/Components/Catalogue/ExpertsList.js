@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LogoutCustomerButton from '../Logout/Logout';
-import LoginCustomer from '../LoginCustomer/LoginCustomer';
-import ProfileButton from '../Profile/ButtonCustomerProfile';
+import LoginCustomer from '../Login/LoginCustomer/LoginCustomer';
+import ProfileButton from '../Profile/CustomerProfile/ButtonCustomerProfile';
 
 
 function ExpertsList() {
   const authToken = localStorage.getItem('auth_token');
-  const authTokenParts = authToken ? authToken.split(';') : [];
-  const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
   const [experts, setExperts] = useState([]);
 
   useEffect(() => {
@@ -20,8 +18,7 @@ function ExpertsList() {
   }, []);
 
 
-  if (lastAuthTokenPart=='C') {
-    // l'utente è autenticato, visualizza il catalogo
+  
     return (
       
       <div>
@@ -35,14 +32,7 @@ function ExpertsList() {
         ))}
       </div>
     );
-  } else {
-    return(
-    // l'utente non è autenticato, visualizza il componente di login
-    <div>
-        <LoginCustomer />       
-    </div>
-    )
-  }
+  
   
 }
 

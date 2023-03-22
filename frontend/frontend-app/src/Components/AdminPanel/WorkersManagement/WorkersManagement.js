@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import AdminQeA from '../QeAManagement/AdminQeA';
 
 function WorkersManagement() {
   const { id } = useParams();
   const [worker, setWorker] = useState({});
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     fetch(`http://localhost:5002/workers/${id}`)
@@ -33,6 +35,7 @@ function WorkersManagement() {
       <h1>Worker Detail</h1>
       <p>Name: {worker.name} {worker.surname}</p>
       <button onClick={handleDeleteWorker}>Delete</button>
+      <AdminQeA id={id} />
     </div>
   );
 

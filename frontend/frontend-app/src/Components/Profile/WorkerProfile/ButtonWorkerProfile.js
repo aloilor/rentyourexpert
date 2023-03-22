@@ -22,3 +22,5 @@ function ProfileButton() {
     <button onClick={handleClick}>View Profile</button>
   );
 }
+
+export default ProfileButton;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import CustomerRequests from '../CustomerRequests/CustomerRequests';
-import LogoutCustomerButton from '../Logout/Logout';
+import CustomerRequests from '../../Requests/CustomerRequests/CustomerRequests';
+import LogoutCustomerButton from '../../Logout/Logout';
 
 function CustomerProfile() {
   const authToken = localStorage.getItem('auth_token');

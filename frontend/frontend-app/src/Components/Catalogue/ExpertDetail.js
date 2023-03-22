@@ -1,14 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LogoutCustomerButton from '../Logout/Logout';
-
+import QeA from '../QeA/QeA';
 
 function ExpertDetail() {
   const { id } = useParams();
   const [expert, setExpert] = useState({});
   const authToken = localStorage.getItem('auth_token');
-  const authTokenParts = authToken ? authToken.split(';') : [];
-  const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
   
   const sendRequest = () => {
     fetch(`http://localhost:5004/catalogue/${id}`, {
@@ -35,7 +33,6 @@ function ExpertDetail() {
       .catch((error) => console.log(error));
   }, [id]);
 
-  if (lastAuthTokenPart=='C') {
   return (
     <div>
       <LogoutCustomerButton />
@@ -47,16 +44,9 @@ function ExpertDetail() {
       <p>Phone: {expert.phone}</p>
       <p>Availability: {expert.available ? 'Available' : 'Not available'}</p>
       <button onClick={sendRequest}>Invia richiesta</button>
+      <QeA id={id} />
 
     </div>
   );
-} else {
-  return(
-  // l'utente non è autenticato, visualizza il componente di login
-  <div>
-      <h1>NON HAI L'AUTORIZZAZIONE</h1>
-  </div>
-  )
-}
 } 
 export default ExpertDetail;

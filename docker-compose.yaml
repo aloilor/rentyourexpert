@@ -41,7 +41,7 @@ services:
     hostname: request_ms
     ports:
       - "5004:5004"
-
+  
   qea_ms:
     build: ./backend/qea_ms
     hostname: qea_ms

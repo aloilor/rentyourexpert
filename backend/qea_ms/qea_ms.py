@@ -28,7 +28,7 @@ def getQeAs(id):
     #connecting to the database
     db = dbConnect()
 
-    query = """SELECT username, question, answer FROM customer, questionanswer 
+    query = """SELECT questionanswer.id, username, question, answer FROM customer, questionanswer 
             WHERE customer.id = {id} AND customer.id = customer_id""".format(id = id)
     
 
@@ -60,7 +60,7 @@ def addQeA(id):
     db = dbConnect()
 
     query = """INSERT INTO questionanswer (customer_id, worker_id, question, answer)
-            VALUES ('{customer_id}', '{worker_id}','{question}', NULL)""".format(
+            VALUES ("{customer_id}", "{worker_id}","{question}", NULL)""".format(
                 customer_id = customer_id,
                 worker_id = worker_id,
                 question = question,
@@ -101,4 +101,21 @@ def worker_addAnswer(id,id2):
 
     return str(id),200  
 
+@app.route('/question/<id>', methods=['DELETE'])
+def delQuestion(id):
+    
+    #connecting to the database
+    db = dbConnect()
 
+    query = """DELETE FROM questionanswer WHERE id = {id}""".format(id=id)
+    
+    #executing the query
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return str(id),200
