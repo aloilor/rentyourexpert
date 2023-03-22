@@ -65,7 +65,9 @@ def addReview(worker_id):
     cursor = db.cursor()
     cursor.execute(query)
 
-    if(not cursor.fetchone()):
+    if(not cursor.fetchall()):
+        cursor.close()
+        db.close()
         return ("Cannot create review, this customer has never sent a request to the worker.")    
 
     query = """ INSERT INTO review (customer_id, worker_id, description) VALUES 
