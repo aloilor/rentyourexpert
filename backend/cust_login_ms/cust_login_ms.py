@@ -140,8 +140,8 @@ def getCustomerProfile(id):
         json_data_info.append(dict(zip(row_headers,result)))
     return json.dumps(json_data_info)
 
-@app.route('/customer_profile/<id>/requests', methods=['GET'])
-def getCustomerRequests(id):
+@app.route('/customer_profile/<id>/pending_requests', methods=['GET'])
+def getCustomerPendingRequests(id):
     #MySQL connection config
     config = {
         'user' : 'root',
@@ -154,7 +154,7 @@ def getCustomerRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id".format(id=id)
+    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '0'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
@@ -170,6 +170,36 @@ def getCustomerRequests(id):
 
     return json.dumps(json_data_req, indent=4, sort_keys=True, default=str)
 
+
+@app.route('/customer_profile/<id>/accepted_requests', methods=['GET'])
+def getCustomerAcceptedRequests(id):
+    #MySQL connection config
+    config = {
+        'user' : 'root',
+        'password' : 'root',
+        'host' : 'db',
+        'port' : '3306',
+        'database' : 'rentYourExpert',
+    }
+    db = mysql.connector.connect(**config)
+    cursor = db.cursor()
+    
+    #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
+    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '1'".format(id=id)
+    cursor.execute(query_requests)
+
+    #jsonifying 
+    row_headers = [x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    json_data_req = []
+    for result in rv:
+        json_data_req.append(dict(zip(row_headers,result)))
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return json.dumps(json_data_req, indent=4, sort_keys=True, default=str)
 
 
    

@@ -104,7 +104,7 @@ if(lastAuthTokenPart=='C'){
         <ul>
           {reviews.map(reviews => (
             <li key={reviews.id}>
-              <div>ID: {reviews.customer_id}</div>
+              <div>Username: {reviews.username}</div>
               <div>Description: {reviews.description}</div>
               <div>Created At: {reviews.created_at}</div>
               {firstAuthTokenPart === reviews.customer_id.toString() && (
@@ -153,7 +153,7 @@ else{
         <ul>
           {reviews.map(reviews => (
             <li key={reviews.id}>
-              <div>ID: {reviews.customer_id}</div>
+              <div>Username: {reviews.username}</div>
               <div>Description: {reviews.description}</div>
               <div>Created At: {reviews.created_at}</div>
             </li>

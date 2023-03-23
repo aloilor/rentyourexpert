@@ -5,7 +5,7 @@ function WorkerRequests({ id }) {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5001/worker_profile/${id}/requests`)
+    fetch(`http://localhost:5001/worker_profile/${id}/pending_requests`)
       .then(response => response.json())
       .then(data => setRequests(data))
       .catch(error => console.log(error));
@@ -49,8 +49,8 @@ function WorkerRequests({ id }) {
             <div>Surname: {request.surname}</div>
             <div>Username: {request.username}</div>
             <div>Accepted: {request.accepted ? 'yes' : 'no'}</div>
-            <button onClick={() => handleRequestResponse(request.id, true)}>Accept</button>
-            <button onClick={() => handleRequestResponse(request.id, false)}>Reject</button>
+            {!request.accepted && <button onClick={() => handleRequestResponse(request.id, true)}>Accept</button>}
+            {request.accepted &&<button onClick={() => handleRequestResponse(request.id, false)}>Reject</button>}
             </li>
         ))}
       </ul>

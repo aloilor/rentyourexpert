@@ -123,7 +123,7 @@ def getWorkerProfile(id):
 
 
     #QUERY TO RETRIVE INFORMATION ABOUT THE WORKER
-    query_info = "SELECT id, name, surname, profession, location, description, email, phone, address, available, password FROM worker WHERE id = {id}".format(id = id)
+    query_info = "SELECT * FROM worker WHERE id = {id}".format(id = id)
     cursor.execute(query_info)
 
     #jsonifying 
@@ -135,8 +135,8 @@ def getWorkerProfile(id):
 
     return json.dumps(json_data_info)
 
-@app.route('/worker_profile/<id>/requests', methods=['GET'])
-def getWorkerRequests(id):
+@app.route('/worker_profile/<id>/pending_requests', methods=['GET'])
+def getWorkerPendingRequests(id):
     #MySQL connection config
     config = {
         'user' : 'root',
@@ -149,7 +149,7 @@ def getWorkerRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS SENT TO THE WORKER 
-    query_requests = "SELECT request.id, name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id".format(id=id)
+    query_requests = "SELECT request.id, name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id AND accepted = '0'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
@@ -166,9 +166,35 @@ def getWorkerRequests(id):
     return  json.dumps(json_data_req, indent=4, sort_keys=True, default=str)
 
 
-#@app.route('/worker_profile/<id>/request/<id2>', methods=['GET'])
+@app.route('/worker_profile/<id>/accepted_requests', methods=['GET'])
+def getWorkerAcceptedRequests(id):
+    #MySQL connection config
+    config = {
+        'user' : 'root',
+        'password' : 'root',
+        'host' : 'db',
+        'port' : '3306',
+        'database' : 'rentYourExpert',
+    }
+    db = mysql.connector.connect(**config)
+    cursor = db.cursor()
+    
+    #QUERY TO RETRIEVE REQUESTS SENT TO THE WORKER 
+    query_requests = "SELECT request.id, name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id AND accepted = '1'".format(id=id)
+    cursor.execute(query_requests)
 
+    #jsonifying 
+    row_headers = [x[0] for x in cursor.description] #this will extract row headers
+    rv = cursor.fetchall()
+    json_data_req = []
+    for result in rv:
+        json_data_req.append(dict(zip(row_headers,result)))
 
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return  json.dumps(json_data_req, indent=4, sort_keys=True, default=str)
 
 
 if __name__ == "__main__":
