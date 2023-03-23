@@ -6,7 +6,7 @@ function CustomerRequests({ id }) {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5003/customer_profile/${id}/requests`)
+    fetch(`http://localhost:5003/customer_profile/${id}/pending_requests`)
       .then(response => response.json())
       .then(data => setRequests(data))
       .catch(error => console.log(error));

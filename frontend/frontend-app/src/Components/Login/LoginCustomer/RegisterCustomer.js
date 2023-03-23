@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 function RegisterCustomer() {
     const [name, setName] = useState('');
@@ -40,28 +42,43 @@ function RegisterCustomer() {
   };
 
   return (
-    <div>
-    <h1>Registration Form</h1>
-    <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input name='name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
-        <br />
-        <label>Surname:</label>
-        <input name='surname' type='text' value={surname} onChange={(e) => setSurname(e.target.value)} />
-        <br />
-        <label>Username:</label>
-        <input name='username' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-        <br />
-        <label>Email:</label>
-        <input name='email' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
-        <br />
-        <label>Password:</label>
-        <input name='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-        <br />
-        <button type='submit'>Register</button>
-    </form>
-    <p>{message}</p>
-    </div>
+    <div className="container my-3 py-3">
+        <h1 className="text-center">Customer Registration Form</h1>
+        <hr />
+        <div className="row my-4 h-100">
+          <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+            <form onSubmit={handleSubmit}>
+              <div className="form my-3">
+                <label htmlFor="name">Name:</label>
+                <input name="name" type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
+              </div>
+              <div className="form my-3">
+                <label htmlFor="surname">Surname:</label>
+                <input name="surname" type="text" className="form-control" value={surname} onChange={(e) => setSurname(e.target.value)} />
+              </div>
+              <div className="form my-3">
+                <label htmlFor="email">Email:</label>
+                <input name="email" type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="form my-3">
+                <label htmlFor="username">Username:</label>
+                <input name="username" type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} />
+              </div>
+              <div className="form my-3">
+                <label htmlFor="password">Password:</label>
+                <input name="password" type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              <div className="text-center">
+                <button type="submit" className="my-2 mx-auto btn btn-dark">Register</button>
+              </div>
+            </form>
+            <p>{message}</p>
+            <div className="my-3">
+              <p>Already have an account? <Link to="/login_customer" className="text-decoration-underline text-info">Login</Link></p>
+            </div>
+          </div>
+        </div>
+      </div>
   );
 }
 
