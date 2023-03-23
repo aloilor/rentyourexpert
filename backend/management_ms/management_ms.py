@@ -327,3 +327,27 @@ def login_admin():
             
     # Output message if something goes wrong...
     return jsonify(response)
+
+
+@app.route('/catalogue/<worker_id>/<id>', methods=['DELETE'])
+def deleteReview(worker_id, id):
+    db = dbConnect()
+    cursor = db.cursor()
+
+    token = request.headers.get('Authorization').split(";")
+    
+
+    query = """ DELETE FROM review 
+            WHERE id = '{id}'  AND worker_id = '{worker_id}' """.format(
+        id = id,
+        worker_id = worker_id
+    )
+
+    cursor.execute(query)
+    db.commit()
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return "Recensione eliminata con successo",200

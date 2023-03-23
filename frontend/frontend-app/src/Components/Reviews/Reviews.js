@@ -37,7 +37,7 @@ function Reviews({ id }) {
               .then(data => setReviews(data))
               .catch(error => console.log(error));
             } else {
-              alert('Errore durante l\'aggiunta della recensione');
+              alert('Tu e il worker non siete ancora amici!');
             }
           })
           .catch(error => console.log(error));
@@ -89,7 +89,7 @@ function Reviews({ id }) {
               .then(data => setReviews(data))
               .catch(error => console.log(error));
           } else {
-            alert('Tu e il worker non siete ancora amici!');
+            alert('Errore nella delete');
           }
         })
         .catch(error => console.log(error));
