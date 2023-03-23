@@ -30,7 +30,7 @@ function CustomerManagement() {
   
   return (
     <div>
-      <h1>Expert Detail</h1>
+      <h1>Customer Detail</h1>
       <p>Name: {customer.name} {customer.surname}</p>
       <button onClick={handleDeleteCustomer}>Delete</button>
     </div>

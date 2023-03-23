@@ -119,3 +119,25 @@ def delQuestion(id):
     db.close()
 
     return str(id),200
+
+@app.route('/worker_profile/<id>/qea/<id2>', methods=['PUT'])
+def editAnswer(id,id2):
+    answer = request.form['answer']
+
+    #connecting to the database
+    db = dbConnect()
+
+    query = """UPDATE questionanswer SET answer = '{answer}' WHERE id = {id2}""".format(
+        answer = answer,
+        id2 = id2
+    )
+
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+
+    #closing the connection to the database
+    cursor.close()
+    db.close()
+
+    return  str(id),200  

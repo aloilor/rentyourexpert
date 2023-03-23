@@ -59,7 +59,7 @@ function App() {
           <Route path="/register_customer" element={<RegisterCustomer  />} />
         
           
-          <Route path="/admin" element={<AdminPanel  />} />
+          <Route path="/admin" element={isAdmin() ? <AdminPanel  /> : <LoginAdmin /> } /> 
           <Route path="/admin/customers" element={isAdmin() ? <CustomersList customers={customers} /> : <LoginAdmin /> } /> 
           <Route path="/admin/customers/:id" element={isAdmin() ? <CustomerManagement />: <LoginAdmin /> } /> 
           <Route path="/admin/customers/new" element={isAdmin() ? <AddCustomerForm />: <LoginAdmin /> } /> 

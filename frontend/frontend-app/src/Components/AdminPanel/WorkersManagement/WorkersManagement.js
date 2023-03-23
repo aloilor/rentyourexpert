@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import AdminQeA from '../QeAManagement/AdminQeA';
+import AdminReviews from '../ReviewManagement/AdminReview';
 
 function WorkersManagement() {
   const { id } = useParams();
@@ -36,6 +37,7 @@ function WorkersManagement() {
       <p>Name: {worker.name} {worker.surname}</p>
       <button onClick={handleDeleteWorker}>Delete</button>
       <AdminQeA id={id} />
+      <AdminReviews id={id} />
     </div>
   );
 
