@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import  Navbar  from '../../Navbar';
 
 function LoginCustomer() {
   const [email, setEmail] = useState('');
@@ -42,6 +43,8 @@ function LoginCustomer() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container my-3 py-3">
         <h1 className="text-center">Login as a Customer</h1>
         <hr />
@@ -85,6 +88,7 @@ function LoginCustomer() {
           </div>
         </div>
       </div>
+      </>
   );
 }
 
