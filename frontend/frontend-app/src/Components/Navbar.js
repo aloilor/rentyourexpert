@@ -1,12 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import LogoutCustomerButton from './Logout/Logout';
+
 
 const Navbar = () => {
     const authToken = localStorage.getItem('auth_token');
     const authTokenParts = authToken ? authToken.split(';') : [];
     const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
 
-    if(lastAuthTokenPart != 'C'){
+    if(lastAuthTokenPart === 'C'){
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
             <div className="container">
@@ -32,6 +34,7 @@ const Navbar = () => {
                     </ul>
                     <div className="buttons text-center">
                         <NavLink to="/customer_profile/:id" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Profile</NavLink>
+                        <LogoutCustomerButton />
                     </div>
                 </div>
 

@@ -3,7 +3,25 @@ import { useState, useEffect } from "react";
 import LogoutCustomerButton from '../Logout/Logout';
 import QeA from '../QeA/QeA';
 import Reviews from '../Reviews/Reviews';
-
+import { Card, Col, Button, Row } from "react-bootstrap";
+import  Navbar  from '../Navbar';
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit';
 
 function ExpertDetail() {
   const { id } = useParams();
@@ -36,20 +54,29 @@ function ExpertDetail() {
   }, [id]);
 
   return (
+    <>
+    <Navbar />
     <div>
-      <LogoutCustomerButton />
-      <h1>Expert Detail</h1>
-      <p>Name: {expert.name} {expert.surname}</p>
-      <p>Profession: {expert.profession}</p>
-      <p>Location: {expert.location}</p>
-      <p>Description: {expert.description}</p>
-      <p>Phone: {expert.phone}</p>
-      <p>Availability: {expert.available ? 'Available' : 'Not available'}</p>
-      <button onClick={sendRequest}>Invia richiesta</button>
-      <QeA id={id} />
-      <Reviews id={id} />
-
-    </div>
+  
+  <h1>Expert Detail</h1>
+  <Card style={{ width: '50rem' }}>
+    
+    <Card.Body>
+      <Card.Title>{expert.name} {expert.surname}</Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">{expert.profession}</Card.Subtitle>
+      <Card.Text>{expert.description}</Card.Text>
+      <Button onClick={sendRequest}>Invia richiesta</Button>
+    </Card.Body>
+    <ul className="list-group list-group-flush">
+      <li className="list-group-item">Location: {expert.location}</li>
+      <li className="list-group-item">Phone: {expert.phone}</li>
+      <li className="list-group-item">Availability: {expert.available ? 'Available' : 'Not available'}</li>
+    </ul>
+  </Card>
+  <QeA id={id} />
+  <Reviews id={id} />
+</div>
+</>
   );
 } 
 export default ExpertDetail;

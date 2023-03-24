@@ -7,6 +7,7 @@ COPY ./package-lock.json ./
 
 RUN npm install
 RUN npm install react-router-dom
+RUN npm install mdb-react-ui-kit
 
 COPY . .
 
