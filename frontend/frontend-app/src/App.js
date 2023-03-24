@@ -23,6 +23,7 @@ import CustomerRequests from "./Components/Requests/CustomerRequests/CustomerReq
 import LoginAdmin from "./Components/AdminPanel/AdminLogin";
 import RequestList from "./Components/AdminPanel/RequestsManagement/AdminRequests";
 import AdminNewRequest from "./Components/AdminPanel/RequestsManagement/AdminNewRequests";
+import CustomerAcceptedRequests from "./Components/Requests/CustomerRequests/CustomerAcceptedRequests";
 
 
 function App() {

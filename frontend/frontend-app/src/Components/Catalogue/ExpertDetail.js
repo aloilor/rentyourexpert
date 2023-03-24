@@ -66,8 +66,7 @@ function ExpertDetail() {
         <p className="text-muted mb-1">{expert.profession}</p>
         <p className="text-muted mb-4">{expert.location}</p>
         <div className="d-flex justify-content-center mb-2">
-          <MDBBtn>Send Request</MDBBtn>
-        </div>
+        <button type="button" class="btn btn-primary" onClick={sendRequest}>Send Request</button>        </div>
       </MDBCardBody>
     </MDBCard>
 

@@ -25,17 +25,22 @@ def dbConnect():
 def sendRequest(id):
 
     db = dbConnect()
-
+    cursor = db.cursor()
     token = request.headers.get('Authorization').split(";")
     customer_id = token[0]
     worker_id = id
     
+    query = """SELECT * FROM request WHERE id = {id}""".format(id=id)
+    cursor.execute(query)
+
+    if(cursor.fetchone()):
+        return "Request already sent, cannot send again", 400
+
     query = """INSERT INTO request (customer_id, worker_id, accepted)
     VALUES ('{customer_id}', '{worker_id}',0);""".format(
         worker_id = worker_id, 
         customer_id = customer_id)
-    cursor = db.cursor()
-
+    
     cursor.execute(query)
     db.commit()
 
@@ -51,11 +56,13 @@ def worker_manageRequest(id,id2):
     worker_id = id
     request_id = id2
 
-    accepted = request.form['accepted']
-
     db = dbConnect()
 
-    query =   """UPDATE request SET accepted = {accepted}
+    accepted = request.form['accepted']
+    if (accepted == '0'):
+        query = """DELETE FROM request WHERE id = {request_id}""".format(request_id = request_id)
+    else:
+        query = """UPDATE request SET accepted = {accepted}
                 WHERE id = '{request_id}'""".format(accepted = accepted, request_id = request_id)
     
     cursor = db.cursor()
@@ -69,7 +76,7 @@ def worker_manageRequest(id,id2):
     return str(id),200  
 
 
-#DELETE REQUEST if it has not already been accepted
+#DELETE REQUEST
 @app.route('/customer_profile/<id>/request/<id2>', methods=['DELETE'])
 def customer_deleteRequest(id, id2):
     token = request.headers.get('Authorization').split(";")
@@ -77,19 +84,7 @@ def customer_deleteRequest(id, id2):
     request_id = id2
 
     db = dbConnect()
-
-    query1 = "SELECT * FROM request WHERE id = {request_id}".format(request_id = request_id)
     cursor = db.cursor()
-    cursor.execute(query1)
-
-    #jsonifying 
-    row_headers = [x[0] for x in cursor.description] #this will extract row headers
-    rv = cursor.fetchone()
-    dic = dict(zip(row_headers,rv))
-    
-    if str(dic['accepted']) == '1':
-        return("Cannot delete the request, it has already been accepted by the worker")
-    
     query = """DELETE FROM request WHERE id = {request_id}""".format(request_id = request_id)
     cursor.execute(query)
     db.commit()

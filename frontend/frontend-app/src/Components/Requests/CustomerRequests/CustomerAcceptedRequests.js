@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 
 
-function CustomerRequests({ id }) {
+function CustomerAcceptedRequests({ id }) {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5003/customer_profile/${id}/pending_requests`)
+    fetch(`http://localhost:5003/customer_profile/${id}/accepted_requests`)
       .then(response => response.json())
       .then(data => setRequests(data))
       .catch(error => console.log(error));
@@ -25,7 +25,7 @@ function CustomerRequests({ id }) {
           const updatedRequests = requests.filter(request => request.id !== requestId);
           setRequests(updatedRequests);
         } else {
-          alert('Cannot delete the request, it has already been accepted by the worker');
+          alert('Cannot delete the request, something has happened');
         }
       })
       .catch(error => console.log(error));
@@ -33,7 +33,7 @@ function CustomerRequests({ id }) {
 
   return (
     <div>
-      <h2>Pending requests</h2>
+      <h2>Accepted requests</h2>
       <ul>
         {requests.map(request => (
           <li key={request.id}>
@@ -49,4 +49,4 @@ function CustomerRequests({ id }) {
   );
 }
 
-export default CustomerRequests;
+export default CustomerAcceptedRequests;

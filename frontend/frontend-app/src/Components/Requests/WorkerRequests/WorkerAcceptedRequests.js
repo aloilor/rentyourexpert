@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-function WorkerRequests({ id }) {
+function WorkerAcceptedRequests({ id }) {
   const [requests, setRequests] = useState([]);
 
 
   useEffect(() => {
-    fetch(`http://localhost:5001/worker_profile/${id}/pending_requests`)
+    fetch(`http://localhost:5001/worker_profile/${id}/accepted_requests`)
       .then(response => response.json())
       .then(data => setRequests(data))
       .catch(error => console.log(error));
@@ -34,7 +34,7 @@ function WorkerRequests({ id }) {
 
   return (
     <div>
-      <h2>Pending Requests</h2>
+      <h2>Accepted requests</h2>
       <ul>
         {requests.map(request => (
           <li key={request.id}>
@@ -43,7 +43,7 @@ function WorkerRequests({ id }) {
             <div>Username: {request.username}</div>
             <div>Accepted: {request.accepted ? 'yes' : 'no'}</div>
             {!request.accepted && <button onClick={() => handleRequestResponse(request.id, 1)}>Accept</button>}
-            {<button onClick={() => handleRequestResponse(request.id, 0)}>Delete</button>}
+            {request.accepted && <button onClick={() => handleRequestResponse(request.id, 0)}>Delete</button>}
             </li>
         ))}
       </ul>
@@ -51,4 +51,4 @@ function WorkerRequests({ id }) {
   );
 }
 
-export default WorkerRequests;
+export default WorkerAcceptedRequests;
