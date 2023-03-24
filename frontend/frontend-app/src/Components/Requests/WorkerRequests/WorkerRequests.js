@@ -23,12 +23,16 @@ function WorkerRequests({ id }) {
     })
       .then(response => {
         if (response.status == 200) {
-          const updatedRequests = requests.filter(request => request.id !== requestId);
-          setRequests(updatedRequests);
+          alert("Request succesfully managed")
+          // Aggiornare la lista delle recensioni
+          fetch(`http://localhost:5001/worker_profile/${id}/pending_requests`)
+          .then(response => response.json())
+          .then(data => setRequests(data))
+          .catch(error => console.log(error));
+          window.location.reload(false);
         } else {
           alert('Cannot delete the request, something has happened');
         }
-        window.location.reload(true);
       }).catch(error => console.log(error));
   };
 

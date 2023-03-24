@@ -65,7 +65,9 @@ def addReview(worker_id):
     cursor = db.cursor()
     cursor.execute(query)
 
-        
+    if (! cursor.fetchone()):
+        return "No request made to this worker", 400
+    
     #jsonifying 
     row_headers = [x[0] for x in cursor.description] #this will extract row headers
     rv = cursor.fetchone()
