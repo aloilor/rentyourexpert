@@ -135,6 +135,57 @@ def getWorkerProfile(id):
 
     return json.dumps(json_data_info)
 
+
+@app.route('/worker_profile/<id>', methods=['PUT'])
+def updateWorkerProfile(id):
+    #MySQL connection config
+    config = {
+        'user' : 'root',
+        'password' : 'root',
+        'host' : 'db',
+        'port' : '3306',
+        'database' : 'rentYourExpert',
+    }
+    db = mysql.connector.connect(**config)
+    cursor = db.cursor()
+
+    email = request.form['email']
+    password = request.form['password']
+    name = request.form['name']
+    surname = request.form['surname']
+    profession = request.form['profession']
+    location = request.form['location']
+    description = request.form['description']
+    phone = request.form['phone']
+    address = request.form['address']
+    available = request.form['available']
+
+    query = """ UPDATE worker 
+                SET name = '{name}', surname = '{surname}', profession = '{profession}',
+                location = '{location}', description = '{description}', email = '{email}',
+                phone = {phone}, address = '{address}', available = {available}, password = '{password}'
+                WHERE id = {id}
+            """.format(
+                name = name, 
+                surname = surname, 
+                profession   = profession, 
+                location = location,
+                description = description, 
+                email = email, 
+                phone = phone, 
+                address = address, 
+                available = available,
+                password = password,
+                id = id 
+            )
+    cursor.execute(query)
+    db.commit()
+
+    return "Profile updated succesfully", 200   
+        
+
+
+
 @app.route('/worker_profile/<id>/pending_requests', methods=['GET'])
 def getWorkerPendingRequests(id):
     #MySQL connection config

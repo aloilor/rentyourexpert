@@ -44,7 +44,6 @@ def getAllWorkers():
 
     return json.dumps(json_data)
 
-
 @app.route('/catalogue/<id>', methods=['GET'])
 def getWorker(id):
     #connecting to the database
