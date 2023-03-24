@@ -11,7 +11,7 @@ function LogoutCustomerButton() {
   navigate('/');
   }
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button className="btn btn-outline-dark m-2" onClick={handleLogout}><i className="fa fa-user-plus mr-1"></i>Logout</button>
   );
 }
 
