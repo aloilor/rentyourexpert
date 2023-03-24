@@ -50,23 +50,30 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login as a Worker</h1>
-      <form onSubmit={handleSubmit}>
-      <label>Email:</label>
-        <input name = 'email' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <br />
-        <label>Password:</label>
-        <input name = 'password' type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <br />
-        <button type="submit">Login</button>
-      </form>
-      <p>{message}</p>
-      <br />
-      <p>Don't have an account? <a href="/register">Register here</a>.</p>
+    <div className="container my-3 py-3">
+    <h1 className="text-center">Login as a Worker</h1>
+    <hr />
+    <div className="row my-4 h-100">
+    <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+    <form onSubmit={handleSubmit}>
+    <div className="my-3">
+    <label htmlFor="email" className="form-label">Email</label>
+    <input type="email" className="form-control" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+    </div>
+    <div className="my-3">
+    <label htmlFor="password" className="form-label">Password</label>
+    <input type="password" className="form-control" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+    </div>
+    <button type="submit" className="btn btn-primary mb-3">Login</button>
+    </form>
+    <div className="text-center">
+    <p>Don't have an account? <a href="/register" className="text-info">Register here</a>.</p>
+    </div>
+    {message && <div className="alert alert-danger">{message}</div>}
+    </div>
+    </div>
     </div>
   );
 }
 
 export default Login;
-

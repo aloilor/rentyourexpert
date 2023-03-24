@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 function Register() {
     const [name, setName] = useState('');
@@ -52,42 +53,63 @@ function Register() {
   };
 
   return (
-    <div>
-    <h1>Registration Form</h1>
-    <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input name='name' type='text' value={name} onChange={(e) => setName(e.target.value)} />
-        <br />
-        <label>Surname:</label>
-        <input name='surname' type='text' value={surname} onChange={(e) => setSurname(e.target.value)} />
-        <br />
-        <label>Profession:</label>
-        <input name='profession' type='text' value={profession} onChange={(e) => setProfession(e.target.value)} />
-        <br />
-        <label>Location:</label>
-        <input name='location' type='text' value={location} onChange={(e) => setLocation(e.target.value)} />
-        <br />
-        <label>Description:</label>
-        <textarea name='description' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-        <br />
-        <label>Email:</label>
-        <input name='email' type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
-        <br />
-        <label>Phone:</label>
-        <input name='phone' type='text' value={phone} onChange={(e) => setPhone(e.target.value)} />
-        <br />
-        <label>Address:</label>
-        <input name='address' type='text' value={address} onChange={(e) => setAddress(e.target.value)} />
-        <br />
-        <label>Password:</label>
-        <input name='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-        <br />
-        <button type='submit'>Register</button>
-    </form>
-    <p>{message}</p>
+    <div className="container my-3 py-3">
+  <h1 className="text-center">Worker Registration Form</h1>
+  <hr />
+  <div className="row my-4 h-100">
+    <div className="col-md-4 col-lg-4 col-sm-8 mx-auto">
+      <form onSubmit={handleSubmit}>
+        <div className="form my-3">
+          <label htmlFor="name">Name:</label>
+          <input name="name" type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="surname">Surname:</label>
+          <input name="surname" type="text" className="form-control" value={surname} onChange={(e) => setSurname(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="profession">Profession:</label>
+          <input name="profession" type="text" className="form-control" value={profession} onChange={(e) => setProfession(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="location">Location:</label>
+          <input name="location" type="text" className="form-control" value={location} onChange={(e) => setLocation(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="description">Description:</label>
+          <textarea name="description" className="form-control" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+        </div>
+        <div className="form my-3">
+          <label htmlFor="email">Email:</label>
+          <input name="email" type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="phone">Phone:</label>
+          <input name="phone" type="text" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="address">Address:</label>
+          <input name="address" type="text" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} />
+        </div>
+        <div className="form my-3">
+          <label htmlFor="password">Password:</label>
+          <input name="password" type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <div className="text-center">
+          <button type="submit" className="my-2 mx-auto btn btn-dark">Register</button>
+        </div>
+      </form>
+      <p>{message}</p>
+      <div className="my-3">
+        <p>Already have an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link></p>
+      </div>
     </div>
+  </div>
+</div>
   );
 }
 
 export default Register;
+
+
 
