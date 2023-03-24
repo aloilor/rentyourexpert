@@ -140,6 +140,44 @@ def getCustomerProfile(id):
         json_data_info.append(dict(zip(row_headers,result)))
     return json.dumps(json_data_info)
 
+
+@app.route('/customer_profile/<id>', methods=['PUT'])
+def updateCustomerProfile(id):
+    #MySQL connection config
+    config = {
+        'user' : 'root',
+        'password' : 'root',
+        'host' : 'db',
+        'port' : '3306',
+        'database' : 'rentYourExpert',
+    }
+    db = mysql.connector.connect(**config)
+    cursor = db.cursor()
+
+    email = request.form['email']
+    password = request.form['password']
+    name = request.form['name']
+    surname = request.form['surname']
+    username = request.form['username']
+
+    query = """ UPDATE customer 
+                SET name = '{name}', surname = '{surname}', email = '{email}', password = '{password}',
+                username = '{username}'
+                WHERE id = {id}
+            """.format(
+                name = name, 
+                surname = surname, 
+                email = email, 
+                username = username,
+                password = password,
+                id = id 
+            )
+    cursor.execute(query)
+    db.commit()
+
+    return "Profile updated succesfully", 200   
+
+
 @app.route('/customer_profile/<id>/pending_requests', methods=['GET'])
 def getCustomerPendingRequests(id):
     #MySQL connection config

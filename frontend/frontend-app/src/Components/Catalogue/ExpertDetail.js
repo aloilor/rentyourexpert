@@ -22,6 +22,8 @@ import {
   MDBListGroup,
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
+import { FaGlobe, FaGithub, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+
 
 function ExpertDetail() {
   const { id } = useParams();
@@ -56,27 +58,107 @@ function ExpertDetail() {
   return (
     <>
     <Navbar />
-    <div>
+    <MDBRow>
+  <MDBCol lg="4">
+    <MDBCard className="mb-4">
+      <MDBCardBody className="text-center">
+        <p className="text-dark mb-1">{expert.name} {expert.surname}</p>
+        <p className="text-muted mb-1">{expert.profession}</p>
+        <p className="text-muted mb-4">{expert.location}</p>
+        <div className="d-flex justify-content-center mb-2">
+          <MDBBtn>Send Request</MDBBtn>
+        </div>
+      </MDBCardBody>
+    </MDBCard>
+
+    <MDBCard className="mb-4 mb-lg-0">
+  <MDBCardBody className="p-0">
+    <MDBListGroup className="rounded-3">
+      <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+        <FaGlobe className="text-warning" />
+        <a target="_blank" rel="noreferrer">
+        website
+        </a>
+      </MDBListGroupItem>
+      <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+        <FaGithub style={{ color: '#333333' }} />
+        <a target="_blank" rel="noreferrer">
+        github
+        </a>
+      </MDBListGroupItem>
+      <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+        <FaTwitter style={{ color: '#55acee' }} />
+        <a target="_blank" rel="noreferrer">
+        twitter
+        </a>
+      </MDBListGroupItem>
+      <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+        <FaInstagram style={{ color: '#ac2bac' }} />
+        <a target="_blank" rel="noreferrer">
+        instagram
+        </a>
+      </MDBListGroupItem>
+      <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
+        <FaFacebook style={{ color: '#3b5998' }} />
+        <a target="_blank" rel="noreferrer">
+        facebook
+        </a>
+      </MDBListGroupItem>
+    </MDBListGroup>
+  </MDBCardBody>
+</MDBCard>
+  </MDBCol>
+
+  <MDBCol lg="8">
+    <MDBCard className="mb-4">
+      <MDBCardBody>
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Full Name</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="9">
+            <MDBCardText className="text-muted">{expert.name} {expert.surname}</MDBCardText>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Email</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="9">
+            <MDBCardText className="text-muted">{expert.email}</MDBCardText>            
+          </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Phone</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="9">
+            <MDBCardText className="text-muted">{expert.phone}</MDBCardText>
+            </MDBCol>
+        </MDBRow>
+        <hr />
+        <MDBRow>
+          <MDBCol sm="3">
+            <MDBCardText>Availability</MDBCardText>
+          </MDBCol>
+          <MDBCol sm="9">
+            <MDBCardText className="text-muted">{expert.available ? 'Available' : 'Not available'}</MDBCardText>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+        </MDBCardBody>
+      </MDBCard>
+      <QeA id={id} />
+      <Reviews id={id} />
+    </MDBCol>
+  </MDBRow>
   
-  <h1>Expert Detail</h1>
-  <Card style={{ width: '50rem' }}>
-    
-    <Card.Body>
-      <Card.Title>{expert.name} {expert.surname}</Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">{expert.profession}</Card.Subtitle>
-      <Card.Text>{expert.description}</Card.Text>
-      <Button onClick={sendRequest}>Invia richiesta</Button>
-    </Card.Body>
-    <ul className="list-group list-group-flush">
-      <li className="list-group-item">Location: {expert.location}</li>
-      <li className="list-group-item">Phone: {expert.phone}</li>
-      <li className="list-group-item">Availability: {expert.available ? 'Available' : 'Not available'}</li>
-    </ul>
-  </Card>
-  <QeA id={id} />
-  <Reviews id={id} />
-</div>
 </>
   );
 } 
 export default ExpertDetail;
+
+
+

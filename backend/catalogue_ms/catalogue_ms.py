@@ -24,9 +24,19 @@ def dbConnect():
 @app.route('/catalogue', methods=['GET'])
 def getAllWorkers():
     #connecting to the database
-    db = dbConnect()
+    db = dbConnect()    
 
-    query = "SELECT id,name,surname,profession,location,description,phone,available FROM worker "
+    filter = request.args.get('filter')
+    query = "SELECT * FROM worker "
+
+    if (filter):
+        query += """ WHERE name LIKE '%{filter}%' OR
+                    surname LIKE '%{filter}%' OR
+                    profession LIKE '%{filter}%' OR
+                    location LIKE '%{filter}%' OR
+                    description LIKE '%{filter}%';
+                """.format(filter = filter)
+
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
@@ -44,13 +54,13 @@ def getAllWorkers():
 
     return json.dumps(json_data)
 
-
 @app.route('/catalogue/<id>', methods=['GET'])
 def getWorker(id):
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT id,name,surname,profession,location,description,phone,available FROM worker WHERE id={id}".format(id=id)
+    query = "SELECT * FROM worker WHERE id={id}".format(id=id)
+
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)

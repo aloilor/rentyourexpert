@@ -1,5 +1,24 @@
 import React, { useEffect, useState } from 'react';
-
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBCardGroup
+} from 'mdb-react-ui-kit';
+import { FaGlobe, FaGithub, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
+import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button, Form, Input } from 'react-bootstrap';
 
 function Reviews({ id }) {
     const [reviews, setReviews] = useState([]);
@@ -100,47 +119,63 @@ function Reviews({ id }) {
 if(lastAuthTokenPart=='C'){
   return(
     <div>
-        <h2>Reviews</h2>
-        <ul>
-          {reviews.map(reviews => (
-            <li key={reviews.id}>
-              <div>Username: {reviews.username}</div>
-              <div>Description: {reviews.description}</div>
-              <div>Created At: {reviews.created_at}</div>
-              {firstAuthTokenPart === reviews.customer_id.toString() && (
-              <div>
-                {editMode && reviews.id === editReviewId ? (
-                  <form onSubmit={event => handleReviewUpdate(event, reviews.id)}>
-                    <label htmlFor="description">Description:</label>
-                    <input type="text" name="description" defaultValue={reviews.description} />
-                    <button type="submit">Update</button>
-                  </form>
-                ) : (
+  <MDBCol lg="12">
+    <MDBCard className="mb-4">
+      <MDBCardBody>
+        <MDBCardText>
+          <h2>Reviews</h2>
+          {reviews.map(review => (
+            <MDBCard key={review.id} className="mb-3">
+              <MDBCardBody>
+                <div>Username: {review.username}</div>
+                <div>Description: {review.description}</div>
+                <div>
+                  <MDBRow>
+                    <MDBCol sm="3">Created At:</MDBCol>
+                    <MDBCol sm="9">{review.created_at}</MDBCol>
+                  </MDBRow>
+                </div>
+                {firstAuthTokenPart === review.customer_id.toString() && (
                   <div>
-                    {reviews.description}
-                    <br />
-                    <button onClick={() => {
-                      setEditMode(true);
-                      setEditReviewId(reviews.id);
-                    }}>Edit</button>
-                    <button onClick={() => handleReviewDelete(reviews.id)}>Delete</button>
+                    <MDBRow>
+                      <MDBCol sm="3">Actions:</MDBCol>
+                      <MDBCol sm="9">
+                        {editMode && review.id === editReviewId ? (
+                          <form onSubmit={event => handleReviewUpdate(event, review.id)}>
+                            <label htmlFor="description">Description:</label>
+                            <input type="text" name="description" defaultValue={review.description} />
+                            <button type="submit">Update</button>
+                          </form>
+                        ) : (
+                          <div>
+                            <button onClick={() => {
+                              setEditMode(true);
+                              setEditReviewId(review.id);
+                            }}>Edit</button>
+                            <button onClick={() => handleReviewDelete(review.id)}>Delete</button>
+                          </div>
+                        )}
+                      </MDBCol>
+                    </MDBRow>
                   </div>
-                )}         
-              </div>
-      )}
-            </li>
+                )}
+              </MDBCardBody>
+            </MDBCard>
           ))}
-        </ul>
-        <h2>Aggiungi una recensione</h2>
+        </MDBCardText>
+        <h2>Add Review</h2>
         <form onSubmit={e => {
           e.preventDefault();
           handleReviewSubmit(e.target.elements.description.value);
-          }}>
-          <label htmlFor="description">Descrizione:</label>
+        }}>
+          <label htmlFor="description">Description:</label>
           <input type="text" id="description" name="description" />
           <button type="submit">Add Review</button>
         </form>
-    </div>
+      </MDBCardBody>
+    </MDBCard>
+  </MDBCol>
+</div>
 
 )
 
@@ -149,17 +184,25 @@ if(lastAuthTokenPart=='C'){
 else{
   return(
     <div>
-        <h2>Reviews</h2>
-        <ul>
-          {reviews.map(reviews => (
-            <li key={reviews.id}>
-              <div>Username: {reviews.username}</div>
-              <div>Description: {reviews.description}</div>
-              <div>Created At: {reviews.created_at}</div>
-            </li>
+  <MDBCol lg="12">
+    <MDBCard className="mb-4">
+      <MDBCardBody>
+        <MDBCardText>
+          <h2>Reviews</h2>
+          {reviews.map(review => (
+            <MDBCard key={review.id}>
+              <MDBCardBody>
+                <div>Username: {review.username}</div>
+                <div>Description: {review.description}</div>
+                <div>Created At: {review.created_at}</div>
+              </MDBCardBody>
+            </MDBCard>
           ))}
-        </ul>
-        </div>
+        </MDBCardText>
+      </MDBCardBody>
+    </MDBCard>
+  </MDBCol>
+</div>
 
 )
 }
