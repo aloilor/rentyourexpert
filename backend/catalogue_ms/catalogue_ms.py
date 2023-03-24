@@ -59,7 +59,7 @@ def getWorker(id):
     #connecting to the database
     db = dbConnect()
 
-    query = "SELECT * worker WHERE id={id}".format(id=id)
+    query = "SELECT * FROM worker WHERE id={id}".format(id=id)
 
     #executing the query
     cursor = db.cursor()
