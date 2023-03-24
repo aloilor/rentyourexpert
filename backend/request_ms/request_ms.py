@@ -30,7 +30,10 @@ def sendRequest(id):
     customer_id = token[0]
     worker_id = id
     
-    query = """SELECT * FROM request WHERE id = {id}""".format(id=id)
+    query = """SELECT * FROM request WHERE customer_id='{customer_id}' AND worker_id='{worker_id}'""".format(
+        customer_id=customer_id,
+        worker_id = worker_id
+        )
     cursor.execute(query)
 
     if(cursor.fetchone()):
