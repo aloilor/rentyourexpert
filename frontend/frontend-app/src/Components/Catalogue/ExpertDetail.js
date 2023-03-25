@@ -5,7 +5,7 @@ import QeA from '../QeA/QeA';
 import Reviews from '../Reviews/Reviews';
 import { Card, Col, Button, Row } from "react-bootstrap";
 import  Navbar  from '../Navbar';
-import {
+import { 
   MDBCol,
   MDBContainer,
   MDBRow,
@@ -29,6 +29,7 @@ function ExpertDetail() {
   const { id } = useParams();
   const [expert, setExpert] = useState({});
   const authToken = localStorage.getItem('auth_token');
+ 
   
   const sendRequest = () => {
     fetch(`http://localhost:5004/catalogue/${id}`, {
@@ -66,7 +67,7 @@ function ExpertDetail() {
         <p className="text-muted mb-1">{expert.profession}</p>
         <p className="text-muted mb-4">{expert.location}</p>
         <div className="d-flex justify-content-center mb-2">
-          <MDBBtn>Send Request</MDBBtn>
+        <button type="button" class="btn btn-primary" onClick={sendRequest}>Send Request</button>
         </div>
       </MDBCardBody>
     </MDBCard>
@@ -154,7 +155,7 @@ function ExpertDetail() {
       <Reviews id={id} />
     </MDBCol>
   </MDBRow>
-  
+
 </>
   );
 } 

@@ -56,16 +56,16 @@ def addReview(worker_id):
     customer_id = token[0]
 
     description = request.form['description']
+    
 
-    query = """SELECT * FROM request WHERE customer_id={customer_id} AND worker_id={worker_id}""".format(        
+    query = """SELECT request.id, request.customer_id, request.worker_id, request.accepted FROM request WHERE customer_id={customer_id} AND worker_id={worker_id}""".format(        
         customer_id=customer_id,
         worker_id = worker_id)
 
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
-
-        
+    
     #jsonifying 
     row_headers = [x[0] for x in cursor.description] #this will extract row headers
     rv = cursor.fetchone()
@@ -80,7 +80,8 @@ def addReview(worker_id):
             ('{customer_id}', '{worker_id}', '{description}') """.format(
                 customer_id = customer_id,
                 worker_id = worker_id,
-                description = description
+                description = description,
+               
             )
     cursor.execute(query)
     db.commit()
@@ -99,6 +100,8 @@ def updateReview(worker_id, id):
     token = request.headers.get('Authorization').split(";")
     customer_id = token[0]
     description = request.form['description']
+
+    
 
 
     query = """UPDATE review SET description = '{description}' 

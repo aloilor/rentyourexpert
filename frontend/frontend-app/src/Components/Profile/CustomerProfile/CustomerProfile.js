@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CustomerRequests from '../../Requests/CustomerRequests/CustomerRequests';
 import LogoutCustomerButton from '../../Logout/Logout';
+import CustomerAcceptedRequests from '../../Requests/CustomerRequests/CustomerAcceptedRequests';
+
 
 function CustomerProfile() {
   const authToken = localStorage.getItem('auth_token');
@@ -27,6 +29,7 @@ function CustomerProfile() {
         <li>Password: {customer.password}</li>
       </ul>
       <CustomerRequests id={id} />
+      <CustomerAcceptedRequests id={id} />
     </div>
   );
 }

@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LogoutCustomerButton from '../Logout/Logout';
 import  Navbar  from '../Navbar';
-import { Card, Col, Button, Row } from "react-bootstrap";
+import { Card, Col, Button, Row, Form } from "react-bootstrap";
 
 function ExpertsList() {
   const authToken = localStorage.getItem('auth_token');
   const [experts, setExperts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const authToken = localStorage.getItem('auth_token')
@@ -16,6 +17,14 @@ function ExpertsList() {
       .catch((error) => console.log(error));
   }, []);
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+      fetch(`http://localhost:5000/catalogue?filter=${searchTerm}`)
+         .then(response => response.json())
+         .then((data) => setExperts(data))
+         .catch(error => console.error(error));
+  }
+
 
   
     return (
@@ -23,8 +32,20 @@ function ExpertsList() {
       <Navbar />
       
       <div className="container my-5">
-
       <h1 className="my-4">Expert List</h1>
+        <Form className="my-4 d-flex" onSubmit={handleSearch}>
+          <Form.Group className="mr-2 flex-grow-1">
+            <Form.Control
+              type="text"
+              placeholder="Search by name, location, description or profession"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="ml-3">
+            Search
+          </Button>
+        </Form>
       <Row>
         {experts.map((expert, index) => (
           <Col md={4} sm={12} key={index}>

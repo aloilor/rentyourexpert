@@ -3,8 +3,7 @@ import WorkerRequests from '../../Requests/WorkerRequests/WorkerRequests';
 import LogoutCustomerButton from '../../Logout/Logout';
 import QeA from '../../QeA/QeA';
 import Reviews from '../../Reviews/Reviews';
-
-
+import WorkerAcceptedRequests from '../../Requests/WorkerRequests/WorkerAcceptedRequests';
 
 function WorkerProfile() {
   const authToken = localStorage.getItem('auth_token');
@@ -40,6 +39,7 @@ function WorkerProfile() {
         <li>Password: {worker.password}</li>
       </ul>
       <WorkerRequests id={id} />
+      <WorkerAcceptedRequests id={id} />
       <QeA id={id} />
       <Reviews id={id} />
      
