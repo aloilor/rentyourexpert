@@ -19,6 +19,8 @@ import {
 } from 'mdb-react-ui-kit';
 import { FaGlobe, FaGithub, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button, Form, Input } from 'react-bootstrap';
+import Modal from "react-modal";
+
 
 
 
@@ -26,6 +28,7 @@ function QeA({ id }) {
   const [questions, setQuestions] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [editingQuestionId, setEditingQuestionId] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const authToken = localStorage.getItem('auth_token');
   const authTokenParts = authToken ? authToken.split(';') : [];
@@ -119,6 +122,7 @@ function QeA({ id }) {
               answer: null,
             },
           ]);
+          setIsModalOpen(false);
         } else {
           throw new Error('Failed to add question');
         }
@@ -188,30 +192,46 @@ function QeA({ id }) {
   <MDBCol lg="12">
     <MDBCard className="mb-4">
       <MDBCardBody>
-        <h2>Add Question</h2>
-        <form onSubmit={handleQuestionSubmit}>
-          <label htmlFor="question">Question:</label>
-          <input type="text" name="question" />
-          <button type="submit">Submit</button>
-        </form>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <h2 style={{ textAlign: 'left' }}>Questions</h2>
+          <button type="button" class="btn btn-primary" onClick={() => setIsModalOpen(true)}>Add Question</button>
+        </div>
+        <Modal isOpen={isModalOpen} className="modal-dialog-centered custom-modal">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <h2>Add new question</h2>
+              <form onSubmit={handleQuestionSubmit}>
+                <input
+                  type="text"
+                  name="question"
+                />
+                <div>
+                  <button type="submit">Submit</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal>
         <hr />
-        <MDBCardText>
-          <h2>Questions</h2>
-          {questions.map(question => (
-            <MDBCard key={question.id} className="mb-3">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+          {questions.map((question) => (
+            <MDBCard key={question.id} className="mb-3" style={{width: '95%', marginBottom: '1rem'}}>
               <MDBCardBody>
-                <MDBCardText>
+                <div>
                   <div>Username: {question.username}</div>
                   <div>Question: {question.question}</div>
                   <div>
                     <div>Answer:</div>
-                    <div>{question.answer ? question.answer : "Not answered yet..."}</div>
+                    <div>
+                      {question.answer ? question.answer : "Not answered yet..."}
+                    </div>
                   </div>
-                </MDBCardText>
+                </div>
               </MDBCardBody>
             </MDBCard>
           ))}
-        </MDBCardText>
+        </div>
       </MDBCardBody>
     </MDBCard>
   </MDBCol>

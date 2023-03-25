@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS review (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `customer_id` int unsigned NOT NULL,
     `worker_id` int unsigned NOT NULL, 
-    `description` varchar(500) NOT NULL, 
+    `description` varchar(500) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY(`customer_id`) REFERENCES customer(`id`) ON DELETE CASCADE,

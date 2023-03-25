@@ -25,12 +25,12 @@ const Navbar = () => {
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/Catalogue">Experts</NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink className="nav-link" to="/">About</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/">Contact</NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                     <div className="buttons text-center">
                         <NavLink to="/customer_profile/:id" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Profile</NavLink>
@@ -62,12 +62,12 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">TastoWorker2</NavLink>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <NavLink className="nav-link" to="/">About</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">Contact</NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                         <div className="buttons text-center">
                             <NavLink to="/" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> TastoWorker3</NavLink>
@@ -100,12 +100,12 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">TastoAdmin2</NavLink>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <NavLink className="nav-link" to="/">About</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">Contact</NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                         <div className="buttons text-center">
                             <NavLink to="/" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> TastoAdmin3</NavLink>

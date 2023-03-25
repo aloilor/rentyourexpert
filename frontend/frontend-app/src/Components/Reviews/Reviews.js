@@ -19,6 +19,9 @@ import {
 } from 'mdb-react-ui-kit';
 import { FaGlobe, FaGithub, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button, Form, Input } from 'react-bootstrap';
+import Modal from "react-modal";
+
+
 
 function Reviews({ id }) {
     const [reviews, setReviews] = useState([]);
@@ -28,7 +31,8 @@ function Reviews({ id }) {
     const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null;
     const [editMode, setEditMode] = useState(false);
     const [editReviewId, setEditReviewId] = useState(null);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
 
     useEffect(() => {
         fetch(`http://localhost:5006/catalogue/${id}`)
@@ -50,6 +54,7 @@ function Reviews({ id }) {
           .then(response => {
             if (response.status === 200) {
               alert('Recensione aggiunta con successo');
+              setIsModalOpen(false)
               // Aggiornare la lista delle recensioni
               fetch(`http://localhost:5006/catalogue/${id}`)
               .then(response => response.json())
@@ -82,7 +87,8 @@ function Reviews({ id }) {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': authToken
           },
-          body: `description=${description}`
+          body: `description=${description}`,
+                  
         })
         .then(response => {
           if (!response.ok) {
@@ -122,39 +128,68 @@ if(lastAuthTokenPart=='C'){
   <MDBCol lg="12">
     <MDBCard className="mb-4">
       <MDBCardBody>
-        <MDBCardText>
-          <h2>Reviews</h2>
-          {reviews.map(review => (
-            <MDBCard key={review.id} className="mb-3">
-              <MDBCardBody>
-                <div>Username: {review.username}</div>
-                <div>Description: {review.description}</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <h2 style={{ textAlign: 'left' }}>Reviews</h2>
+          <button type="button" className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Add Review</button>
+        </div>
+        <Modal isOpen={isModalOpen} className="modal-dialog-centered custom-modal">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <h2>Add new review</h2>
+              <form onSubmit={e => {
+                  e.preventDefault();
+                  handleReviewSubmit(e.target.elements.description.value);
+                }}>
+                <label htmlFor="description">Description:</label>
+                <input type="text" id="description" name="description" />
                 <div>
-                  <MDBRow>
-                    <MDBCol sm="3">Created At:</MDBCol>
-                    <MDBCol sm="9">{review.created_at}</MDBCol>
-                  </MDBRow>
+                  <button type="submit" >Submit</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal>
+        <hr />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '1rem' }}>
+        {reviews.map((review) => (
+            <MDBCard key={review.id} className="mb-3" style={{width: '99%', marginBottom: '1rem'}}>
+              <MDBCardBody>
+                <div>
+                  <div>Username: {review.username}</div>
+                  <div>{review.description}</div>
+                  <div>{review.created_at}</div>
                 </div>
                 {firstAuthTokenPart === review.customer_id.toString() && (
                   <div>
                     <MDBRow>
-                      <MDBCol sm="3">Actions:</MDBCol>
                       <MDBCol sm="9">
-                        {editMode && review.id === editReviewId ? (
-                          <form onSubmit={event => handleReviewUpdate(event, review.id)}>
-                            <label htmlFor="description">Description:</label>
-                            <input type="text" name="description" defaultValue={review.description} />
-                            <button type="submit">Update</button>
-                          </form>
-                        ) : (
-                          <div>
-                            <button onClick={() => {
-                              setEditMode(true);
-                              setEditReviewId(review.id);
-                            }}>Edit</button>
-                            <button onClick={() => handleReviewDelete(review.id)}>Delete</button>
-                          </div>
-                        )}
+                      <div class="d-flex justify-content-between">
+                        <div class="align-self-center">
+                          {editMode && review.id === editReviewId ? (
+                            <form onSubmit={event => handleReviewUpdate(event, review.id)}>
+                              <label htmlFor="description">Description:</label>
+                              <input type="text" class="form-control" name="description" defaultValue={review.description} />
+                              <button type="submit">Update</button>
+                            </form>
+                          ) : (
+                            <p>{review.description}</p>
+                          )}
+                        </div>
+                        <div>
+                          {editMode && review.id === editReviewId ? (
+                            null
+                          ) : (
+                            <div>
+                              <button onClick={() => {
+                                setEditMode(true);
+                                setEditReviewId(review.id);
+                              }}>Edit</button>
+                              <button class="btn btn-danger" onClick={() => handleReviewDelete(review.id)}>Delete</button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                       </MDBCol>
                     </MDBRow>
                   </div>
@@ -162,16 +197,7 @@ if(lastAuthTokenPart=='C'){
               </MDBCardBody>
             </MDBCard>
           ))}
-        </MDBCardText>
-        <h2>Add Review</h2>
-        <form onSubmit={e => {
-          e.preventDefault();
-          handleReviewSubmit(e.target.elements.description.value);
-        }}>
-          <label htmlFor="description">Description:</label>
-          <input type="text" id="description" name="description" />
-          <button type="submit">Add Review</button>
-        </form>
+        </div>
       </MDBCardBody>
     </MDBCard>
   </MDBCol>
