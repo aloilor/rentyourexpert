@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 function AdminQeA({ id }) {
   const [questions, setQuestions] = useState([]);
-  
-
 
   useEffect(() => {
     fetch(`http://localhost:5005/catalogue/${id}`)
@@ -23,31 +21,37 @@ function AdminQeA({ id }) {
         }
     })
     .catch((error) => console.log(error));
-};
-
-  
+  };
 
   return (
-    <div>
-    <h2>Questions</h2>
-    <ul>
-    {questions.map(question => (
-      <li key={question.id}>
-        <div>Username: {question.username}</div>
-        <div>Question: {question.question}</div>
-        <div>Answer: {question.answer ? (
-                 <div>{question.answer}</div>
+    <div className="container">
+      <h2>Questions</h2>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {questions.map(question => (
+            <tr key={question.id}>
+              <td>{question.username}</td>
+              <td>{question.question}</td>
+              <td>{question.answer ? (
+                <div>{question.answer}</div>
               ) : (
-                <div>Not answer yet...</div>
-        )}</div>
-        <button onClick={() => handleDeleteQuestion(question.id)}>Delete</button>
-      </li> 
-    ))}
-      </ul>
-      </div>
-    )
+                <div>Not answered yet...</div>
+              )}</td>
+              <td><button className="btn btn-danger" onClick={() => handleDeleteQuestion(question.id)}>Delete</button></td>
+            </tr> 
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
-
-
 
 export default AdminQeA;
