@@ -59,7 +59,7 @@ function WorkerRequests({ id }) {
   return (
     <>
       <Navbar />
-    <MDBRow style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <MDBRow style={{ marginTop:'20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <MDBCol lg="4">
         <MDBCard className="mb-4">
           <MDBCardBody style={{ textAlign: 'left' }}>

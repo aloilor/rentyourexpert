@@ -50,7 +50,7 @@ function WorkerProfile() {
 
     <>
     <Navbar />
-    <div className="container mt-5">
+    <div style={{marginTop:'20px'}} className="container mt-5">
       <h1 className="mb-4">Worker Profile</h1>
       <div className="row">
         <div className="col-md-4">

@@ -10,7 +10,7 @@ const Navbar = () => {
     const id  = authTokenParts[0]
     if(lastAuthTokenPart === 'C'){
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top">
             <div className="container">
                 <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/"> Rent Your Expert</NavLink>
                 <button className="navbar-toggler mx-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <div className="buttons text-center">
-                        <NavLink to={`/customer_profile/${id}`} className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Profile</NavLink>
+                        <NavLink to={`/customer_profile/${id}`} className="btn btn-outline-light"><i className="fa fa-user-plus mr-1"></i> Profile</NavLink>
                         <LogoutCustomerButton />
                     </div>
                 </div>
@@ -48,7 +48,7 @@ const Navbar = () => {
     if(lastAuthTokenPart === 'W'){
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top">
                 <div className="container">
                     <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/"> Rent Your Expert</NavLink>
                     <button className="navbar-toggler mx-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@ const Navbar = () => {
     if(lastAuthTokenPart === 'A'){
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top">
                 <div className="container">
                     <NavLink className="navbar-brand fw-bold fs-4 px-2" to="/"> Rent Your Expert</NavLink>
                     <button className="navbar-toggler mx-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

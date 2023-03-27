@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import LogoutCustomerButton from '../Logout/Logout';
 import QeA from '../QeA/QeA';
 import Reviews from '../Reviews/Reviews';
-import { Card, Col, Button, Row } from "react-bootstrap";
+import { Image, Card, Col, Button, Row } from "react-bootstrap";
 import  Navbar  from '../Navbar';
 import { 
   MDBCol,
@@ -59,11 +59,13 @@ function ExpertDetail() {
   return (
     <>
     <Navbar />
+    <div style={{marginTop:'20px'}}>
     <h1 className="mb-4">Expert Details</h1>
-    <MDBRow>
+    <MDBRow >
   <MDBCol lg="4">
     <MDBCard className="mb-4">
       <MDBCardBody className="text-center">
+        <Card.Img variant="top" src={require('./worker3.jpg')} />
         <p className="text-dark mb-1">{expert.name} {expert.surname}</p>
         <p className="text-muted mb-1">{expert.profession}</p>
         <p className="text-muted mb-4">{expert.location}</p>
@@ -79,31 +81,31 @@ function ExpertDetail() {
       <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
         <FaGlobe className="text-warning" />
         <a target="_blank" rel="noreferrer">
-        website
+        www.website.com
         </a>
       </MDBListGroupItem>
       <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
         <FaGithub style={{ color: '#333333' }} />
         <a target="_blank" rel="noreferrer">
-        github
+        www.github.com
         </a>
       </MDBListGroupItem>
       <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
         <FaTwitter style={{ color: '#55acee' }} />
         <a target="_blank" rel="noreferrer">
-        twitter
+        www.twitter.com
         </a>
       </MDBListGroupItem>
       <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
         <FaInstagram style={{ color: '#ac2bac' }} />
         <a target="_blank" rel="noreferrer">
-        instagram
+        www.instagram.com
         </a>
       </MDBListGroupItem>
       <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
         <FaFacebook style={{ color: '#3b5998' }} />
         <a target="_blank" rel="noreferrer">
-        facebook
+        www.facebook.com
         </a>
       </MDBListGroupItem>
     </MDBListGroup>
@@ -156,7 +158,7 @@ function ExpertDetail() {
       <Reviews id={id} />
     </MDBCol>
   </MDBRow>
-
+  </div>
 </>
   );
 } 

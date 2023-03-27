@@ -46,7 +46,7 @@ function CustomerProfile() {
     
        <>
       <Navbar />
-      <div className="container mt-5">
+      <div style={{marginTop:'20px'}} className="container mt-5">
   <h1 className="mb-4">Customer Profile</h1>
   <div className="row">
     <div className="col-md-4">

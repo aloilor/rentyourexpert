@@ -140,7 +140,7 @@ function QeA({ id }) {
     return (
       <>
       <Navbar />
-      <div className="w-100" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="w-100" style={{ marginTop:'20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <MDBCol lg="8">
         <MDBCard className="mb-4">
           <MDBCardBody>

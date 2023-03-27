@@ -34,7 +34,7 @@ function WorkersManagement() {
   return (
     <>
     <Navbar />
-    <div className="container">
+    <div style={{marginTop:'20px'}} className="container">
       <div className="card my-5">
         <h5 className="card-header">Worker Details</h5>
         <div className="card-body">
