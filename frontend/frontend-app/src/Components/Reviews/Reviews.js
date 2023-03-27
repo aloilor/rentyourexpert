@@ -120,7 +120,9 @@ function Reviews({ id }) {
         .catch(error => console.log(error));
       };
 
-
+      const handleEditModalOpen = () => {
+        setIsEditModalOpen(true);
+      };
 
 if(lastAuthTokenPart=='C'){
   return(
@@ -167,11 +169,36 @@ if(lastAuthTokenPart=='C'){
                       <div class="d-flex justify-content-between">
                         <div class="align-self-center">
                           {editMode && review.id === editReviewId ? (
-                            <form onSubmit={event => handleReviewUpdate(event, review.id)}>
-                              <label htmlFor="description">Description:</label>
-                              <input type="text" class="form-control" name="description" defaultValue={review.description} />
-                              <button type="submit">Update</button>
-                            </form>
+                           <Modal isOpen={isEditModalOpen} toggle={() => setIsEditModalOpen(false)} className="modal-dialog-centered custom-modal">
+                           <div className="modal-dialog" role="document">
+                             <div className="modal-content">
+                               <h2>Edit Review</h2>
+                               <form
+                                 onSubmit={(event) =>
+                                   handleReviewUpdate(event, review.id)
+                                 }
+                               >
+                                 <label htmlFor="description">Description:</label>
+                                 <input
+                                   type="text"
+                                   className="form-control"
+                                   id="description"
+                                   name="description"
+                                   defaultValue={review.description}
+                                 />
+                                 <div>
+                                   <button type="submit">Update</button>
+                                   <button
+                                     type="button"
+                                     onClick={() => setIsEditModalOpen(false)}
+                                   >
+                                     Cancel
+                                   </button>
+                                 </div>
+                               </form>
+                             </div>
+                           </div>
+                         </Modal>
                           ) : (
                             null
                           )}
@@ -182,6 +209,7 @@ if(lastAuthTokenPart=='C'){
                           ) : (
                             <div>
                               <button className="btn btn-primary mr-2" onClick={() => {
+                                handleEditModalOpen();
                                 setEditMode(true);
                                 setEditReviewId(review.id);
                               }}>Edit</button>

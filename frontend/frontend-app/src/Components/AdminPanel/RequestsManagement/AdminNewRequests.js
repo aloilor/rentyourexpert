@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../Navbar'
+
 
 function AdminNewRequest(){
     const [customerId, setCustomerId] = useState("");
@@ -28,6 +30,8 @@ function AdminNewRequest(){
     };
 
     return (
+        <>
+        <Navbar />
         <div class="container">
             <form onSubmit={handleAddRequest}>
                 <h2>Add a new Request</h2>
@@ -43,6 +47,7 @@ function AdminNewRequest(){
                 <button type="submit" class="btn btn-primary">Add Request</button>
             </form>
         </div>
+        </>
     )
 }
 export default AdminNewRequest;

@@ -65,10 +65,13 @@ def addReview(worker_id):
     #executing the query
     cursor = db.cursor()
     cursor.execute(query)
-    
+
+    rv = cursor.fetchone() 
+    if (not rv):
+        return "No request made to this worker", 400
+        
     #jsonifying 
     row_headers = [x[0] for x in cursor.description] #this will extract row headers
-    rv = cursor.fetchone()
     dic = dict(zip(row_headers,rv))
     
     if str(dic['accepted']) == '0':

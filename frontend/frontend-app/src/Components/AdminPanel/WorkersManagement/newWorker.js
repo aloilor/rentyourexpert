@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../../Navbar'
+
 
 function AddWorkerForm() {
   const [name, setName] = useState("");
@@ -52,6 +54,8 @@ function AddWorkerForm() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container">
       <h1>Add New Worker</h1>
       <form onSubmit={handleSubmit}>
@@ -158,6 +162,7 @@ function AddWorkerForm() {
         </button>
       </form>
     </div>
+    </>
   );
 }
 

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Navbar from '../../Navbar'
+
 
 function WorkersList() {
   const [worker, setworker] = useState([]);
@@ -13,6 +15,8 @@ function WorkersList() {
   }, []);
 
   return (
+    <>
+    <Navbar />
     <div className="container">
       <h1 className="my-4">Worker List</h1>
       <div className="list-group">
@@ -30,6 +34,7 @@ function WorkersList() {
         <button className="btn btn-primary mt-4">Add new worker</button>
       </Link>
     </div>
+    </>
   );
 }
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import Navbar from '../../Navbar'
+
 
 function AddCustomerForm() {
   const [email, setEmail] = useState('');
@@ -42,6 +44,8 @@ function AddCustomerForm() {
   };
 
   return (
+    <>
+    <Navbar />
     <Container>
       <h1>Add New Customer</h1>
       <Form onSubmit={handleSubmit}>
@@ -77,6 +81,7 @@ function AddCustomerForm() {
         </Button>
       </Form>
     </Container>
+    </>
   );
 }
 

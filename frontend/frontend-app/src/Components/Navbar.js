@@ -99,20 +99,20 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav m-auto my-2 text-center">
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">TastoAdmin1 </NavLink>
+                                <NavLink className="nav-link" to="/admin/customers">Customers </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">TastoAdmin2</NavLink>
+                                <NavLink className="nav-link" to="/admin/workers">Workers</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/admin/requests">Requests</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">About</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/">Contact</NavLink>
-                            </li>
                         </ul>
                         <div className="buttons text-center">
-                            <NavLink to="/" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> TastoAdmin3</NavLink>
+                            <LogoutCustomerButton />
                         </div>
                     </div>
     
