@@ -1,4 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import WorkerAcceptedRequests from './WorkerAcceptedRequests';
+import Navbar from '../../Navbar';
+import { 
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit';
 
 function WorkerRequests({ id }) {
   const [requests, setRequests] = useState([]);
@@ -37,21 +57,39 @@ function WorkerRequests({ id }) {
   };
 
   return (
-    <div>
-      <h2>Pending Requests</h2>
-      <ul>
-        {requests.map(request => (
-          <li key={request.id}>
-            <div>Name: {request.name}</div>
-            <div>Surname: {request.surname}</div>
-            <div>Username: {request.username}</div>
-            <div>Accepted: {request.accepted ? 'yes' : 'no'}</div>
-            {!request.accepted && <button onClick={() => handleRequestResponse(request.id, 1)}>Accept</button>}
-            {<button onClick={() => handleRequestResponse(request.id, 0)}>Delete</button>}
-            </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Navbar />
+    <MDBRow style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <MDBCol lg="4">
+        <MDBCard className="mb-4">
+          <MDBCardBody style={{ textAlign: 'left' }}>
+            <MDBCardTitle>Pending Requests</MDBCardTitle>
+                {requests
+              .filter(request => !request.accepted)
+              .map(request => (
+                <MDBCard key={request.id} className="mb-3">
+                  <MDBCardBody>
+                    <div>Name: {request.name}</div>
+                    <div>Surname: {request.surname}</div>
+                    <div>Username: {request.username}</div>
+                    <button className="btn btn-primary" onClick={() => handleRequestResponse(request.id, 1)}>Accept</button>
+                    <button className="btn btn-danger" onClick={() => handleRequestResponse(request.id, 0)}>Delete</button>
+                  </MDBCardBody>
+                </MDBCard>
+            ))}
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+      <MDBCol lg="4">
+        <MDBCard className="mb-4">
+          <MDBCardBody style={{ textAlign: 'left' }}>
+            <MDBCardTitle>Accepted Requests</MDBCardTitle>
+            <WorkerAcceptedRequests id={id} />
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+    </MDBRow>
+    </>
   );
 }
 

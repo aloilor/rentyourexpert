@@ -150,7 +150,6 @@ def updateWorkerProfile(id):
     cursor = db.cursor()
 
     email = request.form['email']
-    password = request.form['password']
     name = request.form['name']
     surname = request.form['surname']
     profession = request.form['profession']
@@ -163,7 +162,7 @@ def updateWorkerProfile(id):
     query = """ UPDATE worker 
                 SET name = '{name}', surname = '{surname}', profession = '{profession}',
                 location = '{location}', description = '{description}', email = '{email}',
-                phone = {phone}, address = '{address}', available = {available}, password = '{password}'
+                phone = {phone}, address = '{address}', available = {available}
                 WHERE id = {id}
             """.format(
                 name = name, 
@@ -175,7 +174,7 @@ def updateWorkerProfile(id):
                 phone = phone, 
                 address = address, 
                 available = available,
-                password = password,
+                
                 id = id 
             )
     cursor.execute(query)

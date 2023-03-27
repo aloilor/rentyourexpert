@@ -5,7 +5,6 @@ function AdminNewRequest(){
     const [customerId, setCustomerId] = useState("");
     const [workerId, setWorkerId] = useState("");
     const navigate = useNavigate();
- 
 
     const handleAddRequest = (event) => {
         event.preventDefault();
@@ -29,19 +28,21 @@ function AdminNewRequest(){
     };
 
     return (
-        <div>
+        <div class="container">
             <form onSubmit={handleAddRequest}>
-            <h2>Add a new Request</h2>
-            <label htmlFor="customer_id">Customer ID:</label>
-            <input type="text" id="customer_id" name="customer_id" value={customerId} onChange={(e) => setCustomerId(e.target.value)} required />
-            <br />
-            <label htmlFor="worker_id">Worker ID:</label>
-            <input type="text" id="worker_id" name="worker_id" value={workerId} onChange={(e) => setWorkerId(e.target.value)} required />
-            <br />
-            <button type="submit">Add Request</button>
+                <h2>Add a new Request</h2>
+                <div class="form-group">
+                    <label htmlFor="customer_id">Customer ID:</label>
+                    <input type="text" class="form-control" id="customer_id" name="customer_id" value={customerId} onChange={(e) => setCustomerId(e.target.value)} required />
+                </div>
+                <div class="form-group">
+                    <label htmlFor="worker_id">Worker ID:</label>
+                    <input type="text" class="form-control" id="worker_id" name="worker_id" value={workerId} onChange={(e) => setWorkerId(e.target.value)} required />
+                </div>
+                <br></br>
+                <button type="submit" class="btn btn-primary">Add Request</button>
             </form>
         </div>
-
     )
 }
 export default AdminNewRequest;

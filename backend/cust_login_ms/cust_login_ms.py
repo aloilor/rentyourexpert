@@ -155,13 +155,12 @@ def updateCustomerProfile(id):
     cursor = db.cursor()
 
     email = request.form['email']
-    password = request.form['password']
     name = request.form['name']
     surname = request.form['surname']
     username = request.form['username']
 
     query = """ UPDATE customer 
-                SET name = '{name}', surname = '{surname}', email = '{email}', password = '{password}',
+                SET name = '{name}', surname = '{surname}', email = '{email}',
                 username = '{username}'
                 WHERE id = {id}
             """.format(
@@ -169,7 +168,6 @@ def updateCustomerProfile(id):
                 surname = surname, 
                 email = email, 
                 username = username,
-                password = password,
                 id = id 
             )
     cursor.execute(query)
@@ -192,7 +190,7 @@ def getCustomerPendingRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '0'".format(id=id)
+    query_requests = "SELECT request.id, request.customer_id, request.worker_id,  name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '0'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
@@ -223,7 +221,7 @@ def getCustomerAcceptedRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT request.id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '1'".format(id=id)
+    query_requests = "SELECT request.id, request.customer_id, request.worker_id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '1'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 

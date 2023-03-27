@@ -13,27 +13,25 @@ function CustomersList() {
       .catch((error) => console.log(error));
   }, []);
 
-
-  
-    // l'utente è autenticato, visualizza il catalogo
-    return (
-      
-      <div>
-        <h1>Customers List</h1>
+  return (
+    <div className="container">
+      <h1>Customers List</h1>
+      <div className="list-group">
         {customer.map((customer, index) => (
-          <div key={index}>
-            <Link to={`/admin/customers/${customer.id}`}>{customer.name} {customer.surname}</Link>
-          </div>
+          <Link
+            to={`/admin/customers/${customer.id}`}
+            key={index}
+            className="list-group-item list-group-item-action"
+          >
+            {customer.name} {customer.surname}
+          </Link>
         ))}
-        <Link to="/admin/customers/new">
-        <button>Add new customer</button>
-      </Link>
       </div>
-    );
- 
-   
-  
-  
+      <Link to="/admin/customers/new">
+        <button className="btn btn-primary mt-4">Add new customer</button>
+      </Link>
+    </div>
+  );
 }
 
 export default CustomersList;

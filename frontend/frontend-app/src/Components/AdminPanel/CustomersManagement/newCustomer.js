@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 function AddCustomerForm() {
   const [email, setEmail] = useState('');
@@ -19,7 +19,6 @@ function AddCustomerForm() {
     const name = form.name.value;
     const surname = form.surname.value;
     const username = form.username.value;
-    
 
     let formData = new FormData();
     formData.append('email', email);
@@ -38,33 +37,46 @@ function AddCustomerForm() {
         console.log("Customer added:", data);
         alert("Customer added successfully");
         navigate('/admin/customers');  
-
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div>
-    <h1>Add New Customer</h1>
-    <form onSubmit={handleSubmit}>
-    <label>Email:</label>
-      <input name = 'email' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <br />
-      <label>Name:</label>
-      <input name = 'name' type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      <br />
-      <label>Surname:</label>
-      <input name = 'surname' type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
-      <br />
-      <label>Username:</label>
-      <input name = 'username' type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <br />
-      <label>Password:</label>
-      <input name = 'password' type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <br />
-      <button type="submit">Add Customer</button>
-    </form>
-  </div>
+    <Container>
+      <h1>Add New Customer</h1>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <Form.Group controlId="email">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="name">
+              <Form.Label>Name:</Form.Label>
+              <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="surname">
+              <Form.Label>Surname:</Form.Label>
+              <Form.Control type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="username">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Form.Group>
+          </Col>
+        </Row>
+        <br></br>
+        <Button variant="primary" type="submit">
+          Add Customer
+        </Button>
+      </Form>
+    </Container>
   );
 }
 

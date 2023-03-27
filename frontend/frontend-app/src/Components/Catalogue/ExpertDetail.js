@@ -59,6 +59,7 @@ function ExpertDetail() {
   return (
     <>
     <Navbar />
+    <h1 className="mb-4">Expert Details</h1>
     <MDBRow>
   <MDBCol lg="4">
     <MDBCard className="mb-4">
