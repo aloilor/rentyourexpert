@@ -20,6 +20,7 @@ import {
 import { FaGlobe, FaGithub, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button, Form, Input } from 'react-bootstrap';
 import Modal from "react-modal";
+import Navbar from '../Navbar';
 
 
 
@@ -29,6 +30,7 @@ function QeA({ id }) {
   const [editMode, setEditMode] = useState(false);
   const [editingQuestionId, setEditingQuestionId] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWorkerModalOpen, setIsWorkerModalOpen] = useState(false);
 
   const authToken = localStorage.getItem('auth_token');
   const authTokenParts = authToken ? authToken.split(';') : [];
@@ -43,6 +45,8 @@ function QeA({ id }) {
       .catch(error => console.log(error));
   }, [id]);
 
+
+
   const handleAnswerUpdate = (event, questionId) => {
     event.preventDefault();
     const answer = event.target.answer.value;
@@ -54,7 +58,6 @@ function QeA({ id }) {
       }
     });
     setQuestions(updatedQuestions);
-    setEditMode(false);
     fetch(`http://localhost:5005/worker_profile/${id}/qea/${questionId}`, {
       method: 'PUT',
       headers: {
@@ -65,7 +68,8 @@ function QeA({ id }) {
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to update answer');
-      }
+      };
+      window.location.reload()
     })
     .catch(error => console.error(error));
   };
@@ -134,7 +138,9 @@ function QeA({ id }) {
 
   if (lastAuthTokenPart=='W' && firstAuthTokenPart === id ) {
     return (
-      <div className="w-100">
+      <>
+      <Navbar />
+      <div className="w-100" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <MDBCol lg="8">
         <MDBCard className="mb-4">
           <MDBCardBody>
@@ -142,37 +148,50 @@ function QeA({ id }) {
               <h2>Questions</h2>
               {questions.map(question => (
                 <MDBCard key={question.id}>
-                  <MDBCardBody>
+                  <MDBCardBody style={{ textAlign: 'left' }}>
                     <div>Username: {question.username}</div>
-                    <div>Question: {question.question}</div>
+                    <div className="fw-bolder">{question.question}</div>
                     <div>
                       <MDBRow>
-                        <MDBCol sm="3">Answer:</MDBCol>
                         <MDBCol sm="9">
-                          {question.answer ? (
-                            <div>
-                              {editMode && question.id === editingQuestionId ? (
-                                <form onSubmit={event => handleAnswerUpdate(event, question.id)}>
-                                  <input type="text" name="answer" defaultValue={question.answer} />
-                                  <button type="submit">Update</button>
-                                </form>
-                              ) : (
-                                <div>
-                                  {question.answer}
-                                  <br />
-                                  <button onClick={() => {
-                                    setEditMode(true);
-                                    setEditingQuestionId(question.id);
-                                  }}>Edit</button>
+                        {question.answer ? (
+                              <div>
+                                {editingQuestionId === question.id ? (
+                                  <Modal isOpen={isWorkerModalOpen} className="modal-dialog-centered custom-modal">
+                                    <div className="modal-dialog" role="document">
+                                      <div className="modal-content">
+                                        <h2>Edit answer</h2>
+                                        <form onSubmit={event => handleAnswerUpdate(event, question.id)}>
+                                          <input type="text" name="answer" defaultValue={question.answer} />
+                                          <div>
+                                            <button type="submit">Submit</button>
+                                            <button type="button" onClick={() => setIsWorkerModalOpen(false)}>Cancel</button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </Modal>
+                                ) : (
+                                  <div>
+                                    {question.answer}
+                                    <br />
+                                    <button className="btn btn-primary" onClick={() => {
+                                      setIsWorkerModalOpen(true);
+                                      setEditingQuestionId(question.id)
+                                    }} style={{ display: 'block', marginTop: '10px' }}>Edit</button>
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <form onSubmit={event => handleAnswerSubmit(event, question.id)}>
+                              <div className="input-group mb-3">
+                              <input type="text" class="form-control rounded" name="answer" placeholder="Enter your answer here" aria-label="Enter your answer here" aria-describedby="submit-answer" />
+                                <div className="input-group-append mt-2">
+                                  <button style={{ marginLeft: '10px' }} className="btn btn-primary" type="submit" id="submit-answer">Submit</button>
                                 </div>
-                              )}
-                            </div>
-                          ) : (
-                            <form onSubmit={event => handleAnswerSubmit(event, question.id)}>
-                              <input type="text" name="answer" />
-                              <button type="submit">Submit</button>
+                              </div>
                             </form>
-                          )}
+                            )}
                         </MDBCol>
                       </MDBRow>
                     </div>
@@ -185,10 +204,12 @@ function QeA({ id }) {
         </MDBCard>
       </MDBCol>
     </div>
+    </>
   );
   } else {
     return (
       <div>
+       
   <MDBCol lg="12">
     <MDBCard className="mb-4">
       <MDBCardBody>
@@ -218,14 +239,11 @@ function QeA({ id }) {
           {questions.map((question) => (
             <MDBCard key={question.id} className="mb-3" style={{width: '95%', marginBottom: '1rem'}}>
               <MDBCardBody>
-                <div>
+                <div style={{ textAlign: 'left'  }}>
                   <div>Username: {question.username}</div>
                   <div>Question: {question.question}</div>
                   <div>
-                    <div>Answer:</div>
-                    <div>
-                      {question.answer ? question.answer : "Not answered yet..."}
-                    </div>
+                    <div>Answer: {question.answer ? question.answer : "Not answered yet..."}</div>
                   </div>
                 </div>
               </MDBCardBody>
@@ -235,7 +253,9 @@ function QeA({ id }) {
       </MDBCardBody>
     </MDBCard>
   </MDBCol>
+ 
 </div>
+     
     );
   }
 }

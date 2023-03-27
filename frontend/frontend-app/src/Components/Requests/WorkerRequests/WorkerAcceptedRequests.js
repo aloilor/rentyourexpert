@@ -1,4 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { 
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit';
 
 function WorkerAcceptedRequests({ id }) {
   const [requests, setRequests] = useState([]);
@@ -38,19 +56,20 @@ function WorkerAcceptedRequests({ id }) {
 
   return (
     <div>
-      <h2>Accepted requests</h2>
-      <ul>
-        {requests.map(request => (
-          <li key={request.id}>
-            <div>Name: {request.name}</div>
-            <div>Surname: {request.surname}</div>
-            <div>Username: {request.username}</div>
-            <div>Accepted: {request.accepted ? 'yes' : 'no'}</div>
-            {!request.accepted && <button onClick={() => handleRequestResponse(request.id, 1)}>Accept</button>}
-            {request.accepted && <button onClick={() => handleRequestResponse(request.id, 0)}>Delete</button>}
-            </li>
-        ))}
-      </ul>
+      {requests
+          .filter(request => request.accepted)
+          .map(request => (
+            <MDBCard key={request.id} className="mb-3">
+              <MDBCardBody>
+                <div>Name: {request.name}</div>
+                <div>Surname: {request.surname}</div>
+                <div>Username: {request.username}</div>
+                <div>Accepted: {request.accepted ? 'yes' : 'no'}</div>
+                {!request.accepted && <button className="btn btn-primary" onClick={() => handleRequestResponse(request.id, 1)}>Accept</button>}
+                {request.accepted && <button className="btn btn-danger" onClick={() => handleRequestResponse(request.id, 0)}>Delete</button>}
+              </MDBCardBody>
+            </MDBCard>
+          ))}
     </div>
   );
 }

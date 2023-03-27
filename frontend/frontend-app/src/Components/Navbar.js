@@ -7,7 +7,7 @@ const Navbar = () => {
     const authToken = localStorage.getItem('auth_token');
     const authTokenParts = authToken ? authToken.split(';') : [];
     const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
-
+    const id  = authTokenParts[0]
     if(lastAuthTokenPart === 'C'){
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
@@ -33,10 +33,11 @@ const Navbar = () => {
                         </li> */}
                     </ul>
                     <div className="buttons text-center">
-                        <NavLink to="/customer_profile/:id" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Profile</NavLink>
+                        <NavLink to={`/customer_profile/${id}`} className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> Profile</NavLink>
                         <LogoutCustomerButton />
                     </div>
                 </div>
+                
 
 
             </div>
@@ -57,20 +58,23 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav m-auto my-2 text-center">
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">TastoWorker1 </NavLink>
+                                <NavLink className="nav-link" to={`/worker_profile/${id}`}>Profile </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">TastoWorker2</NavLink>
-                            </li>
-                            {/* <li className="nav-item">
-                                <NavLink className="nav-link" to="/">About</NavLink>
+                                <NavLink className="nav-link" to={`/worker_profile/${id}/QeA`}>Questions</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">Contact</NavLink>
-                            </li> */}
+                                <NavLink className="nav-link" to={`/worker_profile/${id}/requests`}>Requests</NavLink>
+                            </li>
+                            <li className="nav-item">
+                            <NavLink className="nav-link" to='/'>About</NavLink>
+                            </li>
+                            <li className="nav-item">
+                            <NavLink className="nav-link" to='/'>Contact us</NavLink>
+                            </li>
                         </ul>
                         <div className="buttons text-center">
-                            <NavLink to="/" className="btn btn-outline-dark m-2"><i className="fa fa-user-plus mr-1"></i> TastoWorker3</NavLink>
+                            <LogoutCustomerButton />
                         </div>
                     </div>
     

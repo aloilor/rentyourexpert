@@ -32,7 +32,7 @@ function Reviews({ id }) {
     const [editMode, setEditMode] = useState(false);
     const [editReviewId, setEditReviewId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:5006/catalogue/${id}`)
@@ -154,9 +154,9 @@ if(lastAuthTokenPart=='C'){
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '1rem' }}>
         {reviews.map((review) => (
             <MDBCard key={review.id} className="mb-3" style={{width: '99%', marginBottom: '1rem'}}>
-              <MDBCardBody>
+              <MDBCardBody  style={{ textAlign: 'left' }}>
                 <div>
-                  <div>Username: {review.username}</div>
+                  <div>{review.username}:</div>
                   <div>{review.description}</div>
                   <div>{review.created_at}</div>
                 </div>
@@ -173,7 +173,7 @@ if(lastAuthTokenPart=='C'){
                               <button type="submit">Update</button>
                             </form>
                           ) : (
-                            <p>{review.description}</p>
+                            null
                           )}
                         </div>
                         <div>
@@ -181,7 +181,7 @@ if(lastAuthTokenPart=='C'){
                             null
                           ) : (
                             <div>
-                              <button onClick={() => {
+                              <button className="btn btn-primary mr-2" onClick={() => {
                                 setEditMode(true);
                                 setEditReviewId(review.id);
                               }}>Edit</button>

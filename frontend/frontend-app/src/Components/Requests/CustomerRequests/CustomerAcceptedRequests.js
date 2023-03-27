@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,20 +33,22 @@ function CustomerAcceptedRequests({ id }) {
   };
 
   return (
-    <div>
-      <h2>Accepted requests</h2>
-      <ul>
-        {requests.map(request => (
-          <li key={request.id}>
-            <div>Name: {request.name}</div>
-            <div>Surname: {request.surname}</div>
-            <div>Username: {request.username}</div>
-            <div>Accepted: {request.accepted ? 'yes' : 'no'}</div>
-            {!request.accepted && <button onClick={() => handleDeleteRequest(request.id)}>Delete</button>}
-          </li>
-        ))}
-      </ul>
+    <div className="mt-4">
+    <div className="list-group">
+      {requests.map((request) => (
+        <div className="list-group-item" key={request.id}>
+          <div className="d-flex justify-content-between align-items-center">
+            <Link to={`/catalogue/${request.worker_id}`}>
+              <h5 className="mb-1">{request.name} {request.surname}</h5>
+              </Link>
+              <p className="mb-1">{request.profession}</p>
+            
+            {request.accepted && <button className="btn btn-danger" onClick={() => handleDeleteRequest(request.id)}>Delete</button>}
+          </div>
+        </div>
+      ))}
     </div>
+  </div>
   );
 }
 

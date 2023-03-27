@@ -24,8 +24,7 @@ import CustomerRequests from "./Components/Requests/CustomerRequests/CustomerReq
 import LoginAdmin from "./Components/AdminPanel/AdminLogin";
 import RequestList from "./Components/AdminPanel/RequestsManagement/AdminRequests";
 import AdminNewRequest from "./Components/AdminPanel/RequestsManagement/AdminNewRequests";
-import CustomerAcceptedRequests from "./Components/Requests/CustomerRequests/CustomerAcceptedRequests";
-
+import QeA from "./Components/QeA/QeA";
 
 function App() {
   const [experts] = useState([]);
@@ -34,6 +33,7 @@ function App() {
   const authToken = localStorage.getItem('auth_token');
   const authTokenParts = authToken ? authToken.split(';') : [];
   const lastAuthTokenPart = authTokenParts.length > 0 ? authTokenParts[authTokenParts.length - 1] : null; 
+  const id  = authTokenParts.length > 0 ? authTokenParts[0] : null;
 
   function isAdmin() {
     return lastAuthTokenPart === 'A';
@@ -77,10 +77,11 @@ function App() {
           <Route path="/customer_profile/:id/requests" element={isCustomer() ? <CustomerRequests /> : <LoginCustomer /> } />
           
           <Route path="/worker_profile/:id" element={isWorker() ? <WorkerProfile /> : <Login /> } />
-          <Route path="/worker_profile/:id/requests" element={isWorker() ? <WorkerRequests /> : <Login /> } />
+          <Route path="/worker_profile/:id/requests" element={isWorker() ? <WorkerRequests id={id} /> : <Login /> } />
+          <Route path="/worker_profile/:id/QeA" element={isWorker() ? <QeA id={id}/> : <Login /> } />
         
         </Routes>
-        
+    
           
       </div>
     </BrowserRouter>
