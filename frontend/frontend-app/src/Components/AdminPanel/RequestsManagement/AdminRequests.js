@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
+import Navbar from '../../Navbar'
+
 
 function RequestList(){
     const [requests, setRequests] = useState([]);
@@ -26,6 +28,8 @@ function RequestList(){
 
 
       return (
+        <>
+        <Navbar />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-md-8 col-lg-6">
@@ -44,6 +48,7 @@ function RequestList(){
             </div>
           </div>
         </div>
+        </>
       )
 }
 

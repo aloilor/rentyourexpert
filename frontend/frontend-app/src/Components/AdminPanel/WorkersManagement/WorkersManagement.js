@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import AdminQeA from '../QeAManagement/AdminQeA';
 import AdminReviews from '../ReviewManagement/AdminReview';
+import Navbar from '../../Navbar'
+
 
 function WorkersManagement() {
   const { id } = useParams();
@@ -30,6 +32,8 @@ function WorkersManagement() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container">
       <div className="card my-5">
         <h5 className="card-header">Worker Details</h5>
@@ -52,6 +56,7 @@ function WorkersManagement() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

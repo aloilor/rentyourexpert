@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Navbar from '../../Navbar'
+
 
 function CustomersList() {
   
@@ -14,6 +16,8 @@ function CustomersList() {
   }, []);
 
   return (
+    <>
+    <Navbar />
     <div className="container">
       <h1>Customers List</h1>
       <div className="list-group">
@@ -31,6 +35,7 @@ function CustomersList() {
         <button className="btn btn-primary mt-4">Add new customer</button>
       </Link>
     </div>
+    </>
   );
 }
 

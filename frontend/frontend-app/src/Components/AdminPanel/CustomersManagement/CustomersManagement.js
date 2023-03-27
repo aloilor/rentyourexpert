@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import AdminQeA from '../QeAManagement/AdminQeA';
 import AdminReviews from '../ReviewManagement/AdminReview';
+import Navbar from '../../Navbar'
+
 
 function CustomerManagement() {
   const { id } = useParams();
@@ -30,6 +32,8 @@ function CustomerManagement() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="container mt-5">
       <div className="card">
         <h5 className="card-header">Customer Details</h5>
@@ -43,6 +47,7 @@ function CustomerManagement() {
         </div>
       </div>
     </div>
+    </>
   );  
 } 
 

@@ -2,23 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LogoutCustomerButton from '../Logout/Logout';
 import { Button, ButtonGroup } from 'react-bootstrap';
+import CustomersList from './CustomersManagement/CustomersList'
+import Navbar from '../Navbar'
 
 function AdminPanel() {
   return (
-    <div>
-      <ButtonGroup vertical style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "70vh" }}>
-        <Link to="/admin/customers">
-          <Button color="primary" className="my-1">Customers</Button>
-        </Link>
-        <Link to="/admin/workers">
-          <Button color="primary" className="my-1">Workers</Button>
-        </Link>
-        <Link to="/admin/requests">
-          <Button color="primary" className="my-1">Requests</Button>
-        </Link>
-      </ButtonGroup>
-      <LogoutCustomerButton />
+    <>
+    <Navbar />
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", minHeight: "70vh" }}>
+      <h1>Welcome to the Admin Panel</h1>
+      <p>This is the place where you can manage customers, workers, and requests.</p>
     </div>
+    </>
   );
 }
 
