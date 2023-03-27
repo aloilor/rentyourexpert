@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import Navbar from '../../Navbar'
 
 
@@ -55,114 +56,59 @@ function AddWorkerForm() {
 
   return (
     <>
-    <Navbar />
-    <div className="container">
+   <Navbar />
+    <Container>
       <h1>Add New Worker</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
-          <input
-            className="form-control"
-            name="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Surname:</label>
-          <input
-            className="form-control"
-            name="surname"
-            type="text"
-            value={surname}
-            onChange={(e) => setSurname(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Profession:</label>
-          <input
-            className="form-control"
-            name="profession"
-            type="text"
-            value={profession}
-            onChange={(e) => setProfession(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Location:</label>
-          <input
-            className="form-control"
-            name="location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Description:</label>
-          <textarea
-            className="form-control"
-            name="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-        </div>
-
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            className="form-control"
-            name="email"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Phone:</label>
-          <input
-            className="form-control"
-            name="phone"
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Address:</label>
-          <input
-            className="form-control"
-            name="address"
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Password:</label>
-          <input
-            className="form-control"
-            name="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <Form.Group controlId="email">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="name">
+              <Form.Label>Name:</Form.Label>
+              <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="surname">
+              <Form.Label>Surname:</Form.Label>
+              <Form.Control type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="profession">
+              <Form.Label>Profession:</Form.Label>
+              <Form.Control type="text" value={profession} onChange={(e) => setProfession(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="location">
+              <Form.Label>Location:</Form.Label>
+              <Form.Control type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="phone">
+              <Form.Label>Phone:</Form.Label>
+              <Form.Control type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="address">
+              <Form.Label>Address:</Form.Label>
+              <Form.Control type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="description">
+              <Form.Label>Description:</Form.Label>
+              <Form.Control as="textarea" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
+            </Form.Group>
+          </Col>
+        </Row>  
         <br></br>
-        <button type="submit" className="btn btn-primary">
-          Add worker
-        </button>
-      </form>
-    </div>
-    </>
+        <Button variant="primary" type="submit">
+          Add Worker
+        </Button>
+      </Form>
+    </Container>
+</>
   );
 }
 

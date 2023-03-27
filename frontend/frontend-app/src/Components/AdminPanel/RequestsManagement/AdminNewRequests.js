@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import Navbar from '../../Navbar'
 
 
@@ -32,21 +33,29 @@ function AdminNewRequest(){
     return (
         <>
         <Navbar />
-        <div class="container">
-            <form onSubmit={handleAddRequest}>
-                <h2>Add a new Request</h2>
-                <div class="form-group">
-                    <label htmlFor="customer_id">Customer ID:</label>
-                    <input type="text" class="form-control" id="customer_id" name="customer_id" value={customerId} onChange={(e) => setCustomerId(e.target.value)} required />
-                </div>
-                <div class="form-group">
-                    <label htmlFor="worker_id">Worker ID:</label>
-                    <input type="text" class="form-control" id="worker_id" name="worker_id" value={workerId} onChange={(e) => setWorkerId(e.target.value)} required />
-                </div>
-                <br></br>
-                <button type="submit" class="btn btn-primary">Add Request</button>
-            </form>
-        </div>
+        <Container>
+      <h1>Add New Customer</h1>
+      <Form onSubmit={handleAddRequest}>
+        <Row>
+          <Col>
+            <Form.Group controlId="customer_id">
+              <Form.Label>customer_id:</Form.Label>
+              <Form.Control type="text" value={customerId} onChange={(e) => setCustomerId(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="worker_id">
+              <Form.Label>worker_id:</Form.Label>
+              <Form.Control type="text" value={workerId} onChange={(e) => setWorkerId(e.target.value)} />
+            </Form.Group>
+          </Col>
+        </Row>
+        <br></br>
+        <Button variant="primary" type="submit">
+          Add Customer
+        </Button>
+      </Form>
+    </Container>
         </>
     )
 }
