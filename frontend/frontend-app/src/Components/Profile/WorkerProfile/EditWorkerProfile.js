@@ -90,7 +90,6 @@ function EditWorkerProfile(props) {
   };
 
 
-
   return (
     <MDBCard className="mb-4">
       <MDBCardBody>
@@ -185,27 +184,23 @@ function EditWorkerProfile(props) {
           </MDBRow>
           <hr />  
 
-
           <MDBRow>
-  <MDBCol sm="3">
-    <MDBCardText>Available:</MDBCardText>
-  </MDBCol>
-  <MDBCol sm="9">
-    <div className="form-check">
-      <input 
-        name="available" 
-        type="checkbox" 
-        className="form-check-input" 
-        checked={available} 
-        onChange={(e) => setAvailable(e.target.checked)} />
-    </div>
-  </MDBCol>
-</MDBRow>
-<hr />
+            <MDBCol sm="3">
+              <MDBCardText>Available:</MDBCardText>
+            </MDBCol>
+            <MDBCol sm="9">
+              <div className="form my-3">
+                <input 
+                  name="available" 
+                  type="text" 
+                  className="form-control" 
+                  value={available} 
+                  onChange={(e) => setAvailable(e.target.value)} />
+              </div>
+            </MDBCol>
+          </MDBRow>
+          <hr />
 
-
-          
-      
         <div className="text-center">
           <button type="submit" className="my-2 mx-auto btn btn-dark">Update</button>
         </div>
