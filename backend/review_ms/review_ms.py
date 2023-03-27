@@ -66,7 +66,7 @@ def addReview(worker_id):
     cursor = db.cursor()
     cursor.execute(query)
 
-    rv = cursor.fetchone()
+    rv = cursor.fetchone() 
     if (not rv):
         return "No request made to this worker", 400
         
