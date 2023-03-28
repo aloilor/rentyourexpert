@@ -25,6 +25,12 @@ import LoginAdmin from "./Components/AdminPanel/AdminLogin";
 import RequestList from "./Components/AdminPanel/RequestsManagement/AdminRequests";
 import AdminNewRequest from "./Components/AdminPanel/RequestsManagement/AdminNewRequests";
 import QeA from "./Components/QeA/QeA";
+import AboutPage from "./Components/About";
+import ContactPage from "./Components/Contact";
+import Reviews from "./Components/Reviews/Reviews";
+
+
+
 
 function App() {
   const [experts] = useState([]);
@@ -59,6 +65,9 @@ function App() {
           <Route path="/register" element={<Register  />} />
           <Route path="/login_customer" element={<LoginCustomer  />} />
           <Route path="/register_customer" element={<RegisterCustomer  />} />
+          <Route path="/about" element={<AboutPage  />} />
+          <Route path="/contact" element={<ContactPage  />} />
+
         
           
           <Route path="/admin" element={isAdmin() ? <AdminPanel  /> : <LoginAdmin /> } /> 
@@ -79,6 +88,9 @@ function App() {
           <Route path="/worker_profile/:id" element={isWorker() ? <WorkerProfile /> : <Login /> } />
           <Route path="/worker_profile/:id/requests" element={isWorker() ? <WorkerRequests id={id} /> : <Login /> } />
           <Route path="/worker_profile/:id/QeA" element={isWorker() ? <QeA id={id}/> : <Login /> } />
+          <Route path="/worker_profile/:id/reviews" element={isWorker() ? <Reviews id={id}/> : <Login /> } />
+
+
         
         </Routes>
     

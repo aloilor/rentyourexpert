@@ -20,6 +20,7 @@ import {
 import { FaGlobe, FaGithub, FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button, Form, Input } from 'react-bootstrap';
 import Modal from "react-modal";
+import Navbar from '../Navbar';
 
 
 
@@ -146,7 +147,7 @@ if(lastAuthTokenPart=='C'){
                 <input type="text" id="description" name="description" />
                 <div>
                   <button type="submit" >Submit</button>
-                  <button type="button" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                  <button type="button" onClick={() =>  window.location.reload()}>Cancel</button>
                 </div>
               </form>
             </div>
@@ -155,55 +156,39 @@ if(lastAuthTokenPart=='C'){
         <hr />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)', gap: '1rem' }}>
         {reviews.map((review) => (
-            <MDBCard key={review.id} className="mb-3" style={{width: '99%', marginBottom: '1rem'}}>
-              <MDBCardBody  style={{ textAlign: 'left' }}>
-                <div>
-                  <div>{review.username}:</div>
-                  <div>{review.description}</div>
-                  <div>{review.created_at}</div>
-                </div>
-                {firstAuthTokenPart === review.customer_id.toString() && (
+            <MDBCard key={review.id} className="mb-3" style={{width: '99%', marginBottom: '1rem', textAlign: 'left'}}>
+            <MDBCardBody>
+              <MDBRow>
+                <MDBCol size="2">
+                  <MDBCardImage variant="top" src={review.image_url} className="rounded-circle" style={{ width: '50px', height: '50px' }} />
+                </MDBCol>
+                <MDBCol size="10">
                   <div>
-                    <MDBRow>
-                      <MDBCol sm="9">
-                      <div class="d-flex justify-content-between">
-                        <div class="align-self-center">
-                          {editMode && review.id === editReviewId ? (
-                           <Modal isOpen={isEditModalOpen} toggle={() => setIsEditModalOpen(false)} className="modal-dialog-centered custom-modal">
-                           <div className="modal-dialog" role="document">
-                             <div className="modal-content">
-                               <h2>Edit Review</h2>
-                               <form
-                                 onSubmit={(event) =>
-                                   handleReviewUpdate(event, review.id)
-                                 }
-                               >
-                                 <label htmlFor="description">Description:</label>
-                                 <input
-                                   type="text"
-                                   className="form-control"
-                                   id="description"
-                                   name="description"
-                                   defaultValue={review.description}
-                                 />
-                                 <div>
-                                   <button type="submit">Update</button>
-                                   <button
-                                     type="button"
-                                     onClick={() => setIsEditModalOpen(false)}
-                                   >
-                                     Cancel
-                                   </button>
-                                 </div>
-                               </form>
-                             </div>
-                           </div>
-                         </Modal>
-                          ) : (
-                            null
-                          )}
-                        </div>
-                        <div>
+                    <div>{review.username}:</div>
+                    <div>{review.description}</div>
+                    <div>{review.created_at}</div>
+                    {firstAuthTokenPart === review.customer_id.toString() && (
+                      <div>
+                        {editMode && review.id === editReviewId ? (
+                          <Modal isOpen={isEditModalOpen} toggle={() => setIsEditModalOpen(false)} className="modal-dialog-centered custom-modal">
+                            <div className="modal-dialog" role="document">
+                              <div className="modal-content">
+                                <h2>Edit Review</h2>
+                                <form onSubmit={(event) => handleReviewUpdate(event, review.id)}>
+                                  <label htmlFor="description">Description:</label>
+                                  <input type="text" className="form-control" id="description" name="description" defaultValue={review.description} />
+                                  <div>
+                                    <button type="submit">Update</button>
+                                    <button type="button" onClick={() => window.location.reload()}>Cancel</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </Modal>
+                        ) : (
+                          null
+                        )}
+                        <div class="d-flex justify-content-end">
                           {editMode && review.id === editReviewId ? (
                             null
                           ) : (
@@ -218,12 +203,12 @@ if(lastAuthTokenPart=='C'){
                           )}
                         </div>
                       </div>
-                      </MDBCol>
-                    </MDBRow>
+                    )}
                   </div>
-                )}
-              </MDBCardBody>
-            </MDBCard>
+                </MDBCol>
+              </MDBRow>
+            </MDBCardBody>
+          </MDBCard>
           ))}
         </div>
       </MDBCardBody>
@@ -237,27 +222,32 @@ if(lastAuthTokenPart=='C'){
 }
 else{
   return(
-    <div>
-  <MDBCol lg="12">
-    <MDBCard className="mb-4">
-      <MDBCardBody>
-        <MDBCardText>
-          <h2>Reviews</h2>
-          {reviews.map(review => (
-            <MDBCard key={review.id}>
-              <MDBCardBody>
-                <div>Username: {review.username}</div>
-                <div>Description: {review.description}</div>
-                <div>Created At: {review.created_at}</div>
-              </MDBCardBody>
-            </MDBCard>
-          ))}
-        </MDBCardText>
-      </MDBCardBody>
-    </MDBCard>
+    <>
+      <Navbar />
+      <div className="w-100" style={{ marginTop:'20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+  <MDBCol lg="8">
+  <MDBCard className="mb-4">
+  <MDBCardBody>
+    <MDBCardText>
+      <h2>Reviews</h2>
+      {reviews.map(review => (
+        <MDBCard key={review.id}>
+          <MDBCardBody style={{ display: 'flex', alignItems: 'left' }}>
+            <MDBCardImage variant="top" src={review.image_url} className="rounded-circle" style={{ width: '50px', height: '50px' }} />
+            <div style={{ marginLeft: '1rem' }}>
+              <div>Username: {review.username}</div>
+              <div>Description: {review.description}</div>
+              <div>Created At: {review.created_at}</div>
+            </div>
+          </MDBCardBody>
+        </MDBCard>
+      ))}
+    </MDBCardText>
+  </MDBCardBody>
+</MDBCard>
   </MDBCol>
 </div>
-
+</>
 )
 }
 

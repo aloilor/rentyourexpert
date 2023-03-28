@@ -51,7 +51,7 @@ function ExpertsList() {
           <Col md={4} sm={12} key={index}>
             <Card className="mb-4 shadow-sm">
               <Card.Body>
-                <Card.Img variant="top" src={require('./worker3.jpg')} />
+                <Card.Img variant="top" src={expert.image_url} className="rounded-circle" style={{ width: '150px', height: '150px'}} />
                 <Card.Title>{expert.name} {expert.surname}</Card.Title>
                 <Card.Text>{expert.profession}, {expert.location}</Card.Text>
                 <Link to={`/catalogue/${expert.id}`}>

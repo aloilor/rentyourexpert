@@ -26,10 +26,10 @@ const Navbar = () => {
                             <NavLink className="nav-link" to="/Catalogue">Experts</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">About</NavLink>
+                            <NavLink className="nav-link" to="/about">About</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Contact</NavLink>
+                            <NavLink className="nav-link" to="/contact">Contact</NavLink>
                         </li>
                     </ul>
                     <div className="buttons text-center">
@@ -67,10 +67,7 @@ const Navbar = () => {
                                 <NavLink className="nav-link" to={`/worker_profile/${id}/requests`}>Requests</NavLink>
                             </li>
                             <li className="nav-item">
-                            <NavLink className="nav-link" to='/'>About</NavLink>
-                            </li>
-                            <li className="nav-item">
-                            <NavLink className="nav-link" to='/'>Contact us</NavLink>
+                            <NavLink className="nav-link" to={`/worker_profile/${id}/reviews`}>Reviews</NavLink>
                             </li>
                         </ul>
                         <div className="buttons text-center">
@@ -108,7 +105,7 @@ const Navbar = () => {
                                 <NavLink className="nav-link" to="/admin/requests">Requests</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/">About</NavLink>
+                                <NavLink className="nav-link" to="/about">About</NavLink>
                             </li>
                         </ul>
                         <div className="buttons text-center">

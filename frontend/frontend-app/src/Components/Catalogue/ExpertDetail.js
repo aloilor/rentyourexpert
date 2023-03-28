@@ -65,7 +65,7 @@ function ExpertDetail() {
   <MDBCol lg="4">
     <MDBCard className="mb-4">
       <MDBCardBody className="text-center">
-        <Card.Img variant="top" src={require('./worker3.jpg')} />
+        <Card.Img variant="top" src={expert.image_url}  className="rounded-circle" style={{ width: '150px', height: '150px' }} />
         <p className="text-dark mb-1">{expert.name} {expert.surname}</p>
         <p className="text-muted mb-1">{expert.profession}</p>
         <p className="text-muted mb-4">{expert.location}</p>
