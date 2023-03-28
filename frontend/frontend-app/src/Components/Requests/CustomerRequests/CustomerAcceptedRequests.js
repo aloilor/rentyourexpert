@@ -1,5 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBCardGroup
+} from 'mdb-react-ui-kit';
+
+
 
 
 
@@ -38,6 +58,7 @@ function CustomerAcceptedRequests({ id }) {
       {requests.map((request) => (
         <div className="list-group-item" key={request.id}>
           <div className="d-flex justify-content-between align-items-center">
+          <MDBCardImage variant="top" src={request.image_url}  className="rounded-circle" style={{ width: '50px', height: '50px' }} />
             <Link to={`/catalogue/${request.worker_id}`}>
               <h5 className="mb-1">{request.name} {request.surname}</h5>
               </Link>

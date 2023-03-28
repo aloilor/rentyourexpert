@@ -28,7 +28,7 @@ def getQeAs(id):
     #connecting to the database
     db = dbConnect()
 
-    query = """SELECT questionanswer.id, username, question, answer FROM customer, questionanswer 
+    query = """SELECT questionanswer.id, username, image_url, question, answer FROM customer, questionanswer 
             WHERE customer.id = {id} AND customer.id = customer_id""".format(id = id)
     
 
@@ -54,7 +54,6 @@ def addQeA(id):
     customer_id = token[0]
     worker_id = id
     question = request.form['question'] 
-
 
     #connecting to the database
     db = dbConnect()

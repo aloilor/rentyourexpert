@@ -81,6 +81,7 @@ def register():
         description = request.form['description']
         phone = request.form['phone']
         address = request.form['address']
+        image_url = 'https://exoffender.org/wp-content/uploads/2016/09/empty-profile.png'
         
         
         # Check if account exists using MySQL
@@ -97,7 +98,7 @@ def register():
             response['message'] = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into user table
-            cursor.execute('INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 1, %s)', (name, surname, profession, location, description, email, phone, address, password,))
+            cursor.execute('INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password, image_url) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 1, %s, %s)', (name, surname, profession, location, description, email, phone, address, password, image_url))
             db.commit()
             response['message'] = 'You have successfully registered!'
         
@@ -199,7 +200,7 @@ def getWorkerPendingRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS SENT TO THE WORKER 
-    query_requests = "SELECT request.id, name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id AND accepted = '0'".format(id=id)
+    query_requests = "SELECT request.id, name, surname, username, image_url, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id AND accepted = '0'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
@@ -230,7 +231,7 @@ def getWorkerAcceptedRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS SENT TO THE WORKER 
-    query_requests = "SELECT request.id, name, surname, username, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id AND accepted = '1'".format(id=id)
+    query_requests = "SELECT request.id, name, surname, username, image_url, accepted FROM request, customer WHERE request.worker_id={id} AND request.customer_id = customer.id AND accepted = '1'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 

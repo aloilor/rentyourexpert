@@ -61,6 +61,7 @@ function WorkerAcceptedRequests({ id }) {
           .map(request => (
             <MDBCard key={request.id} className="mb-3">
               <MDBCardBody>
+              <MDBCardImage variant="top" src={request.image_url}  className="rounded-circle" style={{ width: '50px', height: '50px' }} />
                 <div>Name: {request.name}</div>
                 <div>Surname: {request.surname}</div>
                 <div>Username: {request.username}</div>

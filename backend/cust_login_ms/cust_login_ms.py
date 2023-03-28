@@ -45,6 +45,7 @@ def register_customer():
         name = request.form['name']
         surname = request.form['surname']
         username = request.form['username']
+        image_url = 'https://exoffender.org/wp-content/uploads/2016/09/empty-profile.png'
         
         
         # Check if account exists using MySQL
@@ -61,7 +62,7 @@ def register_customer():
             response['message'] = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into user table
-            cursor.execute('INSERT INTO customer (username, name, surname, email, password, isAdmin) VALUES (%s, %s, %s, %s, %s, 0)', (username, name, surname, email, password,))
+            cursor.execute('INSERT INTO customer (username, name, surname, email, password, isAdmin, image_url) VALUES (%s, %s, %s, %s, %s, 0)', (username, name, surname, email, password, image_url))
             db.commit()
             response['message'] = 'You have successfully registered!'
         
@@ -129,7 +130,7 @@ def getCustomerProfile(id):
 
 
     #QUERY TO RETRIVE INFORMATION ABOUT THE CUSTOMER
-    query_info = "SELECT id, username, name, surname, email, password FROM customer WHERE id = {id}".format(id = id)
+    query_info = "SELECT id, username, name, surname, email, image_url, password FROM customer WHERE id = {id}".format(id = id)
     cursor.execute(query_info)
 
     #jsonifying 
@@ -190,7 +191,7 @@ def getCustomerPendingRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT request.id, request.customer_id, request.worker_id,  name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '0'".format(id=id)
+    query_requests = "SELECT request.id, request.customer_id, request.worker_id,  name, surname, profession, image_url, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '0'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 
@@ -221,7 +222,7 @@ def getCustomerAcceptedRequests(id):
     cursor = db.cursor()
     
     #QUERY TO RETRIEVE REQUESTS MADE BY THE CUSTOMER 
-    query_requests = "SELECT request.id, request.customer_id, request.worker_id, name, surname, profession, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '1'".format(id=id)
+    query_requests = "SELECT request.id, request.customer_id, request.worker_id, name, surname, profession, image_url, accepted FROM request, worker WHERE request.customer_id={id} AND request.worker_id = worker.id AND accepted = '1'".format(id=id)
     cursor.execute(query_requests)
 
     #jsonifying 

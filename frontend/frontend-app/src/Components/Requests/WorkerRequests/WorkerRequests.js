@@ -59,7 +59,7 @@ function WorkerRequests({ id }) {
   return (
     <>
       <Navbar />
-    <MDBRow style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <MDBRow style={{ marginTop:'20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <MDBCol lg="4">
         <MDBCard className="mb-4">
           <MDBCardBody style={{ textAlign: 'left' }}>
@@ -69,6 +69,7 @@ function WorkerRequests({ id }) {
               .map(request => (
                 <MDBCard key={request.id} className="mb-3">
                   <MDBCardBody>
+                  <MDBCardImage variant="top" src={request.image_url}  className="rounded-circle" style={{ width: '50px', height: '50px' }} />
                     <div>Name: {request.name}</div>
                     <div>Surname: {request.surname}</div>
                     <div>Username: {request.username}</div>
