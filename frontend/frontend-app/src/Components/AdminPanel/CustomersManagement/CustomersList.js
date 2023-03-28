@@ -18,7 +18,7 @@ function CustomersList() {
   return (
     <>
     <Navbar />
-    <div className="container">
+    <div style={{marginTop:'20px'}} className="container">
       <h1>Customers List</h1>
       <div className="list-group">
         {customer.map((customer, index) => (

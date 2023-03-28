@@ -27,7 +27,7 @@ def dbConnect():
 def getAllReviews(worker_id):
     db = dbConnect()
 
-    query = "SELECT username, review.id,review.customer_id,review.description,review.created_at  FROM review, customer WHERE worker_id = {worker_id}  AND customer_id = customer.id".format(worker_id=worker_id)
+    query = "SELECT username, image_url, review.id,review.customer_id,review.description,review.created_at  FROM review, customer WHERE worker_id = {worker_id}  AND customer_id = customer.id".format(worker_id=worker_id)
 
     #executing the query
     cursor = db.cursor()

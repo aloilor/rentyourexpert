@@ -34,7 +34,7 @@ function CustomerManagement() {
   return (
     <>
     <Navbar />
-    <div className="container mt-5">
+    <div style={{marginTop:'20px'}} className="container mt-5">
       <div className="card">
         <h5 className="card-header">Customer Details</h5>
         <div className="card-body">

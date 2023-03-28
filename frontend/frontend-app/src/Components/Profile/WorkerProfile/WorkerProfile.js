@@ -50,12 +50,13 @@ function WorkerProfile() {
 
     <>
     <Navbar />
-    <div className="container mt-5">
+    <div style={{marginTop:'20px'}} className="container mt-5">
       <h1 className="mb-4">Worker Profile</h1>
       <div className="row">
         <div className="col-md-4">
           <MDBCard className="mb-4">
             <MDBCardBody className="text-center">
+            <MDBCardImage variant="top" src={worker.image_url}  className="rounded-circle" style={{ width: '150px', height: '150px' }} />
                     <p className="text-muted mb-1">{worker.name} {worker.surname}</p>
                     <p className="text-muted mb-4">{worker.email}</p>
                     <div className="d-flex justify-content-center mb-2">

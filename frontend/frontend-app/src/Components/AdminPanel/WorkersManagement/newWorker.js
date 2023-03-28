@@ -57,7 +57,7 @@ function AddWorkerForm() {
   return (
     <>
    <Navbar />
-    <Container>
+    <Container style={{marginTop:'20px'}}>
       <h1>Add New Worker</h1>
       <Form onSubmit={handleSubmit}>
         <Row>

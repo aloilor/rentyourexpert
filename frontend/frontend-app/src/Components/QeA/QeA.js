@@ -117,16 +117,9 @@ function QeA({ id }) {
     })
       .then(response => {
         if (response.ok) {
-          setQuestions(questions => [
-            ...questions,
-            {
-              id: questions.length + 1,
-              username: 'You',
-              question,
-              answer: null,
-            },
-          ]);
+          setQuestions(questions);
           setIsModalOpen(false);
+          window.location.reload();
         } else {
           throw new Error('Failed to add question');
         }
@@ -140,7 +133,7 @@ function QeA({ id }) {
     return (
       <>
       <Navbar />
-      <div className="w-100" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="w-100" style={{ marginTop:'20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <MDBCol lg="8">
         <MDBCard className="mb-4">
           <MDBCardBody>
@@ -149,9 +142,14 @@ function QeA({ id }) {
               {questions.map(question => (
                 <MDBCard key={question.id}>
                   <MDBCardBody style={{ textAlign: 'left' }}>
+                  <MDBRow>
+                  <MDBCol md="3">
+                    <MDBCardImage variant="left" src={question.image_url}  className="rounded-circle" style={{ width: '50px', height: '50px' }} />
+                  </MDBCol>
+                  <MDBCol md="9">
                     <div>Username: {question.username}</div>
                     <div className="fw-bolder">{question.question}</div>
-                    <div>
+                    <div>                      
                       <MDBRow>
                         <MDBCol sm="9">
                         {question.answer ? (
@@ -165,7 +163,7 @@ function QeA({ id }) {
                                           <input type="text" name="answer" defaultValue={question.answer} />
                                           <div>
                                             <button type="submit">Submit</button>
-                                            <button type="button" onClick={() => setIsWorkerModalOpen(false)}>Cancel</button>
+                                            <button type="button" onClick={() => window.location.reload()}>Cancel</button>
                                           </div>
                                         </form>
                                       </div>
@@ -195,6 +193,8 @@ function QeA({ id }) {
                         </MDBCol>
                       </MDBRow>
                     </div>
+                    </MDBCol>
+                    </MDBRow>
                   </MDBCardBody>
                   <hr />
                 </MDBCard>
@@ -239,13 +239,20 @@ function QeA({ id }) {
           {questions.map((question) => (
             <MDBCard key={question.id} className="mb-3" style={{width: '95%', marginBottom: '1rem'}}>
               <MDBCardBody>
-                <div style={{ textAlign: 'left'  }}>
-                  <div>Username: {question.username}</div>
-                  <div>Question: {question.question}</div>
-                  <div>
-                    <div>Answer: {question.answer ? question.answer : "Not answered yet..."}</div>
+              <MDBRow>
+                <MDBCol md="2">
+                  <MDBCardImage variant="left" src={question.image_url} className="rounded-circle" style={{ width: '50px', height: '50px' }} />
+                </MDBCol>
+                <MDBCol md="10" className="d-flex align-items-center">
+                  <div style={{ textAlign: 'left' }}>
+                    <div>Username: {question.username}</div>
+                    <div>Question: {question.question}</div>
+                    <div>
+                      <div>Answer: {question.answer ? question.answer : "Not answered yet..."}</div>
+                    </div>
                   </div>
-                </div>
+                </MDBCol>
+              </MDBRow>
               </MDBCardBody>
             </MDBCard>
           ))}

@@ -55,11 +55,12 @@ def addCustomer():
     name = request.form['name']
     surname = request.form['surname']
     username = request.form['username']
+    image_url = 'https://exoffender.org/wp-content/uploads/2016/09/empty-profile.png'
 
-    
     #executing the query
     cursor = db.cursor()
-    cursor.execute('INSERT INTO customer (name, surname, email, username, password, isAdmin) VALUES (%s, %s, %s, %s, %s, 0)', (name, surname, email, username, password,))
+    cursor.execute('INSERT INTO customer (username, name, surname, email, password, isAdmin, image_url) VALUES (%s, %s, %s, %s, %s, 0, %s)', (username, name, surname, email, password, image_url))
+
     db.commit()
     
     lastId = cursor.lastrowid
@@ -191,12 +192,13 @@ def addWorker():
     description = request.form['description']
     phone = request.form['phone']
     address = request.form['address']
+    image_url = 'https://exoffender.org/wp-content/uploads/2016/09/empty-profile.png'
 
     
 
     #executing the query
     cursor = db.cursor()
-    cursor.execute('INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 1, %s)', (name, surname, profession, location, description, email, phone, address, password,))
+    cursor.execute('INSERT INTO worker (name, surname, profession, location, description, email, phone, address, available, password, image_url) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 1, %s, %s)', (name, surname, profession, location, description, email, phone, address, password, image_url))
     db.commit()
     
     lastId = cursor.lastrowid
@@ -258,16 +260,29 @@ def getRequest(id):
 def addRequest():
     #connecting to the database
     db = dbConnect()
+    customer_id = request.form.get('customer_id')
+    worker_id = request.form.get('worker_id')
+    accepted =  request.form.get('accepted')
+
+    cursor = db.cursor()
+
+    query = """SELECT * FROM request WHERE customer_id='{customer_id}' AND worker_id='{worker_id}'""".format(
+        customer_id=customer_id,
+        worker_id = worker_id
+        )
+    cursor.execute(query)
+
+    if(cursor.fetchone()):
+        return "Request already sent, cannot send again", 400
+    
 
     query = """INSERT INTO request(customer_id, worker_id, accepted) 
-                VALUES ('{customer_id}','{worker_id}',{accepted})""".format(
-                    customer_id = request.form.get('customer_id'),
-                    worker_id = request.form.get('worker_id'),
-                    accepted =  request.form.get('accepted')
+                VALUES ('{customer_id}','{worker_id}',0)""".format(
+                    customer_id = customer_id,
+                    worker_id = worker_id,
                 )
 
     #executing the query
-    cursor = db.cursor()
     cursor.execute(query)
     db.commit()
     
