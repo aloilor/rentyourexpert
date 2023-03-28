@@ -15,7 +15,7 @@ function AdminNewRequest(){
         const formData = new FormData();
         formData.append('customer_id', customerId);
         formData.append('worker_id', workerId);
-        formData.append('accepted', 1)
+        formData.append('accepted', 0)
 
         fetch('http://localhost:5002/requests', {
             method: 'POST',
@@ -26,6 +26,10 @@ function AdminNewRequest(){
                 alert('Request added successfully');
                 navigate('/admin/requests');
             }
+            else{
+              alert("Cannot add the request, it already exists");
+              navigate('/admin/requests');
+            }
         })
         .catch((error) => console.log(error));
     };
@@ -34,7 +38,7 @@ function AdminNewRequest(){
         <>
         <Navbar />
         <Container style={{marginTop:'20px'}}>
-      <h1>Add New Customer</h1>
+      <h1>Add New Request</h1>
       <Form onSubmit={handleAddRequest}>
         <Row>
           <Col>
@@ -52,7 +56,7 @@ function AdminNewRequest(){
         </Row>
         <br></br>
         <Button variant="primary" type="submit">
-          Add Customer
+          Add Request
         </Button>
       </Form>
     </Container>

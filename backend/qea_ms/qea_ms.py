@@ -28,8 +28,8 @@ def getQeAs(id):
     #connecting to the database
     db = dbConnect()
 
-    query = """SELECT questionanswer.id, username, image_url, question, answer FROM customer, questionanswer 
-            WHERE customer.id = {id} AND customer.id = customer_id""".format(id = id)
+    query = """SELECT questionanswer.id,  worker_id, customer_id, username, image_url, question, answer FROM customer, questionanswer 
+            WHERE worker_id = {id} AND customer.id = customer_id""".format(id = id)
     
 
     cursor = db.cursor()

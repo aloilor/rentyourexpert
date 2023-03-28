@@ -121,9 +121,7 @@ function QeA({ id }) {
           setIsModalOpen(false);
           window.location.reload();
         } else {
-          alert("You and the worker are not friends");
-          //throw new Error('Failed to add question');
-          
+          throw new Error('Failed to add question');
         }
       })
       .catch(error => console.error(error));
