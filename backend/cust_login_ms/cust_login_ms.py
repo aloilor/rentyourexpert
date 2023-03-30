@@ -62,7 +62,7 @@ def register_customer():
             response['message'] = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into user table
-            cursor.execute('INSERT INTO customer (username, name, surname, email, password, isAdmin, image_url) VALUES (%s, %s, %s, %s, %s, 0)', (username, name, surname, email, password, image_url))
+            cursor.execute('INSERT INTO customer (username, name, surname, email, password, isAdmin, image_url) VALUES (%s, %s, %s, %s, %s, 0, %s)', (username, name, surname, email, password, image_url))
             db.commit()
             response['message'] = 'You have successfully registered!'
         

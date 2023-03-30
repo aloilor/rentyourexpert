@@ -41,9 +41,10 @@ function ExpertDetail() {
     .then((response) => {
       if (response.ok) {
         console.log('Request sent successfully');
+        alert('Request sent successfully');
         // aggiorna il componente per visualizzare la richiesta inviata
       } else {
-        console.log('Failed to send request');
+        alert('Failed to send request');
       }
     })
     .catch((error) => console.log(error));

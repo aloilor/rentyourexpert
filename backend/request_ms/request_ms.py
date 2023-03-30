@@ -30,20 +30,27 @@ def sendRequest(id):
     customer_id = token[0]
     worker_id = id
     
+    
     query = """SELECT * FROM request WHERE customer_id='{customer_id}' AND worker_id='{worker_id}'""".format(
         customer_id=customer_id,
         worker_id = worker_id
         )
     cursor.execute(query)
-
     if(cursor.fetchone()):
+        cursor.close()
+        db.close()
         return "Request already sent, cannot send again", 400
 
+   
+   
     query = """INSERT INTO request (customer_id, worker_id, accepted)
     VALUES ('{customer_id}', '{worker_id}',0);""".format(
         worker_id = worker_id, 
         customer_id = customer_id)
     
+    
+    
+    cursor = db.cursor()
     cursor.execute(query)
     db.commit()
 

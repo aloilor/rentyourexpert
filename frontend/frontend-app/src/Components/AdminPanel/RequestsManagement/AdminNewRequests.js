@@ -27,7 +27,7 @@ function AdminNewRequest(){
                 navigate('/admin/requests');
             }
             else{
-              alert("Cannot add the request, it already exists");
+              alert("Failed to add the request");
               navigate('/admin/requests');
             }
         })

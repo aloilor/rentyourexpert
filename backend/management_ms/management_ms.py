@@ -266,6 +266,23 @@ def addRequest():
 
     cursor = db.cursor()
 
+
+    query = """SELECT * from customer WHERE id = '{customer_id}'""".format(customer_id = customer_id)
+    cursor.execute(query)
+    if (not cursor.fetchone()):
+        cursor.close()
+        db.close()
+        return "The customer does not exist", 400
+
+
+    query = """SELECT * from worker WHERE id = '{worker_id}'""".format(worker_id = worker_id)
+    cursor.execute(query)
+    if (not cursor.fetchone()):
+        cursor.close()
+        db.close()
+        return "The worker does not exist", 400
+
+
     query = """SELECT * FROM request WHERE customer_id='{customer_id}' AND worker_id='{worker_id}'""".format(
         customer_id=customer_id,
         worker_id = worker_id
@@ -273,8 +290,10 @@ def addRequest():
     cursor.execute(query)
 
     if(cursor.fetchone()):
+        cursor.close()
+        db.close()
         return "Request already sent, cannot send again", 400
-    
+
 
     query = """INSERT INTO request(customer_id, worker_id, accepted) 
                 VALUES ('{customer_id}','{worker_id}',0)""".format(
@@ -283,6 +302,8 @@ def addRequest():
                 )
 
     #executing the query
+    cursor.close()
+    cursor = db.cursor()
     cursor.execute(query)
     db.commit()
     
