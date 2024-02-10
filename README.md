@@ -15,6 +15,11 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - Docker
 - MySQL
 
+## Development Methodology
+- Agile
+- SCRUM
+- REST
+
 **User Stories and Metrics:**
 - We defined the requirements of the application through a total of 25 user stories, documented in the provided spreadsheet.
 - Each user story is described with metrics such as priority, added value, risk, estimation, and release.
@@ -23,8 +28,7 @@ RentYourExpert is a platform that connects individuals who require expert servic
 **Complexity Estimation:**
 - We estimated the complexity of software development, time, and effort using Function Points and COCOMO II methods.
 
-**Development Methodology:**
-- We used the SCRUM methodology for software development, with multiple sprints to develop the application.
+
 
 **Sprint Overview:**
 - **Sprint 1:** Focused on defining the project's structure and learning how to work with the new technologies used.
