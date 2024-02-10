@@ -1,12 +1,8 @@
 ## RentYourExpert
+RentYourExpert is a platform that connects individuals who require expert services with skilled professionals across various fields.
 
-**What is RentYourExpert?**
-- RentYourExpert is a platform that connects individuals who require expert services with skilled professionals across various fields.
-
-**Key Features:**
+## Key Features
 - **User-friendly Interface:** The app is designed to be easy to navigate, allowing users to quickly find the information they need.
-- **Easy Hiring Process:** It's straightforward for individuals to find and hire skilled workers with just a few clicks.
-- **Business Growth for Workers:** It's easy for workers to find new clients and grow their business through the platform.
 - **Worker Reviews:** The platform displays worker reviews, helping clients make informed decisions when hiring a worker.
 - **Efficient Communication:** A built-in Q&A system makes it easy for both parties to discuss project requirements and expectations.
 
@@ -16,6 +12,7 @@
 - React
 - Flask
 - Docker
+- MySQL
 
 **User Stories and Metrics:**
 - We defined the requirements of the application through a total of 25 user stories, documented in the provided spreadsheet.
