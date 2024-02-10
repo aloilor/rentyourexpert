@@ -15,7 +15,6 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - MySQL &#8594; Database Management System
 - Docker &#8594; Containerization
 
-
 ## Development Methodology
 - Agile
 - Scrum
@@ -35,6 +34,17 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - **Sprint 1:** Focused on defining the project's structure and learning how to work with the new technologies used.
 - **Sprint 2:** Involved the addition of most microservices and frontend development. It was the most time and effort-intensive part of development.
 - **Sprint 3:** Required less effort, focusing on completing the application and leveraging our experience with the adopted technologies.
+
+## How to Run
+1. Clone the repository: `git clone https://github.com/aloilor/rentyourexpert.git`
+2. Navigate into the folder:  `cd /rentyourexpert/ `
+3. Navigate into the frontend folder:  `cd /frontend/frontend-app/`
+4. Install the required dependencies:  `npm install`
+5. Go back into the main folder:  `cd ../../ `
+6. Run  `docker compose build` to build the image container
+7. Run  `docker compose up` to start the container
+8. Access the application by visiting http://localhost:3000 in your web browser
+
 
 ## Learn More
 
