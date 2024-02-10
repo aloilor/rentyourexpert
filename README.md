@@ -26,7 +26,6 @@ RentYourExpert is a platform that connects individuals who require expert servic
 
 **User Stories and Metrics:**
 - We defined the requirements of the application through a total of 25 user stories, documented in the provided spreadsheet.
-- Each user story is described with metrics such as priority, added value, risk, estimation, and release.
 
 **Complexity Estimation:**
 - We estimated the complexity of software development, time, and effort using Function Points and COCOMO II methods.
@@ -42,7 +41,6 @@ RentYourExpert is a platform that connects individuals who require expert servic
 3. Run  `docker compose build` to build the image container
 4. Run  `docker compose up` to start the container
 5. Access the application by visiting http://localhost:3000 in your web browser
-
 
 ## Learn More
 For a detailed overview of RentYourExpert's development process and design, please check out our [Canva presentation](https://www.canva.com/design/DAFegq7cqAs/xs79qSubU77cN-Ze8SJBHg/edit?utm_content=DAFegq7cqAs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton).
