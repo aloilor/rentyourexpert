@@ -17,8 +17,8 @@ RentYourExpert is a platform that connects individuals who require expert servic
 
 ## Development Methodology
 - Agile
-- SCRUM
-- REST
+- Scrum
+- REST APIs
 
 **User Stories and Metrics:**
 - We defined the requirements of the application through a total of 25 user stories, documented in the provided spreadsheet.
