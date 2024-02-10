@@ -13,6 +13,10 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - **Efficient Communication:** A built-in Q&A system makes it easy for both parties to discuss project requirements and expectations.
 - **Easy-to-Use Profile Management:** Workers can efficiently manage their profiles, projects, and communication with clients through an intuitive interface.
 
+<p align="center">
+  <img src="./assets/img/worker_profile.png" width="800" alt="Alt Text">
+</p>
+
 ## Technologies Used
 - React &#8594; Frontend
 - Flask &#8594; Backend
