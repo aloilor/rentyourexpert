@@ -3,8 +3,12 @@ RentYourExpert is a platform that connects individuals who require expert servic
 
 ## Key Features
 - **User-friendly Interface:** The app is designed to be easy to navigate, allowing users to quickly find the information they need.
+- **Search Functionality:** Users can search for workers based on their skills and location.
+- **Secure User Authentication and Authorization:** Robust measures ensure the security of user access.
 - **Worker Reviews:** The platform displays worker reviews, helping clients make informed decisions when hiring a worker.
 - **Efficient Communication:** A built-in Q&A system makes it easy for both parties to discuss project requirements and expectations.
+- **Easy-to-Use Profile Management:** Workers can efficiently manage their profiles, projects, and communication with clients through an intuitive interface.
+
 
 ## Development Details
 
