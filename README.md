@@ -9,10 +9,7 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - **Efficient Communication:** A built-in Q&A system makes it easy for both parties to discuss project requirements and expectations.
 - **Easy-to-Use Profile Management:** Workers can efficiently manage their profiles, projects, and communication with clients through an intuitive interface.
 
-
-## Development Details
-
-**Technologies Used:**
+## Technologies Used
 - React
 - Flask
 - Docker
@@ -22,8 +19,6 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - We defined the requirements of the application through a total of 25 user stories, documented in the provided spreadsheet.
 - Each user story is described with metrics such as priority, added value, risk, estimation, and release.
 
-**LoFi Mockups:**
-- Each user story also has an associated LoFi mockup generated using Balsamiq, providing visual context for development.
 
 **Complexity Estimation:**
 - We estimated the complexity of software development, time, and effort using Function Points and COCOMO II methods.
