@@ -10,10 +10,11 @@ RentYourExpert is a platform that connects individuals who require expert servic
 - **Easy-to-Use Profile Management:** Workers can efficiently manage their profiles, projects, and communication with clients through an intuitive interface.
 
 ## Technologies Used
-- React
-- Flask
-- Docker
-- MySQL
+- React &#8594; Frontend
+- Flask &#8594; Backend
+- MySQL &#8594; Database Management System
+- Docker &#8594; Containerization
+
 
 ## Development Methodology
 - Agile
